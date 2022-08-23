@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2ae868d7-6ab4-4564-ac1e-3f11a8bf01f5" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Epiphyllum.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/src/main/kotlin/team/jtq/epi_serve/EpiServeApplication.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_serve/src/test/kotlin/team/jtq/epi_serve/EpiServeApplicationTests.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epi_vue.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/OauthServeApplication.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/test/kotlin/team/jtq/auth/oauth_serve/OauthServeApplicationTests.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/epi_serve">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/oauth_serve">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/oauth_serve" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2DkRawDZGc9OYnPhOjFEEjfZEQA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "11",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="JavaScript 调试.Debug Application">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:8080">
+      <method v="2" />
+    </configuration>
+    <configuration name="EpiServeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="epi_serve.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="team.jtq.epi_serve.EpiServeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OauthServeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="oauth_serve.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="team.jtq.auth.oauth_serve.OauthServeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="2ae868d7-6ab4-4564-ac1e-3f11a8bf01f5" name="变更" comment="" />
+      <created>1661241165869</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661241165869</updated>
+      <workItem from="1661241168280" duration="2620000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
