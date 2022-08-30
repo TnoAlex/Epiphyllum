@@ -52,25 +52,12 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     implementation("com.baomidou:mybatis-plus-boot-starter:3.5.2")
     implementation("com.alibaba:druid-spring-boot-starter:1.2.11")
-    // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
-//    implementation("org.glassfish.jaxb:jaxb-core:4.0.0")
+    implementation("com.github.axet:kaptcha:0.0.9")
     implementation("org.glassfish.jaxb:jaxb-runtime:4.0.0")
-    // https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api
     implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.7.3")
-    // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE")
-
-
-    // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
-//    implementation("javax.xml.bind:jaxb-api:2.4.0-b180830.0359")
-//// https://mvnrepository.com/artifact/javax.xml.bind/activation
-//    implementation("javax.xml.bind:activation:1.0.2")
-//    // https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl
-//    implementation("com.sun.xml.bind:jaxb-impl:4.0.0")
-
 
 }
 
