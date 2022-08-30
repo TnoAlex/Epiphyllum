@@ -4,67 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ae868d7-6ab4-4564-ac1e-3f11a8bf01f5" name="变更" comment="配置文件">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/adapter/ClientDetailsAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/adapter/UserDetailsAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/annotation/NoArg.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/config/OAuthMethodSecurityConfiguration.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/config/OAuthServerConfiguration.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/config/RedisConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/config/WebSecurityConfigurer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/controller/SecurityController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthClientDetails.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthCode.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthRole.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthUser.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthUserRole.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/ResultStatusCode.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/filter/ValidateCodeFilter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthClientDetailsMapper.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthCodeMapper.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthRoleMapper.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthUserMapper.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthUserRoleMapper.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthClientDetailsServiceImp.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthCodeServiceImp.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthRoleServiceImp.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthUserDetailServiceImp.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthUserRoleServiceImp.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthClientDetailsService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthCodeService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthRoleService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthUserDetailService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthUserRoleService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/CollectionUtil.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/MD5Tools.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/RandomTool.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/RanodmImageTool.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/Result.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/ResultUtil.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/SpringContextUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthAccessDeniedHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthExceptionEntryPoint.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthTokenExtractor.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthUserApprovalHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthWebResponseExceptionTranslator.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/SecurityLoginFailureHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/serializer/DefaultOauth2RefreshTokenSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/serializer/FastJsonRedisTokenStoreSerializationStrategy.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/serializer/OAuth2AuthenticationSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/resources/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/resources/xml/OauthUserMap.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/test/kotlin/team/jtq/auth/oauth_serve/oauthTest/OauthTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/test/kotlin/team/jtq/auth/oauth_serve/tools/serializer/FastJsonRedisTokenStoreSerializationStrategyTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oauth_serve/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/oauth_serve/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/OauthServeApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/OauthServeApplication.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oauth_serve/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/oauth_serve/src/main/resources/application.yml" afterDir="false" />
-    </list>
+    <list default="true" id="2ae868d7-6ab4-4564-ac1e-3f11a8bf01f5" name="变更" comment="认证基本完成" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -303,7 +243,7 @@
       <workItem from="1661752274625" duration="8730000" />
       <workItem from="1661761121949" duration="11621000" />
       <workItem from="1661781325733" duration="4992000" />
-      <workItem from="1661850652364" duration="3942000" />
+      <workItem from="1661850652364" duration="4653000" />
     </task>
     <task id="LOCAL-00001" summary="配置文件">
       <created>1661609556920</created>
@@ -312,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661609556920</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="认证基本完成">
+      <created>1661855500534</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1661855500534</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,21 +282,12 @@
       <path value="$PROJECT_DIR$/oauth_serve" />
     </ignored-roots>
     <MESSAGE value="配置文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="配置文件" />
+    <MESSAGE value="认证基本完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="认证基本完成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://G:/Gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-crypto/5.7.3/30f7b7958b37790de06e40c6329f7e9196531027/spring-security-crypto-5.7.3-sources.jar!/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.java</url>
-          <line>124</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://G:/Gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-crypto/5.7.3/30f7b7958b37790de06e40c6329f7e9196531027/spring-security-crypto-5.7.3-sources.jar!/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-function">
           <url>file://$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/Result.kt</url>
           <line>53</line>
