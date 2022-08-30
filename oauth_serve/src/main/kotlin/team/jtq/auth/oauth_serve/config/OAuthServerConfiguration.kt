@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -22,13 +21,10 @@ import org.springframework.security.oauth2.provider.OAuth2RequestFactory
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory
 import org.springframework.security.oauth2.provider.token.TokenStore
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore
 import team.jtq.auth.oauth_serve.service.Imp.OauthClientDetailsServiceImp
 import team.jtq.auth.oauth_serve.service.Imp.OauthCodeServiceImp
 import team.jtq.auth.oauth_serve.service.Imp.OauthUserDetailServiceImp
 import team.jtq.auth.oauth_serve.tools.handler.*
-import team.jtq.auth.oauth_serve.tools.serializer.FastJsonRedisTokenStoreSerializationStrategy
-import javax.annotation.Resource
 
 
 @Slf4j

@@ -15,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter
+import team.jtq.auth.oauth_serve.filter.CustomCORSFilter
 import team.jtq.auth.oauth_serve.filter.ValidateCodeFilter
 import team.jtq.auth.oauth_serve.service.Imp.OauthUserDetailServiceImp
 import team.jtq.auth.oauth_serve.tools.handler.SecurityLoginFailureHandler
@@ -33,6 +35,9 @@ class WebSecurityConfigurer : WebSecurityConfigurerAdapter() {
     @Autowired
     private lateinit var securityLoginFailureHandler: SecurityLoginFailureHandler
 
+    @Autowired
+    private lateinit var corsFilter: CustomCORSFilter
+
     @Bean
     override fun authenticationManagerBean(): AuthenticationManager {
         return super.authenticationManagerBean()
@@ -44,7 +49,8 @@ class WebSecurityConfigurer : WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(http: HttpSecurity) {
-        http.csrf().ignoringAntMatchers("/oauth/authorize", "/oauth/token", "/oauth/rest_token")
+        http.csrf().disable()
+        http.cors()
         http.authorizeRequests()
             .antMatchers("/code/**").permitAll()
             .antMatchers("/antd/**", "/vue/**", "/img/**").permitAll()
@@ -69,6 +75,7 @@ class WebSecurityConfigurer : WebSecurityConfigurerAdapter() {
             .and()
             .exceptionHandling()
             .and() //验证码过滤器
+            .addFilterBefore(corsFilter,WebAsyncManagerIntegrationFilter::class.java)
             .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter::class.java)
             .authenticationProvider(authenticationProvider())
     }

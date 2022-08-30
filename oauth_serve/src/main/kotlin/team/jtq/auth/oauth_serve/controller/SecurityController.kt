@@ -11,7 +11,6 @@ import java.util.*
 import team.jtq.auth.oauth_serve.tools.Result
 import team.jtq.auth.oauth_serve.tools.generate
 import team.jtq.auth.oauth_serve.tools.randomGen
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.annotation.Resource
 
