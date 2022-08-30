@@ -4,35 +4,66 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ae868d7-6ab4-4564-ac1e-3f11a8bf01f5" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Epiphyllum.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/src/main/kotlin/team/jtq/epi_serve/EpiServeApplication.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_serve/src/test/kotlin/team/jtq/epi_serve/EpiServeApplicationTests.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/epi_vue.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/OauthServeApplication.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oauth_serve/src/test/kotlin/team/jtq/auth/oauth_serve/OauthServeApplicationTests.kt" afterDir="false" />
+    <list default="true" id="2ae868d7-6ab4-4564-ac1e-3f11a8bf01f5" name="变更" comment="配置文件">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/adapter/ClientDetailsAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/adapter/UserDetailsAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/annotation/NoArg.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/config/OAuthMethodSecurityConfiguration.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/config/OAuthServerConfiguration.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/config/RedisConfig.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/config/WebSecurityConfigurer.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/controller/SecurityController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthClientDetails.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthCode.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthRole.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthUser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/OauthUserRole.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/entity/ResultStatusCode.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/filter/ValidateCodeFilter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthClientDetailsMapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthCodeMapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthRoleMapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthUserMapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/mapper/OauthUserRoleMapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthClientDetailsServiceImp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthCodeServiceImp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthRoleServiceImp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthUserDetailServiceImp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/Imp/OauthUserRoleServiceImp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthClientDetailsService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthCodeService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthRoleService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthUserDetailService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/service/OauthUserRoleService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/CollectionUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/MD5Tools.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/RandomTool.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/RanodmImageTool.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/Result.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/ResultUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/SpringContextUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthAccessDeniedHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthExceptionEntryPoint.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthTokenExtractor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthUserApprovalHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/OauthWebResponseExceptionTranslator.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/handler/SecurityLoginFailureHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/serializer/DefaultOauth2RefreshTokenSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/serializer/FastJsonRedisTokenStoreSerializationStrategy.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/serializer/OAuth2AuthenticationSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/resources/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/main/resources/xml/OauthUserMap.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/test/kotlin/team/jtq/auth/oauth_serve/oauthTest/OauthTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oauth_serve/src/test/kotlin/team/jtq/auth/oauth_serve/tools/serializer/FastJsonRedisTokenStoreSerializationStrategyTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oauth_serve/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/oauth_serve/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/OauthServeApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/OauthServeApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oauth_serve/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/oauth_serve/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,17 +81,51 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/oauth_serve">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="oauth_serve" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="oauth_serve" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="oauth_serve" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Enum" />
+        <option value="HTML File" />
+        <option value="Kotlin File" />
+        <option value="Class" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin Annotation" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/oauth_serve" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -73,17 +138,48 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "F:/Download/test",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "yarn",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "aa4d6669145733bfd3c26d4a0cae5fdb",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\code\Epiphyllum\oauth_serve\src\main\resources\xml" />
+      <recent name="E:\code\Epiphyllum\oauth_serve\src\main\kotlin\team\jtq\auth\oauth_serve\mapper\xml" />
+      <recent name="E:\code\Epiphyllum\oauth_serve\src\main\kotlin\team\jtq\auth\oauth_serve\entity\config" />
+      <recent name="E:\code\Epiphyllum\oauth_serve\src\main\kotlin\team\jtq\auth\oauth_serve\tools\handler" />
+      <recent name="E:\code\Epiphyllum\oauth_serve\src\main\resources" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="team.jtq.auth.oauth_serve.adapter" />
+      <recent name="team.jtq.auth.oauth_serve.service" />
+      <recent name="team.jtq.auth.oauth_serve.service.Imp" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -91,7 +187,70 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript 调试.Debug Application">
+  <component name="RunManager" selected="Spring Boot.OauthServeApplication">
+    <configuration name="FastJsonRedisTokenStoreSerializationStrategyTests.testCreateInstance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="oauth_serve.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.jtq.auth.oauth_serve.tools.serializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="team.jtq.auth.oauth_serve.tools.serializer" />
+      <option name="MAIN_CLASS_NAME" value="team.jtq.auth.oauth_serve.tools.serializer.FastJsonRedisTokenStoreSerializationStrategyTests" />
+      <option name="METHOD_NAME" value="testCreateInstance" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OauthTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="oauth_serve.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.jtq.auth.oauth_serve.oauthTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="team.jtq.auth.oauth_serve.oauthTest" />
+      <option name="MAIN_CLASS_NAME" value="team.jtq.auth.oauth_serve.oauthTest.OauthTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OauthTest.createUserAndRole" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="oauth_serve.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.jtq.auth.oauth_serve.oauthTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="team.jtq.auth.oauth_serve.oauthTest" />
+      <option name="MAIN_CLASS_NAME" value="team.jtq.auth.oauth_serve.oauthTest.OauthTest" />
+      <option name="METHOD_NAME" value="createUserAndRole" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OauthTest.testEncode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="oauth_serve.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.jtq.auth.oauth_serve.oauthTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="team.jtq.auth.oauth_serve.oauthTest" />
+      <option name="MAIN_CLASS_NAME" value="team.jtq.auth.oauth_serve.oauthTest.OauthTest" />
+      <option name="METHOD_NAME" value="testEncode" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:8080">
       <method v="2" />
     </configuration>
@@ -109,6 +268,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JavaScript 调试.Debug Application" />
+      <item itemvalue="JUnit.OauthTest.testEncode" />
+      <item itemvalue="JUnit.FastJsonRedisTokenStoreSerializationStrategyTests.testCreateInstance" />
+      <item itemvalue="JUnit.OauthTest" />
+      <item itemvalue="JUnit.OauthTest.createUserAndRole" />
+      <item itemvalue="Spring Boot.EpiServeApplication" />
+      <item itemvalue="Spring Boot.OauthServeApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.OauthTest.testEncode" />
+        <item itemvalue="JUnit.OauthTest.createUserAndRole" />
+        <item itemvalue="JUnit.OauthTest" />
+        <item itemvalue="JUnit.FastJsonRedisTokenStoreSerializationStrategyTests.testCreateInstance" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -119,7 +295,24 @@
       <option name="presentableId" value="Default" />
       <updated>1661241165869</updated>
       <workItem from="1661241168280" duration="2620000" />
+      <workItem from="1661245084017" duration="34000" />
+      <workItem from="1661582800750" duration="471000" />
+      <workItem from="1661605480621" duration="3944000" />
+      <workItem from="1661653474996" duration="4244000" />
+      <workItem from="1661666359143" duration="25445000" />
+      <workItem from="1661752274625" duration="8730000" />
+      <workItem from="1661761121949" duration="11621000" />
+      <workItem from="1661781325733" duration="4992000" />
+      <workItem from="1661850652364" duration="3942000" />
     </task>
+    <task id="LOCAL-00001" summary="配置文件">
+      <created>1661609556920</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1661609556920</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,5 +328,69 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/epi_serve" />
+      <path value="$PROJECT_DIR$/oauth_serve" />
+    </ignored-roots>
+    <MESSAGE value="配置文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="配置文件" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://G:/Gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-crypto/5.7.3/30f7b7958b37790de06e40c6329f7e9196531027/spring-security-crypto-5.7.3-sources.jar!/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.java</url>
+          <line>124</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://G:/Gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-crypto/5.7.3/30f7b7958b37790de06e40c6329f7e9196531027/spring-security-crypto-5.7.3-sources.jar!/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-function">
+          <url>file://$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/Result.kt</url>
+          <line>53</line>
+          <properties class="team.jtq.auth.oauth_serve.tools.Result.Companion" method="error">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-function">
+          <url>file://$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/Result.kt</url>
+          <line>49</line>
+          <properties class="team.jtq.auth.oauth_serve.tools.Result.Companion" method="error">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-function">
+          <url>file://$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/tools/Result.kt</url>
+          <line>45</line>
+          <properties class="team.jtq.auth.oauth_serve.tools.Result.Companion" method="error">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/filter/ValidateCodeFilter.kt</url>
+          <line>35</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/oauth_serve/src/main/kotlin/team/jtq/auth/oauth_serve/controller/SecurityController.kt</url>
+          <line>52</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Epiphyllum$OauthServeApplication.ic" NAME="OauthServeApplication 覆盖结果" MODIFIED="1661850873793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

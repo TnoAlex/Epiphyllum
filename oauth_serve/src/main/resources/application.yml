@@ -2,9 +2,17 @@ server:
   port: 8088
 
 spring:
+  main:
+    allow-circular-references: true
   jackson:
     date-format: yyyy-MM-dd HH:MM:ss
     time-zone: GMT-8
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8088
+
 
   datasource:
     druid:
@@ -39,5 +47,7 @@ mybatis-plus:
     banner: false
     db-config:
       id-type: assign_id
+  type-aliases-package:
+  mapper-locations: xml/*.xml
 
 
