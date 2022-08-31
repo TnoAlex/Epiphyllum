@@ -18,6 +18,6 @@ class VerificationCodeGenerater {
         val stream = ByteArrayOutputStream()
         ImageIO.write(image,"jpg",stream)
         val base64Image = Base64.getEncoder().encode(stream.toByteArray())
-        return arrayOf(code , "data:image/jpeg;base64$base64Image")
+        return arrayOf(code , "data:image/jpeg;base64,$base64Image")
     }
 }
