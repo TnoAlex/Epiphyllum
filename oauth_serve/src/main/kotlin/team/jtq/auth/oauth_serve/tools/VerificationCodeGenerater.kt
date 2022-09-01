@@ -9,11 +9,11 @@ import javax.imageio.ImageIO
 
 @Component
 class VerificationCodeGenerater {
-    @Resource
-    private lateinit var producer: Producer
 
+    @Resource
+    private lateinit var producer:Producer
     fun generate(): Array<String> {
-        val code = producer.createText()
+        val code =  producer.createText()
         val image = producer.createImage(code)
         val stream = ByteArrayOutputStream()
         ImageIO.write(image,"jpg",stream)

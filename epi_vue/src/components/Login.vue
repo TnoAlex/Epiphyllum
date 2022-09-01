@@ -18,12 +18,9 @@
     <div  ref="frontbox" class="frontbox">
       <div ref="login" class="login" ><h2>登录</h2>
         <div class="inputbox">
-<!--          <el-col>-->
-<!--            <el-input ref="loginAccount" class="w-50 h-75" placeholder="用户名或邮箱" type="text"/>-->
-<!--            <el-input ref="loginPassword" class="w-50 h-75" placeholder="请输入密码" type="password" show-password/>-->
-<!--          </el-col>-->
           <input type="text" name="email" placeholder="  EMAIL">
-          <input type="password" name="password" placeholder="  密码"></div>
+          <input type="password" name="password" placeholder="  密码">
+        </div>
         <p>忘记密码?</p>
         <button>登录</button>
       </div>
@@ -44,6 +41,12 @@
 export default {
   name: "Login",
 
+  data(){
+    return {loginForm:{
+      userAccount:'',
+        userPassword:''
+      }}
+  },
   methods:{
     switchLogin(){
       const refs = this.$refs

@@ -52,7 +52,7 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     implementation("com.baomidou:mybatis-plus-boot-starter:3.5.2")
     implementation("com.alibaba:druid-spring-boot-starter:1.2.11")
-    implementation("com.github.axet:kaptcha:0.0.9")
+    implementation("com.github.penggle:kaptcha:2.3.2")
     implementation("org.glassfish.jaxb:jaxb-runtime:4.0.0")
     implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.3")
