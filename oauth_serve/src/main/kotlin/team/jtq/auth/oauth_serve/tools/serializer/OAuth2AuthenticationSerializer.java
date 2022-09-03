@@ -84,8 +84,8 @@ public class OAuth2AuthenticationSerializer implements ObjectDeserializer {
     }
 
     private Object parse(DefaultJSONParser parse) {
-        JSONObject object = new JSONObject(parse.lexer.isEnabled(Feature.OrderedField));
-        Object parsedObject = parse.parseObject(object);
+//        JSONObject object = new JSONObject(parse.lexer.isEnabled(Feature.OrderedField));
+        Object parsedObject = parse.parseObject(new JSONObject(parse.lexer.isEnabled(Feature.OrderedField)));
         if (parsedObject instanceof JSONObject) {
             return parsedObject;
         } else if (parsedObject instanceof OAuth2Authentication) {

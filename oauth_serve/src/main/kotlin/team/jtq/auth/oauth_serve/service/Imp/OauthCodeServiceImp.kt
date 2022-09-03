@@ -1,5 +1,6 @@
 package team.jtq.auth.oauth_serve.service.Imp
 
+import com.alibaba.fastjson.JSON
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException
@@ -8,6 +9,7 @@ import org.springframework.security.oauth2.common.util.SerializationUtils
 import org.springframework.security.oauth2.provider.OAuth2Authentication
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices
 import org.springframework.stereotype.Service
+import team.jtq.auth.oauth_serve.entity.OauthClientDetails
 import team.jtq.auth.oauth_serve.entity.OauthCode
 import team.jtq.auth.oauth_serve.mapper.OauthCodeMapper
 import team.jtq.auth.oauth_serve.service.OauthCodeService
@@ -19,7 +21,7 @@ import javax.annotation.Resource
 class OauthCodeServiceImp :ServiceImpl<OauthCodeMapper, OauthCode>(),AuthorizationCodeServices,OauthCodeService {
 
     @Resource
-    private lateinit var redisTemplate:RedisTemplate<String,OauthCode>
+    private lateinit var redisTemplate:RedisTemplate<String,Any>
 
     private val generator = RandomValueStringGenerator(10)
 
@@ -41,7 +43,8 @@ class OauthCodeServiceImp :ServiceImpl<OauthCodeMapper, OauthCode>(),Authorizati
     }
 
     override fun remove(code: String): OAuth2Authentication? {
-        val oauthCode = redisTemplate.opsForValue()[prefix + code]
+        val obj = redisTemplate.opsForValue().get(prefix+code)
+        val oauthCode = JSON.parseObject(JSON.toJSONString(obj), OauthCode::class.java)
         if (oauthCode != null) {
             redisTemplate.delete(prefix + code)
             return SerializationUtils.deserialize(oauthCode.authentication)

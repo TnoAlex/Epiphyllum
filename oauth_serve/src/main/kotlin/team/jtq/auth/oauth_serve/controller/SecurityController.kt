@@ -1,11 +1,13 @@
 package team.jtq.auth.oauth_serve.controller
 
+import com.alibaba.fastjson.JSONObject
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.RestController
 import team.jtq.auth.oauth_serve.tools.MD5Encode
 import java.util.*
 import team.jtq.auth.oauth_serve.tools.Result

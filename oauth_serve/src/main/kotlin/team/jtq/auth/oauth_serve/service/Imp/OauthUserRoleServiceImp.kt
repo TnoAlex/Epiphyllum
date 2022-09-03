@@ -6,5 +6,5 @@ import team.jtq.auth.oauth_serve.entity.OauthUserRole
 import team.jtq.auth.oauth_serve.mapper.OauthUserRoleMapper
 
 @Service
-class OauthUserRoleServiceImp:ServiceImpl<OauthUserRoleMapper,OauthUserRole>() {
+class OauthUserRoleServiceImp:ServiceImpl<OauthUserRoleMapper, OauthUserRole>() {
 }

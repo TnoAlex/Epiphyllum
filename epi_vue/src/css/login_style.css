@@ -1,11 +1,8 @@
-body {
-    background-color: #A8A8A8;
-    font-family: 'Roboto', sans-serif
-}
+@import "font.css";
 
-.container {
-    width: 600px;
-    height: 400px;
+.inner_container {
+    width: 1010px;
+    height: 350px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -26,9 +23,10 @@ body {
 .frontbox {
     background-color: white;
     border-radius: 20px;
-    height: 100%;
+    height: 120%;
     width: 50%;
     z-index: 10;
+    margin-top: -40px;
     position: absolute;
     right: 0;
     margin-right: 3%;
@@ -61,7 +59,17 @@ body {
 .textcontent {
     color: white;
     margin-top: 65px;
-    margin-left: 12%
+    margin-left: 12%;
+    font-family: Yuyang_regular, serif;
+    font-size: 12px;
+}
+.loginButton{
+    margin-top: 80px;
+    margin-right: -300px;
+}
+.regButton{
+    margin-top: 20px;
+    margin-right: -300px;
 }
 
 .loginMsg button, .signupMsg button {
@@ -89,33 +97,18 @@ body {
 .inputbox {
     margin-top: 40px;
     text-align: center;
-    margin-left: 90px;
+    margin-left: 20px;
 }
 
-.login input, .signup input {
-    display: block;
-    width: 100%;
-    height: 40px;
-    background-color: #f2f2f2;
-    border: 0;
-    margin-bottom: 20px;
-    font-size: 12px
+.login input,.signup input{
+    height: 45px;
 }
-
-.login button, .signup button {
-    background-color: #35B729;
-    border: 0;
-    color: white;
+.textlink{
+    font-family: Yuyang_regular sans-serif;
     font-size: 12px;
-    font-weight: 300;
-    box-sizing: content-box;
-    padding: 10px;
-    border-radius: 10px;
-    width: 60px;
-    position: absolute;
-    right: 30px;
-    bottom: 30px;
-    cursor: pointer
+    color: #35B729!important;
+    margin-top: -40px;
+    margin-right: -100px;
 }
 
 .login p {

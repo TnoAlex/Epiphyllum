@@ -17,7 +17,7 @@ class VerificationCodeGenerater {
         val image = producer.createImage(code)
         val stream = ByteArrayOutputStream()
         ImageIO.write(image,"jpg",stream)
-        val base64Image = Base64.getEncoder().encode(stream.toByteArray())
+        val base64Image = String(Base64.getEncoder().encode(stream.toByteArray()))
         return arrayOf(code , "data:image/jpeg;base64,$base64Image")
     }
 }

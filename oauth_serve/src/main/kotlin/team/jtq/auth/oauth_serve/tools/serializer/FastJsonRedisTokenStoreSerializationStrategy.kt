@@ -17,10 +17,10 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 import team.jtq.auth.oauth_serve.adapter.UserDetailsAdapter
 
 class FastJsonRedisTokenStoreSerializationStrategy: RedisTokenStoreSerializationStrategy {
-    companion object{
-        private val defaultRedisConfig = ParserConfig()
-    }
+    private lateinit var defaultRedisConfig:ParserConfig
+
     init {
+        defaultRedisConfig = ParserConfig()
         defaultRedisConfig.isAutoTypeSupport = true
         defaultRedisConfig.putDeserializer(DefaultOAuth2RefreshToken::class.java, DefaultOauth2RefreshTokenSerializer())
         defaultRedisConfig.putDeserializer(OAuth2Authentication::class.java, OAuth2AuthenticationSerializer())
@@ -31,20 +31,18 @@ class FastJsonRedisTokenStoreSerializationStrategy: RedisTokenStoreSerialization
         defaultRedisConfig.addAccept("org.springframework.security.oauth2.common.")
         TypeUtils.addMapping("org.springframework.security.oauth2.common.DefaultOAuth2AccessToken", DefaultOAuth2AccessToken::class.java)
         TypeUtils.addMapping("org.springframework.security.oauth2.common.DefaultExpiringOAuth2RefreshToken", DefaultExpiringOAuth2RefreshToken::class.java)
-        defaultRedisConfig.addAccept("com.pthin.oauth.server.adapter")
-        TypeUtils.addMapping("com.pthin.oauth.server.adapter.UserDetailsAdapter", UserDetailsAdapter::class.java)
+        defaultRedisConfig.addAccept("team.jtq.auth.oauth_serve.adapter")
+        TypeUtils.addMapping("team.jtq.auth.oauth_serve.adapter", UserDetailsAdapter::class.java)
         defaultRedisConfig.addAccept("org.springframework.security.web.authentication.preauth")
         TypeUtils.addMapping("org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken", PreAuthenticatedAuthenticationToken::class.java)
     }
 
     override fun <T> deserialize(bytes: ByteArray?, clazz: Class<T>?): T? {
         Assert.notNull(clazz, "clazz can't be null")
-        return if (bytes == null || bytes.size == 0) {
-            null
-        } else try {
-            JSON.parseObject<T>(String(bytes, IOUtils.UTF8), clazz, defaultRedisConfig)
-        } catch (e: Exception) {
-            throw SerializationException("Could not serialize: " + e.message, e)
+        if (bytes == null || bytes.size == 0)
+            return null
+        else {
+            return JSON.parseObject<T>(String(bytes, IOUtils.UTF8), clazz, defaultRedisConfig)
         }
     }
 
@@ -54,12 +52,12 @@ class FastJsonRedisTokenStoreSerializationStrategy: RedisTokenStoreSerialization
         } else String(bytes, IOUtils.UTF8)
     }
 
-    override fun serialize(`object`: Any?): ByteArray? {
-        return if (`object` == null) {
+    override fun serialize(obj: Any?): ByteArray? {
+        return if (obj == null) {
             ByteArray(0)
         } else try {
             JSON.toJSONBytes(
-                `object`, SerializerFeature.WriteClassName,
+                obj, SerializerFeature.WriteClassName,
                 SerializerFeature.DisableCircularReferenceDetect
             )
         } catch (e: Exception) {

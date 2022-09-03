@@ -54,7 +54,7 @@ class WebSecurityConfigurer : WebSecurityConfigurerAdapter() {
         http.authorizeRequests()
             .antMatchers("/code/**").permitAll()
             .antMatchers("/antd/**", "/vue/**", "/img/**").permitAll()
-            .antMatchers("/oauth/rest_token*").permitAll()
+            .antMatchers("/oauth/rest_token*","/oauth/**").permitAll()
             .antMatchers("/doLogin").permitAll()
             .antMatchers("/login*").permitAll()
             .antMatchers(HttpMethod.GET, "/login*").anonymous()

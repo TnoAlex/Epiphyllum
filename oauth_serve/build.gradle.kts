@@ -48,6 +48,10 @@ dependencies {
     implementation("org.projectlombok:lombok:1.18.22")
     implementation("junit:junit:4.13.1")
     runtimeOnly("mysql:mysql-connector-java")
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3")
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-joda:2.13.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     implementation("com.baomidou:mybatis-plus-boot-starter:3.5.2")

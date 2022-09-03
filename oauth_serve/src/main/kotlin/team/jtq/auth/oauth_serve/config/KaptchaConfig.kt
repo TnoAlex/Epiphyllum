@@ -16,6 +16,8 @@ class KaptchaConfig {
         properties.put("kaptcha.border", "no")
         //边框的颜色
         properties.put("kaptcha.textproducer.font.color", "black")
+        properties.put("kaptcha.image.width","130")
+        properties.put("kaptcha.image.height","45")
         //验证码大小
         properties.put("kaptcha.textproducer.char.space", "5")
         //字体
