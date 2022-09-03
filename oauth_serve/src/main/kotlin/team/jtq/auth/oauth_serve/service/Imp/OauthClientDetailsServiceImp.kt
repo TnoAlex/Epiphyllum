@@ -3,6 +3,9 @@ package team.jtq.auth.oauth_serve.service.Imp
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONObject
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction
+import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.fasterxml.jackson.databind.ObjectMapper
 import lombok.extern.slf4j.Slf4j
@@ -19,21 +22,23 @@ import java.util.concurrent.TimeUnit
 
 @Slf4j
 @Service("oauthClientDetailsService")
-class OauthClientDetailsServiceImp :ServiceImpl<OauthClientDetailsMapper, OauthClientDetails>(),OauthClientDetailsService,ClientDetailsService{
+class OauthClientDetailsServiceImp : ServiceImpl<OauthClientDetailsMapper, OauthClientDetails>(),
+    OauthClientDetailsService, ClientDetailsService {
     @Resource
     private lateinit var redisTemplate: RedisTemplate<String, Any>
     private val prefix = "ClientDetails:"
 
     override fun loadClientByClientId(clientId: String): ClientDetails? {
-        val obj = redisTemplate.opsForValue().get(prefix+clientId)
-        var oauthClientDetils  = JSON.parseObject(JSON.toJSONString(obj),OauthClientDetails::class.java)
-        if(oauthClientDetils == null){
-            val query  = LambdaQueryWrapper<OauthClientDetails>()
-            query.eq(OauthClientDetails::appKey,clientId)
-            oauthClientDetils = this.baseMapper.selectOne(query)
-            if(oauthClientDetils == null)
+        val obj = redisTemplate.opsForValue().get(prefix + clientId)
+        var oauthClientDetils = JSON.parseObject(JSON.toJSONString(obj), OauthClientDetails::class.java)
+        if (oauthClientDetils == null) {
+            val query = QueryWrapper<OauthClientDetails>()
+            query.eq("app_key", clientId)
+           oauthClientDetils = this.baseMapper.selectOne(query)
+
+            if (oauthClientDetils == null)
                 return null
-            redisTemplate.opsForValue().set(prefix+clientId, oauthClientDetils,1,TimeUnit.HOURS)
+            redisTemplate.opsForValue().set(prefix + clientId, oauthClientDetils, 1, TimeUnit.HOURS)
         }
         return ClientDetailsAdapter(oauthClientDetils)
     }

@@ -8,7 +8,10 @@ enum class ResultStatusCode(var code: Int, var msg: String) {
         405,
         "不支持当前请求方法"
     ),
+
     SYSTEM_ERR(500, "服务器运行异常"),
     PERMISSION_DENIED(10001, "权限不足"),
-    TOKEN_MISS(10002, "Token缺失");
+    TOKEN_MISS(10002, "Token缺失"),
+    VERIFICATIONCODE_ERROR(1003,"验证码错误"),
+    UNKONW_ERROR(1004,"未知错误")
 }
