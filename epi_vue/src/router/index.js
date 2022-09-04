@@ -12,7 +12,13 @@ const router = createRouter({
                 path:"/404",
                 name:"404",
                 component:()=>import('@/components/404')
+            },
+            {
+                path:"/index",
+                name:"index_vue",
+                component:()=>import('@/components/blog/index')
             }
+
         ],
     }
 )
