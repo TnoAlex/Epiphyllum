@@ -2756,16 +2756,8 @@ export default {
 }
 </script>
 <style>
-@import url(../../assets/css/css2.css);
-@import url(../../assets/css/all.min.css);
-@import url(../../assets/css/bootstrap-icons.css);
-@import url(../../assets/css/OverlayScrollbars.min.css);
-@import url(../../assets/css/tiny-slider.css);
-@import url(../../assets/css/choices.min.css);
-@import url(../../assets/css/glightbox.min.css);
-@import url(../../assets/css/dropzone.css);
-@import url(../../assets/css/flatpickr.css);
-@import url(../../assets/css/plyr.css);
-@import url(../../assets/css/style.css);
+@import url(@/css/font.css);
+@import url(@/css/all.min.css);
+@import url(@/css/style.css);
 </style>
 

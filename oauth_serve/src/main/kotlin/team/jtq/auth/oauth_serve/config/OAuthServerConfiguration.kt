@@ -133,8 +133,8 @@ class OAuthServerConfiguration {
                 .authorizationCodeServices(authorizationCodeServices) // 用户信息service
                 .userDetailsService(userDetailService) // 用户授权确认处理器
                 .userApprovalHandler(userApprovalHandler()) // 注入authenticationManager来支持password模式
-                .authenticationManager(authenticationManager) // 自定义授权确认页面
-                .pathMapping("/oauth/confirm_access", "/approval")
+//                .authenticationManager(authenticationManager) // 自定义授权确认页面
+//                .pathMapping("/oauth/confirm_access", "/approval")
         }
 
 
