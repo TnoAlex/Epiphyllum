@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction
 import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda
+import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.fasterxml.jackson.databind.ObjectMapper
 import lombok.extern.slf4j.Slf4j
@@ -32,8 +33,9 @@ class OauthClientDetailsServiceImp : ServiceImpl<OauthClientDetailsMapper, Oauth
         val obj = redisTemplate.opsForValue().get(prefix + clientId)
         var oauthClientDetils = JSON.parseObject(JSON.toJSONString(obj), OauthClientDetails::class.java)
         if (oauthClientDetils == null) {
-            val query = QueryWrapper<OauthClientDetails>()
-            query.eq("app_key", clientId)
+            val query = KtQueryWrapper(OauthClientDetails::class.java)
+//            val query = QueryWrapper<OauthClientDetails>()
+            query.eq(OauthClientDetails::appKey,clientId)
            oauthClientDetils = this.baseMapper.selectOne(query)
 
             if (oauthClientDetils == null)

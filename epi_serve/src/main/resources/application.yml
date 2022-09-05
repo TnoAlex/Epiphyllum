@@ -1,24 +1,16 @@
 server:
-  port: 8088
-
-
+  port: 8086
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:MM:ss
     time-zone: GMT-8
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://127.0.0.1:8088
-
 
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/sso?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: ssoUser
-      password: ssoroot
+      url: jdbc:mysql://localhost:3306/usd?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: usdUser
+      password: usdroot
       initial-size: 5
       max-active: 20
       max-wait: 60000
@@ -26,7 +18,7 @@ spring:
       min-evictable-idle-time-millis: 30000
 
   redis:
-    database: 0
+    database: 1
     host: 127.0.0.1
     lettuce:
       pool:
@@ -49,5 +41,3 @@ mybatis-plus:
       id-type: assign_id
   type-aliases-package:
   mapper-locations: xml/*.xml
-
-

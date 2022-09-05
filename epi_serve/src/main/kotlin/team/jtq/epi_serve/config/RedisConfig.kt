@@ -1,24 +1,20 @@
-package team.jtq.auth.oauth_serve.config
+package team.jtq.epi_serve.config
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.PropertyAccessor
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
-import com.fasterxml.jackson.datatype.joda.JodaModule
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore
-import team.jtq.auth.oauth_serve.tools.serializer.FastJsonRedisTokenStoreSerializationStrategy
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -38,7 +34,6 @@ class RedisConfig {
         val om = ObjectMapper()
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
 //        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
-        om.registerModule(JodaModule())
         om.registerModule(Jdk8Module())
         val javaTimeModule = JavaTimeModule()
         //格式化时间格式
@@ -59,13 +54,4 @@ class RedisConfig {
         redisTemplate.afterPropertiesSet()
         return redisTemplate
     }
-
-    @Bean
-    fun tokenStore(connectionFactory: RedisConnectionFactory): RedisTokenStore {
-        val redisTokenStore = RedisTokenStore(connectionFactory)
-        redisTokenStore.setPrefix("TOKEN:")
-        redisTokenStore.setSerializationStrategy(FastJsonRedisTokenStoreSerializationStrategy())
-        return redisTokenStore
-    }
-
 }

@@ -80,7 +80,6 @@
 import axios from "axios"
 import {ElMessage} from "element-plus";
 
-axios.defaults.baseURL = '/api'
 let codetime = 0
 export default {
   name: "Login",
@@ -104,7 +103,7 @@ export default {
     document.querySelector('body').setAttribute('style', ' background-color: #A8A8A8;')
     this.currdatetime = new Date().getTime()
     codetime = this.currdatetime
-    axios.get('/code/' + codetime)
+    axios.get('/api/code/' + codetime)
         .then(res => {
           this.$refs.v_code.src = res.data.data
         })
@@ -139,7 +138,7 @@ export default {
     },
     loadVCode() {
       codetime = this.currdatetime
-      axios.get('/code/' + codetime)
+      axios.get('/api/code/' + codetime)
           .then(res => {
             this.$refs.v_code.src = res.data.data
           })
@@ -169,15 +168,15 @@ export default {
           grouping: true
         })
       }
-      const parms = new URLSearchParams()
-      const form = this.$data.loginForm
-      parms.set('username',form.username)
-      parms.set('password',form.password)
-      parms.set('code',form.code)
-      parms.set('timestamp',codetime)
-      axios.post('/doLogin', parms)
+      this.$data.loginForm.timestamp = codetime
+      axios.post('/api/login', this.$data.loginForm)
           .then(res => {
-            console.log(res.data)
+            if(res.status === 200){
+              console.log("成功")
+            }
+            else if(res.data){
+              console.log("失败")
+            }
           })
     },
   },

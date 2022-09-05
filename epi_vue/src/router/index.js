@@ -18,7 +18,6 @@ const router = createRouter({
                 name:"index_vue",
                 component:()=>import('@/components/blog/index')
             }
-
         ],
     }
 )

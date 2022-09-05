@@ -3,9 +3,8 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
-import 'overlayscrollbars/styles/overlayscrollbars.css'
 import 'tiny-slider/dist/tiny-slider.css'
-import 'choices.js/src/styles/choices.scss'
+import 'choices.js/public/assets/styles/choices.css'
 import 'glightbox/dist/css/glightbox.css'
 import "glightbox/dist/css/plyr.css"
 import 'dropzone/dist/dropzone.css'
@@ -19,6 +18,5 @@ app.use(ElementPlus)
 app.use(router)
 
 app.config.globalProperties.$axios = axios
-axios.defaults.baseURL='/api'
 app.mount('#app')
 
