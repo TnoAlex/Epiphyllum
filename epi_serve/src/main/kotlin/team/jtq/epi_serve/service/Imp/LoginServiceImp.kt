@@ -32,21 +32,21 @@ class LoginServiceImp:LoginService {
 
     override fun verificationCodeGeneration(timestamp: String): String {
         val codePair = codeGenerater.generate()
-        val realKey = DigestUtils.md5Digest((codePair[0]+timestamp).lowercase(Locale.getDefault()).toByteArray(Charsets.UTF_8))
+        val realKey = DigestUtils.md5DigestAsHex((codePair[0]+timestamp).lowercase(Locale.getDefault()).toByteArray(Charsets.UTF_8))
 
-        redisTemplate.opsForValue().set(String(realKey,Charsets.UTF_8),codePair[0],5,TimeUnit.MINUTES)
+        redisTemplate.opsForValue().set("verification_code:$realKey",codePair[0],5,TimeUnit.MINUTES)
         return codePair[1]
     }
 
     override fun checkLoginParameter(entity: LoginEntity): Result {
-        val realKey= String(DigestUtils.md5Digest((entity.code.lowercase(Locale.getDefault()) + entity.timestamp).toByteArray(Charsets.UTF_8)),Charsets.UTF_8)
+        val realKey= "verification_code:"+DigestUtils.md5DigestAsHex((entity.code.lowercase(Locale.getDefault()) + entity.timestamp).toByteArray(Charsets.UTF_8))
         if(redisTemplate.hasKey(realKey))
         {
             redisTemplate.delete(realKey)
             val reqUrl = AppResourceConfig.oauthService+AppResourceConfig.queryTokenUri+"client_id="+AppResourceConfig.appResourcesId+"&client_secret="+
                     AppResourceConfig.appQuerySecret+"&grant_type=password&username="+entity.username+"&password="+entity.password
 
-            var responseBody = ResponseEntity<String>(HttpStatus.OK)
+            val responseBody: ResponseEntity<String>
             try{
                 responseBody = restTemplate.postForEntity(reqUrl,null,String::class.java)
             }catch (e:Exception){

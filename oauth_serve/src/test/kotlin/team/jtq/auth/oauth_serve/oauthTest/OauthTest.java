@@ -65,11 +65,8 @@ public class OauthTest {
         userRoleService.save(userRole);
     }
     @Test
-    public void  testEncode(){
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String s1 = bCryptPasswordEncoder.encode("12345");
-        boolean res = bCryptPasswordEncoder.matches("12345",s1);
-        System.out.println(res);
+    public void  testSql(){
+        userRoleService.registerUserRole("123","321");
     }
 
 

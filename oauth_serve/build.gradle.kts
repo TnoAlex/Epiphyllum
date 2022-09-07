@@ -45,7 +45,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.alibaba:fastjson:1.2.60")
     implementation("org.springframework.session:spring-session-data-redis")
-    implementation("org.projectlombok:lombok:1.18.22")
+    implementation("org.projectlombok:lombok:1.18.24")
+    implementation("io.github.microutils:kotlin-logging:2.1.23")
     implementation("junit:junit:4.13.1")
     runtimeOnly("mysql:mysql-connector-java")
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310

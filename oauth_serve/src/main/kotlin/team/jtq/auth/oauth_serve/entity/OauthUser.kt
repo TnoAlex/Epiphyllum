@@ -27,6 +27,7 @@ data class OauthUser(
     var createTime: LocalDateTime,
     var updateBy: Long,
     var updateTime: LocalDateTime,
+    var addition:String,
     @TableField(exist = false)
     var roleList: List<OauthRole>,
 ) : Serializable {

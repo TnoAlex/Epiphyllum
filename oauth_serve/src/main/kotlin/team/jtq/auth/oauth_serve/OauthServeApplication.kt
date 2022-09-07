@@ -18,7 +18,7 @@ class OauthServeApplication{
                 registry.addMapping("/**")
                     .allowCredentials(false)
                     .allowedMethods("POST","GET","DELETE","PUT","OPTIONS")
-                    .allowedOrigins("*")
+                    .allowedOrigins("http://127.0.0.1:8086")
             }
         }
     }

@@ -9,11 +9,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.listener.RedisMessageListenerContainer
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer
@@ -28,6 +30,9 @@ import javax.annotation.Resource
 
 @Configuration
 class RedisConfig {
+
+    @Autowired
+    private lateinit var redisConnectionFactory: RedisConnectionFactory
 
     @Resource
     private lateinit var lettuceConnectionFactory: LettuceConnectionFactory
@@ -66,6 +71,13 @@ class RedisConfig {
         redisTokenStore.setPrefix("TOKEN:")
         redisTokenStore.setSerializationStrategy(FastJsonRedisTokenStoreSerializationStrategy())
         return redisTokenStore
+    }
+
+    @Bean
+    fun redisMessageListenerContainer(): RedisMessageListenerContainer{
+        val listenerContainer = RedisMessageListenerContainer()
+        listenerContainer.setConnectionFactory(redisConnectionFactory)
+        return listenerContainer
     }
 
 }
