@@ -22,6 +22,7 @@ data class OauthRole(
     var updateBy: Long,
     var updateTime: LocalDateTime,
     var canExudes:Int,
+    var roleLevel:Int
 
     ) : Serializable {
     companion object {

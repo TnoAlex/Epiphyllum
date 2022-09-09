@@ -6,6 +6,13 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:MM:ss
     time-zone: GMT-8
+  mail:
+    default-encoding: UTF-8
+    protocol: smtp
+    host: smtp.163.com
+    password: QCWALYFSSZANWCAY
+    username: tommills@163.com
+    test-connection: false
   security:
     oauth2:
       resourceserver:
@@ -50,4 +57,6 @@ mybatis-plus:
   type-aliases-package:
   mapper-locations: xml/*.xml
 
-
+deploy:
+  domainName: http://127.0.0.1:8088
+  minimumCheckLevel: 2

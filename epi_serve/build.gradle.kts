@@ -49,6 +49,8 @@ dependencies {
     implementation("com.github.penggle:kaptcha:2.3.2")
     // https://mvnrepository.com/artifact/com.alibaba/fastjson
     implementation("com.alibaba:fastjson:2.0.12")
+    implementation("org.springframework.boot:spring-boot-configuration-processor:2.7.3")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
 
 }

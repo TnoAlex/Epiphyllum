@@ -9,10 +9,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import team.jtq.auth.oauth_serve.entity.OauthRole;
 import team.jtq.auth.oauth_serve.entity.OauthUser;
 import team.jtq.auth.oauth_serve.entity.OauthUserRole;
-import team.jtq.auth.oauth_serve.service.Imp.OauthClientDetailsServiceImp;
-import team.jtq.auth.oauth_serve.service.Imp.OauthRoleServiceImp;
-import team.jtq.auth.oauth_serve.service.Imp.OauthUserDetailServiceImp;
-import team.jtq.auth.oauth_serve.service.Imp.OauthUserRoleServiceImp;
+import team.jtq.auth.oauth_serve.service.imp.OauthClientDetailsServiceImp;
+import team.jtq.auth.oauth_serve.service.imp.OauthRoleServiceImp;
+import team.jtq.auth.oauth_serve.service.imp.OauthUserDetailServiceImp;
+import team.jtq.auth.oauth_serve.service.imp.OauthUserRoleServiceImp;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;

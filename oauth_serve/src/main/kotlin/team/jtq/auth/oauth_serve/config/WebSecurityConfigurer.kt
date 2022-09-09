@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter
 import team.jtq.auth.oauth_serve.filter.CustomCORSFilter
-import team.jtq.auth.oauth_serve.service.Imp.OauthUserDetailServiceImp
+import team.jtq.auth.oauth_serve.service.imp.OauthUserDetailServiceImp
 
 
 @Slf4j

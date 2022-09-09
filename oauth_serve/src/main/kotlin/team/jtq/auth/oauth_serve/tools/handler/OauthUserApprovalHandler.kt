@@ -5,7 +5,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.oauth2.provider.AuthorizationRequest
 import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler
 import team.jtq.auth.oauth_serve.adapter.ClientDetailsAdapter
-import team.jtq.auth.oauth_serve.service.Imp.OauthClientDetailsServiceImp
+import team.jtq.auth.oauth_serve.service.imp.OauthClientDetailsServiceImp
 import team.jtq.auth.oauth_serve.tools.SpringContextUtils
 
 

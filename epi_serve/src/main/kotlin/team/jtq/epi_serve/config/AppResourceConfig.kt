@@ -1,9 +1,14 @@
 package team.jtq.epi_serve.config
 
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.stereotype.Component
 
+
+@Component
+@ConfigurationProperties(prefix = "authorization-server")
 object AppResourceConfig {
-    const val appResourcesId = "1293380307393789953"
-    const val appQuerySecret = "jskJzLhsye02mqKbn09SXSx0j28IehjG"
-    const val oauthService = "http://127.0.0.1:8088"
-    const val queryTokenUri = "/oauth/token?"
+    lateinit var appResourcesId: String
+    lateinit var appQuerySecret: String
+    lateinit var oauthService: String
+    lateinit var queryTokenUri: String
 }

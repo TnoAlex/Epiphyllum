@@ -3,7 +3,6 @@ package team.jtq.epi_serve.service.Imp
 import com.alibaba.fastjson.JSON
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.util.DigestUtils
@@ -28,10 +27,10 @@ class LoginServiceImp:LoginService {
     @Resource
     private lateinit var redisTemplate: RedisTemplate<String, String>
     @Autowired
-    private lateinit var codeGenerater: VerificationCodeGenerater
+    private lateinit var codeGenerator: VerificationCodeGenerater
 
     override fun verificationCodeGeneration(timestamp: String): String {
-        val codePair = codeGenerater.generate()
+        val codePair = codeGenerator.generate()
         val realKey = DigestUtils.md5DigestAsHex((codePair[0]+timestamp).lowercase(Locale.getDefault()).toByteArray(Charsets.UTF_8))
 
         redisTemplate.opsForValue().set("verification_code:$realKey",codePair[0],5,TimeUnit.MINUTES)

@@ -21,9 +21,9 @@ import org.springframework.security.oauth2.provider.OAuth2RequestFactory
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory
 import org.springframework.security.oauth2.provider.token.TokenStore
-import team.jtq.auth.oauth_serve.service.Imp.OauthClientDetailsServiceImp
-import team.jtq.auth.oauth_serve.service.Imp.OauthCodeServiceImp
-import team.jtq.auth.oauth_serve.service.Imp.OauthUserDetailServiceImp
+import team.jtq.auth.oauth_serve.service.imp.OauthClientDetailsServiceImp
+import team.jtq.auth.oauth_serve.service.imp.OauthCodeServiceImp
+import team.jtq.auth.oauth_serve.service.imp.OauthUserDetailServiceImp
 import team.jtq.auth.oauth_serve.tools.handler.*
 
 

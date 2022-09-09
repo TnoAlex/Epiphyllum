@@ -12,7 +12,7 @@ data class RegisterEntity(
     var password:String,
     var phone:String,
     var gender:Int,
-    var accountType:String,
+    var accountLevel:Int,
     var addition:String
 ) {
 }

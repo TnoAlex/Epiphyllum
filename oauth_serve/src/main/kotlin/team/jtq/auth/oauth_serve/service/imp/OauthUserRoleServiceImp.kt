@@ -1,11 +1,10 @@
-package team.jtq.auth.oauth_serve.service.Imp
+package team.jtq.auth.oauth_serve.service.imp
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.stereotype.Service
 import team.jtq.auth.oauth_serve.entity.OauthUserRole
 import team.jtq.auth.oauth_serve.mapper.OauthUserRoleMapper
 import team.jtq.auth.oauth_serve.service.OauthUserRoleService
-import kotlin.reflect.jvm.javaConstructor
 
 @Service
 class OauthUserRoleServiceImp : ServiceImpl<OauthUserRoleMapper, OauthUserRole>(), OauthUserRoleService {

@@ -63,8 +63,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.7.3")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE")
-
+    implementation("org.springframework.boot:spring-boot-configuration-processor:2.7.3")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springframework.boot:spring-boot-starter-mail:2.7.3")
 }
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {

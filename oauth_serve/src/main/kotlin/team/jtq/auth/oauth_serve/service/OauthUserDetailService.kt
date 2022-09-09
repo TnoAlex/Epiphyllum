@@ -9,4 +9,7 @@ interface OauthUserDetailService:IService<OauthUser> {
     fun getProtectedUserInfo(account: String): JSONObject?
     fun updateUserName(account:String,userName:String): Boolean
     fun addAccount(entity: RegisterEntity):Boolean
+    fun addCertificationRequiredAccount(entity: OauthUser):Boolean
+    fun generateConfirmCode(): String
+
 }

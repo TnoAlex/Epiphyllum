@@ -41,3 +41,9 @@ mybatis-plus:
       id-type: assign_id
   type-aliases-package:
   mapper-locations: xml/*.xml
+
+authorization-server:
+  appResourcesId: 1293380307393789953
+  appQuerySecret: jskJzLhsye02mqKbn09SXSx0j28IehjG
+  oauthService: http://127.0.0.1:8088
+  queryTokenUri: /oauth/token?

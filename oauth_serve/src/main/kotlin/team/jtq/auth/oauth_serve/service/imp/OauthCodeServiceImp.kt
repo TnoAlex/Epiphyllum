@@ -1,4 +1,4 @@
-package team.jtq.auth.oauth_serve.service.Imp
+package team.jtq.auth.oauth_serve.service.imp
 
 import com.alibaba.fastjson.JSON
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
@@ -9,7 +9,6 @@ import org.springframework.security.oauth2.common.util.SerializationUtils
 import org.springframework.security.oauth2.provider.OAuth2Authentication
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices
 import org.springframework.stereotype.Service
-import team.jtq.auth.oauth_serve.entity.OauthClientDetails
 import team.jtq.auth.oauth_serve.entity.OauthCode
 import team.jtq.auth.oauth_serve.mapper.OauthCodeMapper
 import team.jtq.auth.oauth_serve.service.OauthCodeService
