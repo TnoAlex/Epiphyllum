@@ -17,6 +17,27 @@ public class UserDetailsAdapter implements UserDetails {
 
     private String username;
     private String password;
+    private String phone;
+    private String nickname;
+    private Integer status;
+    private String gender;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
     /**
      * 权限
      */
@@ -24,16 +45,20 @@ public class UserDetailsAdapter implements UserDetails {
     private boolean enable;
     private static final String defaultRolePrefix = "ROLE_";
 
-    public UserDetailsAdapter(){
+    public UserDetailsAdapter() {
 
     }
 
     public UserDetailsAdapter(OauthUser oauthUser) {
         this.username = oauthUser.getAccount();
         this.password = oauthUser.getPassword();
+        this.nickname = oauthUser.getUserName();
+        this.phone = oauthUser.getPhone();
+        this.status = oauthUser.getStatus();
+        this.gender = oauthUser.getGender() == 0 ? "女" : "男";
 
         List<GrantedAuthority> list = new ArrayList<>();
-        if(!oauthUser.getRoleList().isEmpty()){
+        if (!oauthUser.getRoleList().isEmpty()) {
             for (OauthRole role : oauthUser.getRoleList()) {
                 GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(defaultRolePrefix + role.getRoleCode());
                 list.add(grantedAuthority);

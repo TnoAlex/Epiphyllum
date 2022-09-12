@@ -20,7 +20,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore
-import team.jtq.auth.oauth_serve.tools.serializer.FastJsonRedisTokenStoreSerializationStrategy
+//import team.jtq.auth.oauth_serve.tools.serializer.FastJsonRedisTokenStoreSerializationStrategy
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -69,7 +69,7 @@ class RedisConfig {
     fun tokenStore(connectionFactory: RedisConnectionFactory): RedisTokenStore {
         val redisTokenStore = RedisTokenStore(connectionFactory)
         redisTokenStore.setPrefix("TOKEN:")
-        redisTokenStore.setSerializationStrategy(FastJsonRedisTokenStoreSerializationStrategy())
+//        redisTokenStore.setSerializationStrategy(FastJsonRedisTokenStoreSerializationStrategy())
         return redisTokenStore
     }
 

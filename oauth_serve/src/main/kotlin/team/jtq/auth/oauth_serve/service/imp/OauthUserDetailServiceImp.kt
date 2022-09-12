@@ -1,6 +1,10 @@
 package team.jtq.auth.oauth_serve.service.imp
 
+import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONObject
+import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
+import com.baomidou.mybatisplus.extension.kotlin.KtUpdateChainWrapper
+import com.baomidou.mybatisplus.extension.kotlin.KtUpdateWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
@@ -8,28 +12,26 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
+import org.springframework.util.Base64Utils
 import org.springframework.util.DigestUtils
 import team.jtq.auth.oauth_serve.adapter.UserDetailsAdapter
 import team.jtq.auth.oauth_serve.config.AppResourceConfig
 import team.jtq.auth.oauth_serve.entity.OauthRole
 import team.jtq.auth.oauth_serve.entity.OauthUser
+import team.jtq.auth.oauth_serve.entity.OauthVerify
 import team.jtq.auth.oauth_serve.entity.RegisterEntity
 import team.jtq.auth.oauth_serve.mapper.OauthUserMapper
-import team.jtq.auth.oauth_serve.service.EmailService
-import team.jtq.auth.oauth_serve.service.OauthRoleService
-import team.jtq.auth.oauth_serve.service.OauthUserDetailService
-import team.jtq.auth.oauth_serve.service.OauthUserRoleService
+import team.jtq.auth.oauth_serve.service.*
+import team.jtq.auth.oauth_serve.tools.UnifiedCodeValidator
 import java.io.Serializable
 import java.time.LocalDateTime
 import java.util.UUID
+import java.util.concurrent.TimeUnit
 import java.util.stream.Collectors
 import javax.annotation.Resource
 
 @Service
-class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), OauthUserDetailService, UserDetailsService, Serializable {
-
-    @Resource
-    private lateinit var mapper: OauthUserMapper
+class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), OauthUserDetailService, Serializable {
 
     @Autowired
     private lateinit var userRoleService: OauthUserRoleService
@@ -37,20 +39,23 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
     @Autowired
     private lateinit var roleService: OauthRoleService
 
-    @Resource
-    private lateinit var redisTemplate: RedisTemplate<String,Any>
-
     @Autowired
     private lateinit var emailService: EmailService
 
+    @Autowired
+    private lateinit var verifyService:OauthVerifyService
+
+    @Resource
+    private lateinit var redisTemplate: RedisTemplate<String, Any>
+
 
     override fun loadUserByUsername(username: String): UserDetails {
-        val user = mapper.getUserByAccount(username) ?: throw UsernameNotFoundException("Can Not Found User")
+        val user = this.baseMapper.getUserByAccount(username) ?: throw UsernameNotFoundException("Can Not Found User")
         return UserDetailsAdapter(user)
     }
 
     override fun getProtectedUserInfo(account: String): JSONObject? {
-        val user = mapper.getUserByAccount(account)
+        val user = this.baseMapper.getUserByAccount(account)
         if (user != null) {
             val res = JSONObject()
             res["id"] = user.id
@@ -59,20 +64,20 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
             res["gender"] = user.gender
             res["addition"] = user.addition
             res["sattus"] = user.status
-            if(!user.roleList.isEmpty()){
-                res.put("role",user.roleList.stream().map(OauthRole::roleCode).collect(Collectors.toList()))
+            if (!user.roleList.isEmpty()) {
+                res.put("role", user.roleList.stream().map(OauthRole::roleCode).collect(Collectors.toList()))
             }
             return res
         }
         return null
     }
 
-    override fun updateUserName(account:String, userName:String): Boolean {
-        val user = mapper.getUserByAccount(account)
-        if(user!=null){
-            user.userName=userName
+    override fun updateUserName(account: String, userName: String): Boolean {
+        val user = this.baseMapper.getUserByAccount(account)
+        if (user != null) {
+            user.userName = userName
             user.updateTime = LocalDateTime.now()
-            mapper.updateById(user)
+            this.baseMapper.updateById(user)
             return true
         }
         return false
@@ -81,12 +86,12 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
     override fun addAccount(entity: RegisterEntity): Boolean {
         val obj = OauthUser::class.java
         val instance = obj.newInstance()
-        val systemID  = roleService.lodeSystemRole()
+        val systemID = roleService.lodeSystemRole()
         val servreTime = LocalDateTime.now()
         val role = roleService.getAllGeneralizableRole()
 
         instance.account = entity.account
-        instance.userName =entity.username
+        instance.userName = entity.username
         instance.password = entity.password
         instance.addition = entity.addition
         instance.phone = entity.phone
@@ -98,28 +103,80 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
         instance.createTime = servreTime
         instance.updateTime = servreTime
 
-        if(entity.accountLevel < AppResourceConfig.minimumCheckLevel.toInt()){
-            super<ServiceImpl>.save(instance)
-            for(i in role!!){
-                if(i.roleLevel<entity.accountLevel)
-                    userRoleService.registerUserRole(instance.id,i.id)
-            }
-            val code = generateConfirmCode()
-            val address = if(AppResourceConfig.domainName.endsWith("/")) AppResourceConfig.domainName else AppResourceConfig.domainName+"/" + "oauth/confirm_account/"+code
-            return emailService.sendConfirmationEmail(address,entity.account,"Epiphyllum注册确认")
+        super<ServiceImpl>.save(instance)
+        for (i in role!!) {
+            if (i.roleLevel < entity.accountLevel)
+                userRoleService.registerUserRole(instance.id, i.id)
         }
-        TODO("Not yet implemented")
+        if (entity.accountLevel < AppResourceConfig.minimumCheckLevel.toInt()) {
+            val code = generateConfirmCode()
+            val address =
+                if (AppResourceConfig.domainName.endsWith("/")) AppResourceConfig.domainName else AppResourceConfig.domainName + "/" +
+                        "oauth/confirm_account/" + Base64Utils.encodeToString(instance.id.toByteArray(Charsets.UTF_8))+"/" +code
+            return emailService.sendConfirmationEmail(address, entity.account, "Epiphyllum注册确认")
+        } else {
+            try {
+                val addition = JSON.parseObject(entity.addition)
+                if(addition.isEmpty())
+                    return false
+                if((addition["credit_code"] as String).isNotEmpty()){
+                    if(UnifiedCodeValidator.validateUnifiedCreditCode(addition["credit_code"] as String)){
+                        val verifyObj = OauthVerify::class.java
+                        val verify = verifyObj.newInstance()
+                        verify.addition = addition["credit_code"] as String
+                        verify.passUser = systemID.toString()
+                        verify.status = 1
+                        verify.createTime = servreTime
+                        verify.passTime = servreTime
+                        verify.requestId = instance.id
+                        verifyService.baseMapper.insert(verify)
+                        return true
+                    }
+                    else
+                    {
+                        val verifyObj = OauthVerify::class.java
+                        val verify = verifyObj.newInstance()
+                        verify.addition = addition["other"] as String
+                        verify.passUser = systemID.toString()
+                        verify.status = 0
+                        verify.createTime = servreTime
+                        verify.passTime = servreTime
+                        verify.requestId = instance.id
+                        verifyService.baseMapper.insert(verify)
+                        return true
+                    }
+                }
+            } catch (e: Exception) {
+                return false
+            }
+        }
+        return false
     }
 
-    override fun addCertificationRequiredAccount(entity: OauthUser): Boolean {
-        TODO("Not yet implemented")
+
+
+    override fun verifyConfirmationCode(code: String, id: String): Boolean {
+        val key = DigestUtils.md5DigestAsHex(code.toByteArray(Charsets.UTF_8))
+        if(redisTemplate.hasKey("CONFIRMCODE:$key")){
+            redisTemplate.delete("CONFIRMCODE:$key")
+            val uid = Base64Utils.decodeFromString(id)
+            val query = KtUpdateWrapper(OauthUser::class.java)
+            query.eq(OauthUser::id,uid).set(OauthUser::status,1).set(OauthUser::updateTime,LocalDateTime.now())
+            val row = this.baseMapper.update(null,query)
+            return row!=0
+
+        }
+        else
+            return false
     }
 
-    override fun generateConfirmCode(): String {
-        val confirmUUID = UUID.randomUUID().toString().replace("-","")
+    private fun generateConfirmCode(): String {
+        val confirmUUID = UUID.randomUUID().toString().replace("-", "")
         val UUIDKey = DigestUtils.md5DigestAsHex(confirmUUID.toByteArray(Charsets.UTF_8))
-        redisTemplate.opsForValue().set("CONFIRMCODE:$UUIDKey",confirmUUID)
+        redisTemplate.opsForValue()
+            .set("CONFIRMCODE:$UUIDKey", confirmUUID, AppResourceConfig.maxConfirmCodeLive.toLong(), TimeUnit.MINUTES)
         return confirmUUID
     }
+
 
 }

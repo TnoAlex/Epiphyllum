@@ -66,6 +66,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-configuration-processor:2.7.3")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-mail:2.7.3")
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
+    implementation("org.apache.commons:commons-collections4:4.4")
+
 }
 
 

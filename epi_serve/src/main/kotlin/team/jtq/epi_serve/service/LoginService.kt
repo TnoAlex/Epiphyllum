@@ -6,4 +6,5 @@ import team.jtq.epi_serve.tools.Result
 interface LoginService{
     fun verificationCodeGeneration(timestamp:String):String
     fun checkLoginParameter(entity:LoginEntity):Result
+    fun getUserParameter(token:String):Result
 }

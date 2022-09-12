@@ -8,4 +8,5 @@ import org.springframework.stereotype.Component
 object AppResourceConfig {
     lateinit var domainName:String
     lateinit var minimumCheckLevel:String
+    lateinit var maxConfirmCodeLive:String
 }

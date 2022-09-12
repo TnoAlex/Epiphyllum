@@ -8,6 +8,7 @@ import team.jtq.auth.oauth_serve.service.EmailService
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.thymeleaf.TemplateEngine
 import org.thymeleaf.context.Context
+import team.jtq.auth.oauth_serve.config.AppResourceConfig
 import javax.annotation.Resource
 
 @Service
@@ -30,6 +31,7 @@ class EmailServiceImp: EmailService {
             helper.setSubject(subject)
             val context = Context()
             context.setVariable("confirmAddress", address)
+            context.setVariable("aliveTime",AppResourceConfig.maxConfirmCodeLive)
             val text = templateEngine.process("mailTemplate",context)
             helper.setText(text,true)
             mailSender.send(message)

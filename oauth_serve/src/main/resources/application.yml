@@ -60,3 +60,4 @@ mybatis-plus:
 deploy:
   domainName: http://127.0.0.1:8088
   minimumCheckLevel: 2
+  maxConfirmCodeLive: 10

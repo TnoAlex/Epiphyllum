@@ -20,7 +20,10 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.OAuth2RequestFactory
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter
 import org.springframework.security.oauth2.provider.token.TokenStore
+import team.jtq.auth.oauth_serve.adapter.UserAuthenticationConverter
+import team.jtq.auth.oauth_serve.service.OauthUserDetailService
 import team.jtq.auth.oauth_serve.service.imp.OauthClientDetailsServiceImp
 import team.jtq.auth.oauth_serve.service.imp.OauthCodeServiceImp
 import team.jtq.auth.oauth_serve.service.imp.OauthUserDetailServiceImp
@@ -112,7 +115,7 @@ class OAuthServerConfiguration {
         private lateinit var authorizationCodeServices: OauthCodeServiceImp
 
         @Autowired
-        private lateinit var userDetailService: OauthUserDetailServiceImp
+        private lateinit var userDetailService: OauthUserDetailService
 
         @Autowired
         @Qualifier("authenticationManagerBean")
@@ -135,6 +138,10 @@ class OAuthServerConfiguration {
                 .userApprovalHandler(userApprovalHandler())// 注入authenticationManager来支持password模式
                 .authenticationManager(authenticationManager) // 自定义授权确认页面
 //                .pathMapping("/oauth/confirm_access", "/approval")
+            val converter =  DefaultAccessTokenConverter()
+            val userConverter = UserAuthenticationConverter()
+            converter.setUserTokenConverter(userConverter)
+            endpoints.accessTokenConverter(converter)
         }
 
 

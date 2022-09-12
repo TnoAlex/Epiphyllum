@@ -47,3 +47,4 @@ authorization-server:
   appQuerySecret: jskJzLhsye02mqKbn09SXSx0j28IehjG
   oauthService: http://127.0.0.1:8088
   queryTokenUri: /oauth/token?
+  checkTokenUri: /oauth/check_token?

@@ -27,6 +27,10 @@ class AppController {
     fun login(@RequestBody entity: LoginEntity): Result {
         return loginService.checkLoginParameter(entity)
     }
+    @PostMapping("/doLogin/{code}")
+    fun getUser(@PathVariable code: String):Result{
+        return loginService.getUserParameter(code)
+    }
 
     fun register(@RequestBody entity:RegisterEntity):Result{
         TODO()
