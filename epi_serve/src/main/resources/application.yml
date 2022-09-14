@@ -48,3 +48,4 @@ authorization-server:
   oauthService: http://127.0.0.1:8088
   queryTokenUri: /oauth/token?
   checkTokenUri: /oauth/check_token?
+  remoteSingup: /oauth/signup

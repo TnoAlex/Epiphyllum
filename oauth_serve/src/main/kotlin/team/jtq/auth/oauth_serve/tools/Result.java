@@ -15,6 +15,34 @@ public class Result implements Serializable {
     private static final long serialVersionUID = 1L;
     private boolean success = true;
 
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
     private String msg = "ok";
 
     private Integer code = 0;

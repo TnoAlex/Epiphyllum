@@ -31,7 +31,4 @@ data class OauthUser(
     @TableField(exist = false)
     var roleList: List<OauthRole>,
 ) : Serializable {
-    companion object {
-        private const val serialVersionUID = -3693279689434442688L
-    }
 }

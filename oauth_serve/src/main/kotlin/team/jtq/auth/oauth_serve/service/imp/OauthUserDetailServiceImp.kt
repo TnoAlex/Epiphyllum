@@ -2,14 +2,11 @@ package team.jtq.auth.oauth_serve.service.imp
 
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONObject
-import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
-import com.baomidou.mybatisplus.extension.kotlin.KtUpdateChainWrapper
 import com.baomidou.mybatisplus.extension.kotlin.KtUpdateWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.util.Base64Utils
@@ -45,6 +42,8 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
     @Autowired
     private lateinit var verifyService:OauthVerifyService
 
+    @Autowired lateinit var userClientService: OauthUserClientService
+
     @Resource
     private lateinit var redisTemplate: RedisTemplate<String, Any>
 
@@ -59,11 +58,11 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
         if (user != null) {
             val res = JSONObject()
             res["id"] = user.id
-            res["userName"] = user.userName
+            res["username"] = user.userName
             res["phone"] = user.phone
             res["gender"] = user.gender
+            res["status"] = user.status
             res["addition"] = user.addition
-            res["sattus"] = user.status
             if (!user.roleList.isEmpty()) {
                 res.put("role", user.roleList.stream().map(OauthRole::roleCode).collect(Collectors.toList()))
             }
@@ -87,23 +86,24 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
         val obj = OauthUser::class.java
         val instance = obj.newInstance()
         val systemID = roleService.lodeSystemRole()
-        val servreTime = LocalDateTime.now()
+        val systemTime = LocalDateTime.now()
         val role = roleService.getAllGeneralizableRole()
 
         instance.account = entity.account
         instance.userName = entity.username
         instance.password = entity.password
-        instance.addition = entity.addition
         instance.phone = entity.phone
         instance.delFlag = 0
         instance.gender = entity.gender
         instance.status = 0
+        instance.addition = entity.addition
         instance.createBy = systemID
         instance.updateBy = systemID
-        instance.createTime = servreTime
-        instance.updateTime = servreTime
+        instance.createTime = systemTime
+        instance.updateTime = systemTime
 
         super<ServiceImpl>.save(instance)
+        userClientService.addLinkedInUserClient(instance.id,entity.addition)
         for (i in role!!) {
             if (i.roleLevel < entity.accountLevel)
                 userRoleService.registerUserRole(instance.id, i.id)
@@ -126,8 +126,8 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
                         verify.addition = addition["credit_code"] as String
                         verify.passUser = systemID.toString()
                         verify.status = 1
-                        verify.createTime = servreTime
-                        verify.passTime = servreTime
+                        verify.createTime = systemTime
+                        verify.passTime = systemTime
                         verify.requestId = instance.id
                         verifyService.baseMapper.insert(verify)
                         return true
@@ -139,8 +139,8 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
                         verify.addition = addition["other"] as String
                         verify.passUser = systemID.toString()
                         verify.status = 0
-                        verify.createTime = servreTime
-                        verify.passTime = servreTime
+                        verify.createTime = systemTime
+                        verify.passTime = systemTime
                         verify.requestId = instance.id
                         verifyService.baseMapper.insert(verify)
                         return true

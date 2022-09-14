@@ -27,6 +27,7 @@ data class OauthClientDetails(
     var authorizedGrantTypes: String,
     var redirectUri: String,
     var authorities: String,
+    var appPublicKey: String,
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     var accessTokenValidity: Int,
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -48,5 +49,6 @@ data class OauthClientDetails(
     var updateBy: String,
     @JsonDeserialize(using = LocalDateTimeDeserializer::class)
     @JsonSerialize(using = LocalDateTimeSerializer::class)
-    var updateTime: LocalDateTime
-): Serializable
+    var updateTime: LocalDateTime,
+
+    ) : Serializable

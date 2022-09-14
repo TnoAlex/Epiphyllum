@@ -72,4 +72,5 @@ class ClientDetailsAdapter(private val clientDetails: OauthClientDetails) : Clie
     fun getClientDetails(): OauthClientDetails {
         return clientDetails
     }
+
 }

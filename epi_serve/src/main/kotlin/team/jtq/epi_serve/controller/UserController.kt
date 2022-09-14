@@ -9,12 +9,19 @@ import org.springframework.web.bind.annotation.ResponseBody
 import team.jtq.epi_serve.entity.LoginEntity
 import team.jtq.epi_serve.entity.RegisterEntity
 import team.jtq.epi_serve.service.LoginService
+import team.jtq.epi_serve.service.RegisterService
+import team.jtq.epi_serve.service.TokenService
 import team.jtq.epi_serve.tools.Result
 
 @Controller
-class AppController {
+class UserController {
+
     @Autowired
     private lateinit var loginService: LoginService
+    @Autowired
+    private lateinit var tokenService: TokenService
+    @Autowired
+    private lateinit var registerService: RegisterService
 
     @PostMapping("/code/{timestamp}")
     @ResponseBody
@@ -28,13 +35,13 @@ class AppController {
         return loginService.checkLoginParameter(entity)
     }
     @PostMapping("/doLogin/{code}")
+    @ResponseBody
     fun getUser(@PathVariable code: String):Result{
-        return loginService.getUserParameter(code)
+        return tokenService.getUserParameter(code)
     }
-
+    @PostMapping("/register")
     fun register(@RequestBody entity:RegisterEntity):Result{
-        TODO()
-
+        return registerService.registerOnRemote(entity)
     }
 
 }

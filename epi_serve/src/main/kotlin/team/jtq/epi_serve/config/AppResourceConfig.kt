@@ -11,5 +11,6 @@ object AppResourceConfig {
     lateinit var appQuerySecret: String
     lateinit var oauthService: String
     lateinit var queryTokenUri: String
-    lateinit var checkTokenUri:String
+    lateinit var checkTokenUri: String
+    lateinit var remoteSingup: String
 }
