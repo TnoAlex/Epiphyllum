@@ -16,8 +16,8 @@ import javax.crypto.Cipher
 
 class UserAuthenticationConverter: DefaultUserAuthenticationConverter() {
 
-    var userClientService:OauthUserClientService = BeanContext.getBean(OauthUserClientService::class.java)
-    var clientDetailsService:OauthClientDetailsService =BeanContext.getBean(OauthClientDetailsService::class.java)
+    var userClientService:OauthUserClientService = BeanContext.getBeanbyClazz(OauthUserClientService::class.java)
+    var clientDetailsService:OauthClientDetailsService =BeanContext.getBeanbyClazz(OauthClientDetailsService::class.java)
 
     override fun convertUserAuthentication(authentication: Authentication): MutableMap<String, *> {
         var response = LinkedHashMap<String,Any>()
@@ -29,12 +29,12 @@ class UserAuthenticationConverter: DefaultUserAuthenticationConverter() {
         response["user_status"] = principal.status.toString()
         response["user_id"] = principal.id
         val client = userClientService.getClientbyUser(principal.id)
-//        response = rSAEncoder(response,client)
+        response = rSAEncoder(response,client)
         if (authentication.authorities != null && !authentication.authorities.isEmpty()) {
             response[AUTHORITIES] = AuthorityUtils.authorityListToSet(authentication.authorities)
         }
         return response
-        TODO("开发过程中暂时禁用加密")
+//        TODO("开发过程中暂时禁用加密")
     }
 
     private fun rSAEncoder(value:LinkedHashMap<String,Any>, id:String): LinkedHashMap<String, Any> {
@@ -49,7 +49,7 @@ class UserAuthenticationConverter: DefaultUserAuthenticationConverter() {
         val res = LinkedHashMap<String,Any>()
         for((k,v)in value){
             val sv = cipher.doFinal((v as String).toByteArray(Charsets.UTF_8))
-            res[k] = String(sv)
+            res[k] = sv.asList()
         }
         return res
     }

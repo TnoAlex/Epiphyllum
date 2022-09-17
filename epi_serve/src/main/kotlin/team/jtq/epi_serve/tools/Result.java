@@ -1,7 +1,7 @@
 package team.jtq.epi_serve.tools;
 
 import lombok.Data;
-import team.jtq.epi_serve.entity.ResultStatusCode;
+import team.jtq.epi_serve.entity.ao.ResultStatusCode;
 
 
 import java.io.Serializable;

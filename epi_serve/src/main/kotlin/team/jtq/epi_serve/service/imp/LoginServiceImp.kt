@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service
 import org.springframework.util.DigestUtils
 import org.springframework.web.client.RestTemplate
 import team.jtq.epi_serve.config.AppResourceConfig
-import team.jtq.epi_serve.entity.LoginEntity
-import team.jtq.epi_serve.entity.RegisterEntity
-import team.jtq.epi_serve.entity.ResultStatusCode
-import team.jtq.epi_serve.entity.Token
+import team.jtq.epi_serve.entity.ao.LoginEntity
+import team.jtq.epi_serve.entity.ao.ResultStatusCode
+import team.jtq.epi_serve.entity.ao.Token
 import team.jtq.epi_serve.service.LoginService
 import team.jtq.epi_serve.tools.Result
 import team.jtq.epi_serve.tools.VerificationCodeGenerater
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.annotation.Resource
@@ -30,7 +31,14 @@ class LoginServiceImp:LoginService {
     @Autowired
     private lateinit var codeGenerator: VerificationCodeGenerater
 
+
     override fun verificationCodeGeneration(timestamp: String): String {
+        val systemTime = LocalDateTime.now().toEpochSecond(ZoneOffset.of(AppResourceConfig.UTCTimeZone))
+        val requestTime = timestamp.toLong()
+        if(systemTime<requestTime)
+            return ""
+        if(systemTime-requestTime>120)
+            return ""
         val codePair = codeGenerator.generate()
         val realKey = DigestUtils.md5DigestAsHex((codePair[0]+timestamp).lowercase(Locale.getDefault()).toByteArray(Charsets.UTF_8))
 

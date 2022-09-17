@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import team.jtq.epi_serve.config.AppResourceConfig
-import team.jtq.epi_serve.entity.RegisterEntity
-import team.jtq.epi_serve.entity.ResultStatusCode
+import team.jtq.epi_serve.entity.ao.RegisterEntity
+import team.jtq.epi_serve.entity.ao.ResultStatusCode
 import team.jtq.epi_serve.service.RegisterService
 import team.jtq.epi_serve.tools.Result
 

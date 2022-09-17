@@ -4,4 +4,5 @@ import team.jtq.epi_serve.tools.Result
 
 interface TokenService {
     fun getUserParameter(token:String): Result
+    fun checkToken(token: String, uid: String):Result
 }

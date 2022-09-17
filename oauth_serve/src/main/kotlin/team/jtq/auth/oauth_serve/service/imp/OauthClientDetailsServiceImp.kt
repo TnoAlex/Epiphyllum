@@ -8,11 +8,10 @@ import lombok.extern.slf4j.Slf4j
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.oauth2.provider.ClientDetails
-import org.springframework.security.oauth2.provider.ClientDetailsService
 import org.springframework.stereotype.Service
 import org.springframework.util.Base64Utils
 import team.jtq.auth.oauth_serve.adapter.ClientDetailsAdapter
-import team.jtq.auth.oauth_serve.entity.OauthAppRegister
+import team.jtq.auth.oauth_serve.entity.ao.OauthAppRegister
 import team.jtq.auth.oauth_serve.entity.OauthClientDetails
 import team.jtq.auth.oauth_serve.mapper.OauthClientDetailsMapper
 import team.jtq.auth.oauth_serve.service.OauthClientDetailsService

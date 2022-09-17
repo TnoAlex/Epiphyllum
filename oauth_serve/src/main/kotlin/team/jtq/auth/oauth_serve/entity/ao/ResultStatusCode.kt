@@ -1,4 +1,4 @@
-package team.jtq.auth.oauth_serve.entity
+package team.jtq.auth.oauth_serve.entity.ao
 
 enum class ResultStatusCode(var code: Int, var msg: String) {
     OK(0, "OK"),

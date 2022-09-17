@@ -16,7 +16,7 @@ import team.jtq.auth.oauth_serve.config.AppResourceConfig
 import team.jtq.auth.oauth_serve.entity.OauthRole
 import team.jtq.auth.oauth_serve.entity.OauthUser
 import team.jtq.auth.oauth_serve.entity.OauthVerify
-import team.jtq.auth.oauth_serve.entity.RegisterEntity
+import team.jtq.auth.oauth_serve.entity.ao.RegisterEntity
 import team.jtq.auth.oauth_serve.mapper.OauthUserMapper
 import team.jtq.auth.oauth_serve.service.*
 import team.jtq.auth.oauth_serve.tools.UnifiedCodeValidator

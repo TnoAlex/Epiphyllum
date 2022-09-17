@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject
 import com.baomidou.mybatisplus.extension.service.IService
 import org.springframework.security.core.userdetails.UserDetailsService
 import team.jtq.auth.oauth_serve.entity.OauthUser
-import team.jtq.auth.oauth_serve.entity.RegisterEntity
+import team.jtq.auth.oauth_serve.entity.ao.RegisterEntity
 
 interface OauthUserDetailService:IService<OauthUser>,UserDetailsService{
     fun getProtectedUserInfo(account: String): JSONObject?

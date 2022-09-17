@@ -11,14 +11,18 @@ import org.springframework.util.Base64Utils
 import sun.misc.BASE64Encoder
 import team.jtq.auth.oauth_serve.entity.OauthClientDetails
 import team.jtq.auth.oauth_serve.service.OauthClientDetailsService
+import java.security.KeyFactory
 import java.security.KeyPair
 import java.security.KeyPairGenerator
+import java.security.Provider
 import java.security.SecureRandom
 import java.security.interfaces.RSAPrivateKey
 import java.security.interfaces.RSAPublicKey
+import java.security.spec.PKCS8EncodedKeySpec
+import java.security.spec.X509EncodedKeySpec
+import javax.crypto.Cipher
 
 @SpringBootTest
-@RunWith(SpringRunner::class)
 class restest {
 
     @Autowired
@@ -43,7 +47,20 @@ class restest {
 
         /** 得到私钥 */
         val privateKey = keyPair.getPrivate()
+//        val pkcs8KeySpec = PKCS8EncodedKeySpec(privateKey.encoded)
+//        val  x509KeySpec = X509EncodedKeySpec(publicKey.encoded)
+//        val keyFactory = KeyFactory.getInstance("RSA")
+//        val pk = keyFactory.generatePublic(x509KeySpec)
+//        val prk = keyFactory.generatePrivate(pkcs8KeySpec)
+//        val prc=Cipher.getInstance(keyFactory.algorithm)
+//        val pc = Cipher.getInstance(keyFactory.algorithm)
+//        pc.init(Cipher.ENCRYPT_MODE, pk)
+//        prc.init(Cipher.DECRYPT_MODE,prk)
+//        val s =pc.doFinal("123".toByteArray())
+//        println(String(s))
+//        println(String(prc.doFinal(s)))
 
+//
         val publicKeyBytes = publicKey.encoded
         val privateKeyBytes = privateKey.encoded
 

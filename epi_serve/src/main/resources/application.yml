@@ -49,3 +49,5 @@ authorization-server:
   queryTokenUri: /oauth/token?
   checkTokenUri: /oauth/check_token?
   remoteSingup: /oauth/signup
+  UTCTimeZone: '+8'
+  RSAPath: /rsa/appPrivateKey

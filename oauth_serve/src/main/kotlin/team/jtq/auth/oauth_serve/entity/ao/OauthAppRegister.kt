@@ -1,4 +1,4 @@
-package team.jtq.auth.oauth_serve.entity
+package team.jtq.auth.oauth_serve.entity.ao
 
 import lombok.Data
 

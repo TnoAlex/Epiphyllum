@@ -1,7 +1,7 @@
 package team.jtq.auth.oauth_serve.tools;
 
 import lombok.Data;
-import team.jtq.auth.oauth_serve.entity.ResultStatusCode;
+import team.jtq.auth.oauth_serve.entity.ao.ResultStatusCode;
 
 
 import java.io.Serializable;

@@ -13,7 +13,7 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 noArg {
-    annotation("team.jtq.auth.oauth_serve.annotation.NoArg")
+    annotation("team.jtq.epi_serve.annotation.NoArg")
     invokeInitializers = true
 }
 repositories {

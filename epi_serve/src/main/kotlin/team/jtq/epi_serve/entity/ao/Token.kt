@@ -1,4 +1,4 @@
-package team.jtq.epi_serve.entity
+package team.jtq.epi_serve.entity.ao
 
 import com.alibaba.fastjson.annotation.JSONCreator
 import com.alibaba.fastjson.annotation.JSONField

@@ -2,12 +2,10 @@ package team.jtq.epi_serve.controller
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.ResponseBody
-import team.jtq.epi_serve.entity.LoginEntity
-import team.jtq.epi_serve.entity.RegisterEntity
+import org.springframework.web.bind.annotation.*
+import team.jtq.epi_serve.entity.ao.LoginEntity
+import team.jtq.epi_serve.entity.ao.RegisterEntity
+import team.jtq.epi_serve.entity.ao.ResultStatusCode
 import team.jtq.epi_serve.service.LoginService
 import team.jtq.epi_serve.service.RegisterService
 import team.jtq.epi_serve.service.TokenService
@@ -23,10 +21,13 @@ class UserController {
     @Autowired
     private lateinit var registerService: RegisterService
 
-    @PostMapping("/code/{timestamp}")
+    @GetMapping("/code/{timestamp}")
     @ResponseBody
     fun vCode(@PathVariable timestamp: String): Result {
-        return Result.ok(loginService.verificationCodeGeneration(timestamp))
+        val code = loginService.verificationCodeGeneration(timestamp)
+        if(code.isEmpty())
+            return Result.error(ResultStatusCode.BAD_REQUEST)
+        return Result.ok(code)
     }
 
     @PostMapping("/login")
@@ -40,8 +41,7 @@ class UserController {
         return tokenService.getUserParameter(code)
     }
     @PostMapping("/register")
-    fun register(@RequestBody entity:RegisterEntity):Result{
+    fun register(@RequestBody entity: RegisterEntity):Result{
         return registerService.registerOnRemote(entity)
     }
-
 }

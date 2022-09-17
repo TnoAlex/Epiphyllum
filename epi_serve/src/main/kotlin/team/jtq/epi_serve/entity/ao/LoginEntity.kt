@@ -1,4 +1,4 @@
-package team.jtq.epi_serve.entity
+package team.jtq.epi_serve.entity.ao
 
 import lombok.Data
 import team.jtq.epi_serve.annotation.NoArg

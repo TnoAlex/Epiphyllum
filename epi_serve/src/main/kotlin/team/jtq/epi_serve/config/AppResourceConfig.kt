@@ -13,4 +13,6 @@ object AppResourceConfig {
     lateinit var queryTokenUri: String
     lateinit var checkTokenUri: String
     lateinit var remoteSingup: String
+    lateinit var UTCTimeZone: String
+    lateinit var RSAPath:String
 }

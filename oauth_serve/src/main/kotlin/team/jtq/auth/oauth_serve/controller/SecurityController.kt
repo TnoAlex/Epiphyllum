@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
-import team.jtq.auth.oauth_serve.entity.OauthAppRegister
-import team.jtq.auth.oauth_serve.entity.RegisterEntity
-import team.jtq.auth.oauth_serve.entity.ResultStatusCode
+import team.jtq.auth.oauth_serve.entity.ao.OauthAppRegister
+import team.jtq.auth.oauth_serve.entity.ao.RegisterEntity
+import team.jtq.auth.oauth_serve.entity.ao.ResultStatusCode
 import team.jtq.auth.oauth_serve.service.OauthClientDetailsService
 import team.jtq.auth.oauth_serve.service.OauthUserDetailService
 import team.jtq.auth.oauth_serve.tools.Result
