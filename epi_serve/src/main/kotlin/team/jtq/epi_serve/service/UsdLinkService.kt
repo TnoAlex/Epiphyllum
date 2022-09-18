@@ -23,4 +23,6 @@ interface UsdLinkService {
         linkBean:KClass<V>,
         items:List<Pair<KProperty<*>,String>>
     ): ArrayList<V>?
+
+
 }
