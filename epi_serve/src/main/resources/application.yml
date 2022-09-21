@@ -51,3 +51,4 @@ authorization-server:
   remoteSingup: /oauth/signup
   UTCTimeZone: '+8'
   RSAPath: /rsa/appPrivateKey
+

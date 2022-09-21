@@ -42,6 +42,7 @@ dependencies {
     implementation("org.springframework.session:spring-session-data-redis")
     implementation("org.projectlombok:lombok:1.18.22")
     runtimeOnly("mysql:mysql-connector-java")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     implementation("com.baomidou:mybatis-plus-boot-starter:3.5.2")

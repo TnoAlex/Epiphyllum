@@ -8,10 +8,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
+import org.springframework.data.redis.listener.RedisMessageListenerContainer
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer
@@ -27,6 +30,10 @@ class RedisConfig {
 
     @Resource
     private lateinit var lettuceConnectionFactory: LettuceConnectionFactory
+
+    @Autowired
+    private lateinit var redisConnectionFactory: RedisConnectionFactory
+
     @Bean
     fun redisTemplate(): RedisTemplate<String, Any> {
         // 设置序列化
@@ -53,5 +60,17 @@ class RedisConfig {
         redisTemplate.hashValueSerializer = jackson2JsonRedisSerializer // Hash value序列化
         redisTemplate.afterPropertiesSet()
         return redisTemplate
+    }
+
+    @Bean
+   fun redisMessageListenerContainer(): RedisMessageListenerContainer {
+        val redisMessageListenerContainer =  RedisMessageListenerContainer()
+        redisMessageListenerContainer.setConnectionFactory(redisConnectionFactory)
+        return redisMessageListenerContainer
+    }
+
+    @Bean
+    fun  keyExpiredListener():RedisKeyExpiredListener{
+        return RedisKeyExpiredListener(this.redisMessageListenerContainer())
     }
 }

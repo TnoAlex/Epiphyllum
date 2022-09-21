@@ -24,5 +24,10 @@ interface UsdLinkService {
         items:List<Pair<KProperty<*>,String>>
     ): ArrayList<V>?
 
+    fun <T:Any,V:Any> batchSelectLinkBeans(
+        linkClazz:KClass<T>,
+        linkBean:KClass<V>,
+        items:Pair<KProperty<*>,List<String>>
+    ):ArrayList<V>?
 
 }

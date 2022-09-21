@@ -38,7 +38,7 @@ class UserController {
     @PostMapping("/doLogin/{code}")
     @ResponseBody
     fun getUser(@PathVariable code: String):Result{
-        return tokenService.getUserParameter(code)
+        return tokenService.checkToken(code)
     }
     @PostMapping("/register")
     fun register(@RequestBody entity: RegisterEntity):Result{

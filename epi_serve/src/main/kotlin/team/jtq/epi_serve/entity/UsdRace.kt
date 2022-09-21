@@ -22,6 +22,7 @@ data class UsdRace (
     var raceEndTime: LocalDateTime,
     var raceDescription: String,
     var raceAddition: String,
-    var status: Int
+    var status: Int,
+    var organizer:String,
 )
 

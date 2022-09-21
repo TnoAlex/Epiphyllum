@@ -20,7 +20,6 @@
     "flatpickr": "^4.6.13",
     "glightbox": "^3.2.0",
     "gsap": "^3.11.0",
-    "jquery": "^3.6.1",
     "js-base64": "^3.7.2",
     "overlayscrollbars": "^2.0.0-beta.1",
     "overlayscrollbars-vue": "^0.3.0",
@@ -29,11 +28,9 @@
     "stylus": "^0.59.0",
     "stylus-loader": "^7.0.0",
     "tiny-slider": "^2.9.4",
-    "typescript": "^4.8.3",
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
-    "vue-router": "^4.1.5",
-    "vue2-dropzone": "^3.6.0"
+    "vue-router": "^4.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

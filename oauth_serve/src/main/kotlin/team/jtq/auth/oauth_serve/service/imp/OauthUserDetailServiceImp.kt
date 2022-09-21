@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 import org.springframework.util.Base64Utils
 import org.springframework.util.DigestUtils
 import team.jtq.auth.oauth_serve.adapter.UserDetailsAdapter
-import team.jtq.auth.oauth_serve.config.AppResourceConfig
+import team.jtq.auth.oauth_serve.config.OAuthServerConfig
 import team.jtq.auth.oauth_serve.entity.OauthRole
 import team.jtq.auth.oauth_serve.entity.OauthUser
 import team.jtq.auth.oauth_serve.entity.OauthVerify
@@ -108,10 +108,10 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
             if (i.roleLevel < entity.accountLevel)
                 userRoleService.registerUserRole(instance.id, i.id)
         }
-        if (entity.accountLevel < AppResourceConfig.minimumCheckLevel.toInt()) {
+        if (entity.accountLevel < OAuthServerConfig.minimumCheckLevel.toInt()) {
             val code = generateConfirmCode()
             val address =
-                if (AppResourceConfig.domainName.endsWith("/")) AppResourceConfig.domainName else AppResourceConfig.domainName + "/" +
+                if (OAuthServerConfig.domainName.endsWith("/")) OAuthServerConfig.domainName else OAuthServerConfig.domainName + "/" +
                         "oauth/confirm_account/" + Base64Utils.encodeToString(instance.id.toByteArray(Charsets.UTF_8))+"/" +code
             return emailService.sendConfirmationEmail(address, entity.account, "Epiphyllum注册确认")
         } else {
@@ -174,7 +174,7 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
         val confirmUUID = UUID.randomUUID().toString().replace("-", "")
         val UUIDKey = DigestUtils.md5DigestAsHex(confirmUUID.toByteArray(Charsets.UTF_8))
         redisTemplate.opsForValue()
-            .set("CONFIRMCODE:$UUIDKey", confirmUUID, AppResourceConfig.maxConfirmCodeLive.toLong(), TimeUnit.MINUTES)
+            .set("CONFIRMCODE:$UUIDKey", confirmUUID, OAuthServerConfig.maxConfirmCodeLive.toLong(), TimeUnit.MINUTES)
         return confirmUUID
     }
 

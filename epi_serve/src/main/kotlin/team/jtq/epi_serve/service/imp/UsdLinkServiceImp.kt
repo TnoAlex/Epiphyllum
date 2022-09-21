@@ -67,8 +67,7 @@ class UsdLinkServiceImp : UsdLinkService {
         val res :ArrayList<V>
         return try{
             val instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
-            items.forEach { i->query.eq(i.first,i.second)
-            }
+            items.forEach { i->query.eq(i.first,i.second) }
             res = instantLink.selectList(query).toCollection(ArrayList<V>())
             res
         }catch (e:Exception){
@@ -76,5 +75,21 @@ class UsdLinkServiceImp : UsdLinkService {
         }
     }
 
+    override fun <T : Any, V : Any> batchSelectLinkBeans(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: Pair<KProperty<*>, List<String>>
+    ): ArrayList<V>? {
+        val query = KtQueryWrapper(linkBean.java)
+        val res :ArrayList<V>
+        return try{
+            val instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
+            query.`in`(items.first,items.second)
+            res = instantLink.selectList(query).toCollection(ArrayList<V>())
+            res
+        }catch (e:Exception){
+            null
+        }
+    }
 
 }

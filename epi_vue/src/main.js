@@ -20,10 +20,6 @@ import axios from "axios"
 
 
 //import Dropzone from 'dropzone'
-
-
-
-
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(router)

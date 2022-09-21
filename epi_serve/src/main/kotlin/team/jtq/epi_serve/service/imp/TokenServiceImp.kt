@@ -34,11 +34,11 @@ class TokenServiceImp : TokenService {
     @Resource
     private lateinit var redisTemplate: RedisTemplate<String,Any>
 
-    override fun getUserParameter(token: String): Result {
+    override fun checkToken(token: String): Result {
         if (token.isEmpty())
             return Result.error(ResultStatusCode.TOKEN_MISS)
-        val redisKey  = TOKEN_PREFIX + DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
-        val encryptList = listOf("user_account","user_name","user_gender","user_phone","user_status","user_id")
+        val redisKey  = TOKEN_PREFIX +":"+ DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
+        val encryptList = listOf("user_account","user_name","user_gender","user_phone","user_status","user_id","authorities")
         if(redisTemplate.hasKey(redisKey)){
             val obj = redisTemplate.opsForValue().get(redisKey)
             val json = JSON.parseObject(JSON.toJSONString(obj))
@@ -66,20 +66,18 @@ class TokenServiceImp : TokenService {
             val json = rsaDecode(encryptItems) ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
             encryptList.forEach { i->responseRes[i] = json[i] }
 
-            redisTemplate.opsForValue().set(redisKey,responseRes,10,TimeUnit.MINUTES)
+            redisTemplate.opsForValue().set(redisKey,responseRes,1,TimeUnit.DAYS)
             return Result.ok(json)
         }
         return Result.error(ResultStatusCode.UNKONW_ERROR)
     }
-
-    override fun checkToken(token: String, uid: String): Result {
-        val redisKey = TOKEN_PREFIX+ uid
-        if(redisTemplate.hasKey(redisKey)){
-            return Result.ok()
+    override fun getUserInfo(token: String): JSONObject? {
+        val redisKey = TOKEN_PREFIX+":" + DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
+        if (redisTemplate.hasKey(redisKey)) {
+            val obj = redisTemplate.opsForValue().get(redisKey)
+            return JSON.parseObject(JSON.toJSONString(obj))
         }
-        else{
-            return getUserParameter(token)
-        }
+        return null
     }
 
     private fun rsaDecode(json: JSONObject): JSONObject? {

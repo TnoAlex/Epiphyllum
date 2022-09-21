@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @ConfigurationProperties(prefix = "deploy")
-object AppResourceConfig {
+object OAuthServerConfig {
     lateinit var domainName:String
     lateinit var minimumCheckLevel:String
     lateinit var maxConfirmCodeLive:String

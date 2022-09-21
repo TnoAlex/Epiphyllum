@@ -14,5 +14,6 @@ enum class ResultStatusCode(var code: Int, var msg: String) {
     PERMISSION_DENIED(10001, "权限不足"),
     TOKEN_MISS(10002, "Token缺失"),
     VERIFICATIONCODE_ERROR(1003,"验证码错误"),
-    UNKONW_ERROR(1004,"未知错误")
+    UNKONW_ERROR(1004,"未知错误"),
+    TOKEN_EXPIRED(403,"Token已过期")
 }
