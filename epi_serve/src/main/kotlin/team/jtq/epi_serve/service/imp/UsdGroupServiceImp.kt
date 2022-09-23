@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.DigestUtils
 import team.jtq.epi_serve.entity.UsdGroup
 import team.jtq.epi_serve.entity.UsdGroupUser
@@ -40,6 +41,7 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
 
     private val USER_JOINED_GROUP ="USER_JOINED_GROUP"
 
+    @Transactional
     override fun addGroup(entity: GroupUpLoadeEntity, token: String): Result {
 
         val obj = UsdGroup::class.java
@@ -60,11 +62,13 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
             Pair(UsdGroupUser::groupId.name, instant.id),
             Pair(UsdGroupUser::uid.name, instant.createUser)
         )
-        if (!linkRes)
-            return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        if (!linkRes){
+            throw RuntimeException("Sql Error!")
+        }
         return Result.ok()
     }
 
+    @Transactional
     override fun joinGroup(token: String, gid: String): Result {
 
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
@@ -78,10 +82,11 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
         return if (linkRes) {
             Result.ok()
         } else {
-            Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
         }
     }
 
+    @Transactional
     override fun exitGroup(token: String, gid: String): Result {
 
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
@@ -101,9 +106,10 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
         return if (res)
             Result.ok()
         else
-            Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
     }
 
+    @Transactional
     override fun revokedGroup(token: String, gid: String): Result {
 
         val groupMembers = linkService.selectLinkinBeans(
@@ -127,10 +133,11 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
             listOf(Pair(UsdGroup::id, gid))
         )
         if (!res)
-            return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+           throw RuntimeException("Sql Error!")
         return Result.ok()
     }
 
+    @Transactional
     override fun modifyGroup(entity: ModifyGroupEntity, token: String): Result {
         return try {
             val query = KtUpdateWrapper(UsdGroup::class.java)
@@ -145,7 +152,7 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
             super<ServiceImpl>.update(query)
             Result.ok()
         } catch (e: Exception) {
-            Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
         }
     }
 

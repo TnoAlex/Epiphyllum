@@ -1,27 +1,39 @@
 package team.jtq.epi_serve.service.imp
 
-import com.alibaba.fastjson2.JSON
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
+import org.apache.commons.io.FileUtils
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.DigestUtils
 import team.jtq.epi_serve.config.AppResourceConfig
+import team.jtq.epi_serve.config.BeanContext
+import team.jtq.epi_serve.entity.FileDocument
 import team.jtq.epi_serve.entity.UsdRace
+import team.jtq.epi_serve.entity.UsdRaceAnnex
 import team.jtq.epi_serve.entity.UsdUserRace
 import team.jtq.epi_serve.entity.ao.RaceUpLoadEntity
 import team.jtq.epi_serve.entity.ao.ResultStatusCode
+import team.jtq.epi_serve.entity.to.FileChunkInfo
+import team.jtq.epi_serve.entity.to.TFileInfo
+import team.jtq.epi_serve.mapper.UsdRaceAnnexMapper
 import team.jtq.epi_serve.mapper.UsdRaceMapper
 import team.jtq.epi_serve.mapper.UsdUserRaceMapper
+import team.jtq.epi_serve.service.MongoService
 import team.jtq.epi_serve.service.RaceService
 import team.jtq.epi_serve.service.TokenService
 import team.jtq.epi_serve.service.UsdLinkService
 import team.jtq.epi_serve.tools.Result
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Service
 class RaceServiceImp : ServiceImpl<UsdRaceMapper, UsdRace>(), RaceService {
@@ -33,10 +45,10 @@ class RaceServiceImp : ServiceImpl<UsdRaceMapper, UsdRace>(), RaceService {
     private lateinit var linkService: UsdLinkService
 
     @Autowired
-    private lateinit var redisTemplate: RedisTemplate<String, Any>
+    private lateinit var mongoService: MongoService
 
-    private val RACE_CACHE = "RACE_CACHE"
 
+    @Transactional
     override fun addRace(entity: RaceUpLoadEntity, token: String): Result {
         val obj = UsdRace::class.java
         val instant = obj.newInstance()
@@ -60,26 +72,156 @@ class RaceServiceImp : ServiceImpl<UsdRaceMapper, UsdRace>(), RaceService {
     }
 
     override fun selectAllRace(token: String, pageIndex: String, pageItems: String): Result {
-        val page = Page<UsdRace>(pageIndex.toLong(),pageItems.toLong())
+        val page = Page<UsdRace>(pageIndex.toLong(), pageItems.toLong())
         val mouthBefore = LocalDateTime.now().minusMonths(1)
         val query = KtQueryWrapper(UsdRace::class.java)
         query.ge(UsdRace::raceStartTime, mouthBefore)
-        val races = this.baseMapper.selectPage(page,query)
+        val races = this.baseMapper.selectPage(page, query)
         return Result.ok(races.records)
     }
 
+    @Transactional
     override fun registrationRace(token: String, rid: String): Result {
         val json = tokenService.getUserInfo(token)!!
         val res = linkService.addLinkinBeans(
             UsdUserRaceMapper::class,
             UsdUserRace::class,
-            Pair(UsdUserRace::raceId.name,rid),
-            Pair(UsdUserRace::uid.name,json["user_id"] as String)
+            Pair(UsdUserRace::raceId.name, rid),
+            Pair(UsdUserRace::uid.name, json["user_id"] as String)
         )
-        return if(res)
+        return if (res)
             Result.ok()
         else
-            Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
     }
+
+    override fun selectUserJoinedRace(token: String): Result {
+        val json = tokenService.getUserInfo(token)!!
+        val res = linkService.selectLinkinBeans(
+            UsdUserRaceMapper::class,
+            UsdUserRace::class,
+            listOf(Pair(UsdUserRace::uid, json["user_id"] as String))
+        ) ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        return Result.ok(res)
+    }
+
+    @Transactional
+    override fun cancelRegistration(token: String, rid: String): Result {
+        val json = tokenService.getUserInfo(token)!!
+        val res = linkService.deleteLinkinBeans(
+            UsdUserRaceMapper::class,
+            UsdUserRace::class,
+            listOf(Pair(UsdUserRace::uid, json["user_id"] as String), Pair(UsdUserRace::raceId, rid))
+        )
+        return if (res)
+            Result.ok()
+        else
+            throw RuntimeException("Sql Error!")
+    }
+
+    override fun uploadAnnex(rid: String, token: String, chunk: FileChunkInfo): Result {
+        return try {
+            val json = tokenService.getUserInfo(token)!!
+            val chunkPath =
+                AppResourceConfig.appCachePath + File.separator + (json["user_id"] as String) + File.separator + "RACE" + File.separator + rid +File.separator + "part" + File.separator + chunk.chunkNumber + ".part"
+            val outFile = File(chunkPath)
+            val stream = chunk.file.inputStream
+            FileUtils.copyInputStreamToFile(stream, outFile)
+            Result.ok()
+        } catch (e: Exception) {
+            Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        }
+    }
+
+    override fun finishUpload(rid: String, token: String, fileInfo: TFileInfo): Result {
+        val json = tokenService.getUserInfo(token)!!
+        val chunkPath =
+            AppResourceConfig.appCachePath + File.separator + (json["user_id"] as String) + File.separator + "RACE" + File.separator + rid+ File.separator +"part"
+        val file = File(chunkPath)
+        val filename = DigestUtils.md5DigestAsHex(((json["user_id"] as String)+"&"+rid).toByteArray(Charsets.UTF_8))
+        val partFile= File(file.parent + File.separator + filename)
+        if(file.isDirectory){
+            val files = file.listFiles()
+            if(files!=null && files.isNotEmpty()){
+                val desFile = FileOutputStream(partFile,true)
+                files.forEach {
+                    FileUtils.copyFile(it,desFile)
+                }
+                desFile.close()
+                FileUtils.deleteDirectory(file)
+
+            }
+        }
+        val inputStream = FileInputStream(partFile)
+        val md5 = DigestUtils.md5DigestAsHex(inputStream)
+        if(fileInfo.uniqueIdentifier!=md5)
+            return Result.error(ResultStatusCode.FILE_CHECK_ERR)
+        val fileDocument = FileDocument(UUID.randomUUID().toString().replace("-",""),
+            filename,fileInfo.size,System.currentTimeMillis().toString(),md5,null,fileInfo.fileType,"RACE",Pair(json["user_id"] as String,rid),null
+        )
+        mongoService.saveFile(FileInputStream(partFile),fileInfo.fileType,fileDocument)
+        val mapper = BeanContext.getBeanbyClazz(UsdRaceAnnexMapper::class.java)
+        val obj = UsdRaceAnnex::class.java.newInstance()
+        obj.raceId = rid
+        obj.uid = json["user_id"] as String
+        obj.annexId = fileDocument.id
+        mapper.insert(obj)
+        return Result.ok()
+    }
+
+    @Transactional
+    override fun deleteAnnex(rid: String, token: String): Result {
+        val json = tokenService.getUserInfo(token)!!
+        val annex = linkService.selectLinkinBeans(
+            UsdRaceAnnexMapper::class,
+            UsdRaceAnnex::class,
+            listOf(Pair(UsdRaceAnnex::uid,json["user_id"] as String),Pair(UsdRaceAnnex::raceId,rid))
+        )?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        var res = linkService.deleteLinkinBeans(
+            UsdRaceAnnexMapper::class,
+            UsdRaceAnnex::class,
+            listOf(Pair(UsdRaceAnnex::uid,json["user_id"] as String),Pair(UsdRaceAnnex::raceId,rid))
+        )
+        if(!res)
+            throw RuntimeException("Sql Error")
+        res = mongoService.deleteFile(annex[0].annexId)
+        if(!res)
+            throw RuntimeException("Sql Error")
+        return Result.ok()
+    }
+
+    override fun downloadAnnexs(rid: String, token: String): Result {
+        val annexs = linkService.selectLinkinBeans(
+            UsdRaceAnnexMapper::class,
+            UsdRaceAnnex::class,
+            listOf(Pair(UsdRaceAnnex::raceId,rid))
+        )?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        val res = ArrayList<FileDocument>()
+        annexs.forEach {
+            val file = mongoService.findByID(it.annexId)?:return Result.error(ResultStatusCode.FILE_NOT_FIND)
+            res.add(file)
+        }
+        TODO("Not yet implemented")
+    }
+
+    override fun selectUserHoldRace(token: String): Result {
+        val json = tokenService.getUserInfo(token)!!
+        val res = linkService.selectLinkinBeans(
+            UsdRaceMapper::class,
+            UsdUserRace::class,
+            listOf(Pair(UsdRace::organizer,json["user_id"] as String))
+        )?:return Result.ok()
+        return Result.ok(res)
+    }
+
+    override fun cancelRace(token: String, rid: String): Result {
+        val query = KtQueryWrapper(UsdRace::class.java)
+        query.eq(UsdRace::Id,rid)
+        val res = this.baseMapper.selectOne(query)
+        if(res.status!=-1)
+            return Result.error("比赛已经开始或结束，无法删除")
+        TODO("Not yet implemented")
+    }
+
 
 }

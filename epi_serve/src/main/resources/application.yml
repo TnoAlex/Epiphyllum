@@ -4,6 +4,10 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:MM:ss
     time-zone: GMT-8
+  data:
+    mongodb:
+      uri: mongodb://admin:root@localhost:27017/OSS
+      database: OSS
 
   datasource:
     druid:
@@ -51,4 +55,4 @@ authorization-server:
   remoteSingup: /oauth/signup
   UTCTimeZone: '+8'
   RSAPath: /rsa/appPrivateKey
-
+  appCachePath: E:\springCache

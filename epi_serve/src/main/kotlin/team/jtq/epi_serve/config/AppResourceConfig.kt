@@ -21,6 +21,7 @@ object AppResourceConfig {
     lateinit var remoteSingup: String
     lateinit var UTCTimeZone: String
     lateinit var RSAPath:String
+    lateinit var appCachePath:String
 
     @Autowired
     lateinit var redisTemplate:RedisTemplate<String,Any>

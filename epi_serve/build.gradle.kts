@@ -52,7 +52,10 @@ dependencies {
     implementation("com.alibaba:fastjson:2.0.12")
     implementation("org.springframework.boot:spring-boot-configuration-processor:2.7.3")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:2.7.3")
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation("commons-io:commons-io:2.11.0")
 
 }
 

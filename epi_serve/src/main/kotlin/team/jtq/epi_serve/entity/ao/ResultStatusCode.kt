@@ -15,5 +15,7 @@ enum class ResultStatusCode(var code: Int, var msg: String) {
     TOKEN_MISS(10002, "Token缺失"),
     VERIFICATIONCODE_ERROR(1003,"验证码错误"),
     UNKONW_ERROR(1004,"未知错误"),
-    TOKEN_EXPIRED(403,"Token已过期")
+    TOKEN_EXPIRED(403,"Token已过期"),
+    FILE_CHECK_ERR(500,"文件校验失败"),
+    FILE_NOT_FIND(500,"文件未找到")
 }

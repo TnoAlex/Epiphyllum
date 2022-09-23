@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.DigestUtils
 import team.jtq.epi_serve.config.AppResourceConfig
 import team.jtq.epi_serve.config.BeanContext
@@ -43,6 +44,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
     private val USER_ALL_IDS = "USER_ALL_IDS"
     private val POST_CACHE = "POST_CACHE"
 
+    @Transactional
     override fun addUserPost(entity: PostUpLoadeEntity, token: String): Result {
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
         val obj = UsdPost::class.java
@@ -71,13 +73,14 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
                 Pair(UsdGroupPost::groupId.name, entity.groupId), Pair(UsdGroupPost::postId.name, instant.id)
             )
             if (!link2Res)
-                return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+                throw RuntimeException("Sql Error!")
         } catch (e: Exception) {
-            return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
         }
         return Result.ok()
     }
 
+    @Transactional
     override fun deleteUserPost(token: String, pid: String): Result {
 
         var res = linkService.deleteLinkinBeans(
@@ -86,20 +89,21 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
             listOf(Pair(UsdGroupPost::postId, pid))
         )
         if (!res)
-            return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
         res = linkService.deleteLinkinBeans(
             UsdUserPostMapper::class,
             UsdUserPost::class,
             listOf(Pair(UsdUserPost::postId, pid))
         )
         if (!res)
-            return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
         val query = KtQueryWrapper(UsdPost::class.java)
         query.eq(UsdPost::id, pid)
         this.baseMapper.delete(query)
         return Result.ok()
     }
 
+    @Transactional
     override fun favoritePosts(token: String, pid: String): Result {
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
         val user = json["user_id"] as String
@@ -112,9 +116,10 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
         return if (res)
             Result.ok()
         else
-            Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
     }
 
+    @Transactional
     override fun unfavoritePost(token: String, pid: String): Result {
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
         val user = json["user_id"] as String
@@ -126,7 +131,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
         return if (res)
             Result.ok()
         else
-            Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            throw RuntimeException("Sql Error!")
     }
 
     override fun selectAllFavorite(token: String, pageIndex: Long, pageItems: Long): Result {
