@@ -41,6 +41,29 @@ class UsdLinkServiceImp : UsdLinkService {
         }
     }
 
+    override fun <T : Any, V : Any> addLinkBeans(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: Map<KProperty<*>, String>
+    ): Boolean {
+        val instantLink: Any
+                try {
+                    instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
+                    val obj = linkBean.java.newInstance()
+                    val pro = linkBean.declaredMemberProperties
+                    pro.forEach {
+                        val kmp = it as KMutableProperty1<Any, Any?>
+                        if(items.containsKey(it)){
+                            kmp.set(obj,items[it])
+                        }
+                    }
+                    instantLink.insert(obj)
+                    return true
+                } catch (e: Exception) {
+                    return false
+                }
+    }
+
     override fun <T : Any, V : Any> deleteLinkinBeans(
         linkClazz: KClass<T>,
         linkBean: KClass<V>,

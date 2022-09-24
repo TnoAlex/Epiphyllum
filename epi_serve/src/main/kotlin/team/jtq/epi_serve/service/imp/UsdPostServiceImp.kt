@@ -16,10 +16,7 @@ import team.jtq.epi_serve.config.BeanContext
 import team.jtq.epi_serve.entity.*
 import team.jtq.epi_serve.entity.ao.PostUpLoadeEntity
 import team.jtq.epi_serve.entity.ao.ResultStatusCode
-import team.jtq.epi_serve.mapper.UsdGroupPostMapper
-import team.jtq.epi_serve.mapper.UsdPostMapper
-import team.jtq.epi_serve.mapper.UsdUserFavoritesMapper
-import team.jtq.epi_serve.mapper.UsdUserPostMapper
+import team.jtq.epi_serve.mapper.*
 import team.jtq.epi_serve.service.TokenService
 import team.jtq.epi_serve.service.UsdGroupService
 import team.jtq.epi_serve.service.UsdLinkService
@@ -120,7 +117,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
     }
 
     @Transactional
-    override fun unfavoritePost(token: String, pid: String): Result {
+    override fun unFavoritePost(token: String, pid: String): Result {
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
         val user = json["user_id"] as String
         val res = linkService.deleteLinkinBeans(
@@ -139,7 +136,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
         val page = Page<UsdPost>(pageIndex, pageItems)
         val query = KtQueryWrapper(UsdPost::class.java)
-        val redisKey = USER_FAV_IDS + ":"+DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
+        val redisKey = USER_FAV_IDS + ":" + DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
         val postID: List<String>
         if (redisTemplate.hasKey(redisKey)) {
             val obj = redisTemplate.opsForValue().get(redisKey) as String
@@ -163,7 +160,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
         AppResourceConfig.forceRefreshFolder(POST_CACHE) //强制刷新redis
         val page = Page<UsdPost>(pageIndex, pageItems)
         val query = KtQueryWrapper(UsdPost::class.java)
-        val redisKey = USER_ALL_IDS+":" + DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
+        val redisKey = USER_ALL_IDS + ":" + DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
         val postID: List<String>
         if (redisTemplate.hasKey(redisKey)) {
             val obj = redisTemplate.opsForValue().get(redisKey) as String
@@ -185,39 +182,84 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
     }
 
     override fun likePost(token: String, pid: String): Result {
-        val redisKey = POST_CACHE +":"+ DigestUtils.md5DigestAsHex(pid.toByteArray(Charsets.UTF_8))
-        if(redisTemplate.hasKey(redisKey)){
+        val redisKey = POST_CACHE + ":" + DigestUtils.md5DigestAsHex(pid.toByteArray(Charsets.UTF_8))
+        if (redisTemplate.hasKey(redisKey)) {
             val obj = redisTemplate.opsForValue().get(redisKey)
             val expireTime = redisTemplate.opsForValue().operations.getExpire(redisKey)!!
-            val post = JSON.parseObject(JSON.toJSONString(obj),UsdPost::class.java)
-            post.likes = post.likes+1
-            redisTemplate.opsForValue().set(redisKey,post,expireTime,TimeUnit.SECONDS)
-        }else{
+            val post = JSON.parseObject(JSON.toJSONString(obj), UsdPost::class.java)
+            post.likes = post.likes + 1
+            redisTemplate.opsForValue().set(redisKey, post, expireTime, TimeUnit.SECONDS)
+        } else {
             val query = KtQueryWrapper(UsdPost::class.java)
-            query.eq(UsdPost::id,pid)
+            query.eq(UsdPost::id, pid)
             val post = this.baseMapper.selectOne(query)
-            post.likes = post.likes +1
-            redisTemplate.opsForValue().set(redisKey,post,1,TimeUnit.MINUTES)
+            post.likes = post.likes + 1
+            redisTemplate.opsForValue().set(redisKey, post, 1, TimeUnit.MINUTES)
         }
         return Result.ok()
     }
 
     override fun modfiyPost(token: String, pid: String, entity: PostUpLoadeEntity): Result {
-        val redisKey = POST_CACHE +":"+DigestUtils.md5DigestAsHex(pid.toByteArray(Charsets.UTF_8))
-        if(redisTemplate.hasKey(redisKey))
-        {
+        val redisKey = POST_CACHE + ":" + DigestUtils.md5DigestAsHex(pid.toByteArray(Charsets.UTF_8))
+        if (redisTemplate.hasKey(redisKey)) {
             val obj = redisTemplate.opsForValue().get(redisKey)
             val expireTime = redisTemplate.opsForValue().operations.getExpire(redisKey)!!
-            val post = JSON.parseObject(JSON.toJSONString(obj),UsdPost::class.java)
+            val post = JSON.parseObject(JSON.toJSONString(obj), UsdPost::class.java)
             post.postContent = entity.connect
-            redisTemplate.opsForValue().set(redisKey,post,expireTime,TimeUnit.SECONDS)
-            AppResourceConfig.forceRefresh("POST",redisKey)
-        }else{
+            redisTemplate.opsForValue().set(redisKey, post, expireTime, TimeUnit.SECONDS)
+            AppResourceConfig.forceRefresh("POST", redisKey)
+        } else {
             val query = KtUpdateWrapper(UsdPost::class.java)
-            query.eq(UsdPost::id,pid).set(UsdPost::postContent,entity.connect)
-            this.baseMapper.update(null,query)
+            query.eq(UsdPost::id, pid).set(UsdPost::postContent, entity.connect)
+            this.baseMapper.update(null, query)
         }
         return Result.ok()
+    }
+
+    @Transactional
+    override fun postComment(token: String, pid: String, comment: String): Result {
+        val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
+        val mapper = BeanContext.getBeanbyClazz(UsdCommentMapper::class.java)
+        val obj = UsdComment::class.java.newInstance()
+        obj.comment = comment
+        obj.createBy = json["user_id"] as String
+        obj.createTime = LocalDateTime.now()
+        mapper.insert(obj)
+        val res = linkService.addLinkBeans(
+            UsdPostCommentMapper::class,
+            UsdPostComment::class,
+            mapOf(UsdPostComment::commentId to obj.id, UsdPostComment::postId to pid)
+        )
+        return if (res)
+            Result.ok()
+        else
+            throw RuntimeException("Sql Error")
+    }
+
+    override fun selectPostComment(token: String, pid: String, pageIndex: String, pageItems: String): Result {
+        val redisKey = "COMMENT:" + DigestUtils.md5DigestAsHex(pid.toByteArray(Charsets.UTF_8))
+        val commentIds: List<String>
+        if (redisTemplate.hasKey(redisKey)) {
+            val obj = redisTemplate.opsForValue().get(redisKey)
+            commentIds = JSONArray.parseArray(JSON.toJSONString(obj), String::class.java)
+
+        } else {
+            val query = KtQueryWrapper(UsdPostComment::class.java)
+            query.eq(UsdPostComment::postId, pid)
+            val mapper = BeanContext.getBeanbyClazz(UsdPostCommentMapper::class.java)
+            commentIds =
+                mapper.selectList(query)?.map { it.id } ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            redisTemplate.opsForValue().set(redisKey, JSON.toJSONString(commentIds))
+        }
+        val page = Page<UsdComment>(pageIndex.toLong(), pageItems.toLong())
+
+        val res = linkService.batchSelectLinkBeansInListOnPage(
+            UsdCommentMapper::class,
+            UsdComment::class,
+            Pair(UsdComment::id, commentIds),
+            page
+        ) ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        return Result.ok(res.records)
     }
 
 }

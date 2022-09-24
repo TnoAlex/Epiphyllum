@@ -25,6 +25,8 @@ class UserController {
     @Autowired
     private lateinit var userService: UsdUserService
 
+
+    //验证码
     @GetMapping("/code/{timestamp}")
     @ResponseBody
     fun vCode(@PathVariable timestamp: String): Result {
@@ -34,52 +36,64 @@ class UserController {
         return Result.ok(code)
     }
 
+    //登录
     @PostMapping("/login")
     @ResponseBody
     fun login(@RequestBody entity: LoginEntity): Result {
         return loginService.checkLoginParameter(entity)
     }
+
+    //回调（用户不可见）
     @PostMapping("/doLogin/{code}")
     @ResponseBody
     fun getUser(@PathVariable code: String):Result{
         return tokenService.checkToken(code)
     }
+
+    //注册
     @PostMapping("/register")
     @ResponseBody
     fun register(@RequestBody entity: RegisterEntity):Result{
         return registerService.registerOnRemote(entity)
     }
 
+
+    //查看消息
     @PostMapping("/usd/user/notice/{token}/{pageIndex}/{pageItems}")
     @ResponseBody
     fun selectNotice(@PathVariable token: String, @PathVariable pageIndex: String, @PathVariable pageItems: String): Result {
         return userService.selectUserNotice(token,pageIndex, pageItems)
     }
 
+    //已读消息
     @PostMapping("/usd/user/notice/mark-notice/{token}/{nid}")
     @ResponseBody
     fun markNotice(@PathVariable nid: String, @PathVariable token: String): Result {
         return userService.markNotice(token, nid)
     }
 
+    //获取用户基础信息
     @PostMapping("/usd/user/info/common/{token}")
     @ResponseBody
     fun getUserCommonInfo(@PathVariable token: String): Result {
         return userService.getUserCommonInfo(token)
     }
 
+    //获取用户受保护信息
     @PostMapping("/usd/user/info/protected/{token}")
     @ResponseBody
     fun getUserProtectedInfo(@PathVariable token: String): Result {
         return userService.getUserProtectedInfo(token)
     }
 
+    //用户修改资料
     @PostMapping("/usd/user/modify-user/{token}")
     @ResponseBody
     fun modifyUser(@PathVariable token: String,@RequestBody entity:ModifyUserEntity): Result {
         return userService.modfiyUser(token, entity)
     }
 
+    //查看比赛结果
     @PostMapping("/usd/user/race/result/{token}/{pageIndex}/{pageItems}")
     @ResponseBody
     fun userRaceResult(@PathVariable token: String, @PathVariable pageIndex: String, @PathVariable pageItems: String): Result {

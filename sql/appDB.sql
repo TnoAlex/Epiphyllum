@@ -1,8 +1,10 @@
 create table usd_comment
 (
-    id      varchar(128) not null
+    id          varchar(128) not null
         primary key,
-    comment blob         not null
+    comment     blob         not null,
+    create_by   varchar(128) not null,
+    create_time datetime     not null
 );
 
 create table usd_group
@@ -59,6 +61,14 @@ create table usd_post
     status       int          not null comment '1：正常,0：隐藏',
     likes        int          null comment '点赞数',
     favorites    int          null comment '收藏数'
+);
+
+create table usd_post_comment
+(
+    id         varchar(128) not null
+        primary key,
+    post_id    varchar(128) not null,
+    comment_id varchar(128) not null
 );
 
 create table usd_race
@@ -119,14 +129,6 @@ create table usd_user_post
     post_id varchar(128) null
 );
 
-create table usd_user_post_comment
-(
-    id      varchar(128) not null
-        primary key,
-    post_id varchar(128) not null,
-    uid     varchar(128) not null
-);
-
 create table usd_user_race
 (
     id      varchar(128) not null
@@ -140,9 +142,9 @@ create definer = root@localhost event raceTimmer on schedule
         starts '2022-09-23 10:20:28'
     enable
     do
-    UPDATE usd_race SET `status` = CASE 
-	WHEN (race_start_time<NOW() AND race_end_time>NOW()) THEN 0
-	WHEN (race_start_time>NOW()) THEN -1
-	WHEN (race_end_time<NOW()) THEN 1
-END;
+    UPDATE usd_race SET `status` = CASE
+                                       WHEN (race_start_time<NOW() AND race_end_time>NOW()) THEN 0
+                                       WHEN (race_start_time>NOW()) THEN -1
+                                       WHEN (race_end_time<NOW()) THEN 1
+        END;
 

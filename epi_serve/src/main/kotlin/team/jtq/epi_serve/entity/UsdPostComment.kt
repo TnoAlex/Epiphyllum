@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableName
 import team.jtq.epi_serve.annotation.NoArg
 
 @NoArg
-@TableName("usd_user_post_comment")
-data class UsdUserPostComment(
+@TableName("usd_post_comment")
+data class UsdPostComment(
     @TableId(type=IdType.ASSIGN_ID)
     var id:String,
-    var uid:String,
     var postId:String,
+    var commentId:String,
 )

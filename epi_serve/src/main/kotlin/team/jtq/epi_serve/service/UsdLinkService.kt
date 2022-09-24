@@ -13,6 +13,12 @@ interface UsdLinkService {
         sourcePair: Pair<String, String>
     ): Boolean
 
+    fun <T:Any,V:Any> addLinkBeans(
+        linkClazz:KClass<T>,
+        linkBean:KClass<V>,
+        items: Map<KProperty<*>, String>
+    ): Boolean
+
     fun <T : Any, V : Any> deleteLinkinBeans(
         linkClazz: KClass<T>,
         linkBean: KClass<V>,
