@@ -14,4 +14,5 @@ interface UsdPostService : IService<UsdPost> {
     fun selectAllFavorite(token: String, pageIndex: Long, pageItems: Long): Result
     fun selectAllPost(token: String, pageIndex: Long, pageItems: Long):Result
     fun likePost(token: String,pid: String):Result
+    fun modfiyPost(token: String, pid: String, entity: PostUpLoadeEntity):Result
 }

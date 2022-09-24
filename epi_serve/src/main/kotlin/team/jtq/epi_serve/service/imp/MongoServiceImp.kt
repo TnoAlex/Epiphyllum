@@ -44,6 +44,11 @@ class MongoServiceImp : MongoService {
         }
     }
 
+    override fun selectOSSId(fid: String): String? {
+        val fileDocument = mongoTemplate.findById(fid, FileDocument::class.java) ?: return null
+        return fileDocument.gridFSId
+    }
+
     private fun storeFileGridFs(file: InputStream, contentType: String): String {
         val fileid = UUID.randomUUID().toString().replace("-", "")
         gridFSTemplate.store(file, fileid, contentType)

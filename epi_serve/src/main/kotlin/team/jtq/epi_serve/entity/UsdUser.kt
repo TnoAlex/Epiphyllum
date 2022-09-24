@@ -8,8 +8,10 @@ import team.jtq.epi_serve.annotation.NoArg
 @TableName("usd_user")
 data class UsdUser(
     @TableId
-    val uid:String,
-    val signature:String,
-    val occupation:String,
-    val portrait:String,
+    var id:String,
+    var uid:String,
+    var signature:String,
+    var occupation:String,
+    var portrait:String,
+    var nickName:String
 )

@@ -9,6 +9,6 @@ import team.jtq.auth.oauth_serve.entity.ao.RegisterEntity
 interface OauthUserDetailService:IService<OauthUser>,UserDetailsService{
     fun getProtectedUserInfo(account: String): JSONObject?
     fun updateUserName(account:String,userName:String): Boolean
-    fun addAccount(entity: RegisterEntity):Boolean
+    fun addAccount(entity: RegisterEntity): String?
     fun verifyConfirmationCode(code: String, id: String): Boolean
 }

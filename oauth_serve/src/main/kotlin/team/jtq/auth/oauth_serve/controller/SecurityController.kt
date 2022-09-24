@@ -27,8 +27,8 @@ class SecurityController {
     @ResponseBody
     fun register(@RequestBody entity: RegisterEntity): Result {
         val res = userDetailService.addAccount(entity)
-        return if (res) {
-            Result.ok()
+        return if (res!=null) {
+            Result.ok(res)
         } else
             Result.error("注册失败!")
     }

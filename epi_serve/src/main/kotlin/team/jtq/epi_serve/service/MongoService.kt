@@ -5,6 +5,7 @@ import java.io.InputStream
 
 interface MongoService {
     fun findByID(fid:String): FileDocument?
+    fun selectOSSId(fid: String): String?
     fun saveFile(fileStream: InputStream, contentType: String, file: FileDocument): String
     fun deleteFile(fid:String):Boolean
 }

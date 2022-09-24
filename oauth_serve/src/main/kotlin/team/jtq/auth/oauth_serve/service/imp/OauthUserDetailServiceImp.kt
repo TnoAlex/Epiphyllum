@@ -82,7 +82,7 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
         return false
     }
 
-    override fun addAccount(entity: RegisterEntity): Boolean {
+    override fun addAccount(entity: RegisterEntity): String? {
         val obj = OauthUser::class.java
         val instance = obj.newInstance()
         val systemID = roleService.lodeSystemRole()
@@ -113,12 +113,13 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
             val address =
                 if (OAuthServerConfig.domainName.endsWith("/")) OAuthServerConfig.domainName else OAuthServerConfig.domainName + "/" +
                         "oauth/confirm_account/" + Base64Utils.encodeToString(instance.id.toByteArray(Charsets.UTF_8))+"/" +code
-            return emailService.sendConfirmationEmail(address, entity.account, "Epiphyllum注册确认")
+            val email = emailService.sendConfirmationEmail(address, entity.account, "Epiphyllum注册确认")
+            return instance.id
         } else {
             try {
                 val addition = JSON.parseObject(entity.addition)
                 if(addition.isEmpty())
-                    return false
+                    return null
                 if((addition["credit_code"] as String).isNotEmpty()){
                     if(UnifiedCodeValidator.validateUnifiedCreditCode(addition["credit_code"] as String)){
                         val verifyObj = OauthVerify::class.java
@@ -130,7 +131,7 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
                         verify.passTime = systemTime
                         verify.requestId = instance.id
                         verifyService.baseMapper.insert(verify)
-                        return true
+                        return instance.id
                     }
                     else
                     {
@@ -143,14 +144,14 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
                         verify.passTime = systemTime
                         verify.requestId = instance.id
                         verifyService.baseMapper.insert(verify)
-                        return true
+                        return instance.id
                     }
                 }
             } catch (e: Exception) {
-                return false
+                return null
             }
         }
-        return false
+        return null
     }
 
 

@@ -16,8 +16,8 @@ data class UsdNotice(
     @TableId(type = IdType.ASSIGN_ID)
     var id:String,
     var context:String,
-    var status:Int,
     @JsonDeserialize(using = LocalDateTimeDeserializer::class)
     @JsonSerialize(using = LocalDateTimeSerializer::class)
-    var createTime: LocalDateTime
+    var createTime: LocalDateTime,
+    var createBy:String
 )

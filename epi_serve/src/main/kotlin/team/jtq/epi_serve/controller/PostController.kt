@@ -58,4 +58,10 @@ class PostController {
     fun likePost(@PathVariable pid: String, @PathVariable token: String): Result {
         return postService.likePost(token,pid)
     }
+
+    @PostMapping("/usd/post/modfiy-post/{token}/{pid}")
+    @ResponseBody
+    fun modfiyPost(@PathVariable pid: String, @PathVariable token: String,entity: PostUpLoadeEntity): Result {
+        return postService.modfiyPost(token, pid,entity)
+    }
 }

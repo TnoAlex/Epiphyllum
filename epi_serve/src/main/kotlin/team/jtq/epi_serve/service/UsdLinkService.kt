@@ -1,5 +1,6 @@
 package team.jtq.epi_serve.service
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
@@ -24,10 +25,36 @@ interface UsdLinkService {
         items:List<Pair<KProperty<*>,String>>
     ): ArrayList<V>?
 
-    fun <T:Any,V:Any> batchSelectLinkBeans(
+    fun <T:Any,V:Any> selectLinkinBeansonPage(
+        linkClazz:KClass<T>,
+        linkBean:KClass<V>,
+        items:List<Pair<KProperty<*>,String>>,
+        page: Page<V>
+    ):Page<V>?
+
+    fun <T:Any,V:Any> batchSelectLinkBeansInList(
         linkClazz:KClass<T>,
         linkBean:KClass<V>,
         items:Pair<KProperty<*>,List<String>>
     ):ArrayList<V>?
+
+    fun <T:Any,V:Any> batchSelectLinkBeansInListOnPage(
+        linkClazz:KClass<T>,
+        linkBean:KClass<V>,
+        items:Pair<KProperty<*>,List<String>>,
+        page: Page<V>
+    ):Page<V>?
+
+    fun <T:Any,V:Any> batchSelectLinkBeansNotInList(
+        linkClazz:KClass<T>,
+        linkBean:KClass<V>,
+        items:Pair<KProperty<*>,List<String>>
+    ):ArrayList<V>?
+
+    fun <T:Any,V:Any> countLinkBeans(
+        linkClazz:KClass<T>,
+        linkBean:KClass<V>,
+        items: List<Pair<KProperty<*>, String>>
+    ): Long?
 
 }

@@ -28,6 +28,8 @@ class UserAuthenticationConverter: DefaultUserAuthenticationConverter() {
         response["user_phone"] = principal.phone
         response["user_status"] = principal.status.toString()
         response["user_id"] = principal.id
+        response["user_identification"] = principal.identification
+
         val client = userClientService.getClientbyUser(principal.id)
         response = rSAEncoder(response,client)
         if (authentication.authorities != null && !authentication.authorities.isEmpty()) {

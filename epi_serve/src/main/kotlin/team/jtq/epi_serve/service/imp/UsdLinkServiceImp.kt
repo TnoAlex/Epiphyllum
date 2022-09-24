@@ -2,6 +2,7 @@ package team.jtq.epi_serve.service.imp
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import org.springframework.stereotype.Service
 import team.jtq.epi_serve.config.BeanContext
 import team.jtq.epi_serve.service.UsdLinkService
@@ -75,7 +76,56 @@ class UsdLinkServiceImp : UsdLinkService {
         }
     }
 
-    override fun <T : Any, V : Any> batchSelectLinkBeans(
+    override fun <T : Any, V : Any> selectLinkinBeansonPage(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: List<Pair<KProperty<*>, String>>,
+        page: Page<V>
+    ): Page<V>? {
+        val query = KtQueryWrapper(linkBean.java)
+        val res : Page<V>
+        return try{
+            val instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
+            items.forEach { i->query.eq(i.first,i.second) }
+            res = instantLink.selectPage(page,query)
+            res
+        }catch (e:Exception){
+            null
+        }
+    }
+
+    override fun <T : Any, V : Any> batchSelectLinkBeansInList(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: Pair<KProperty<*>, List<String>>
+    ): ArrayList<V>? {
+        val query = KtQueryWrapper(linkBean.java)
+        return try{
+            val instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
+            query.`in`(items.first,items.second)
+            instantLink.selectList(query).toCollection(ArrayList<V>())
+        }catch (e:Exception){
+            null
+        }
+    }
+
+    override fun <T : Any, V : Any> batchSelectLinkBeansInListOnPage(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: Pair<KProperty<*>, List<String>>,
+        page: Page<V>
+    ): Page<V>? {
+        val query = KtQueryWrapper(linkBean.java)
+        return try{
+            val instantLink =BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
+            query.`in`(items.first,items.second)
+            instantLink.selectPage(page,query)
+        }catch (e:Exception){
+            null
+        }
+    }
+
+    override fun <T : Any, V : Any> batchSelectLinkBeansNotInList(
         linkClazz: KClass<T>,
         linkBean: KClass<V>,
         items: Pair<KProperty<*>, List<String>>
@@ -84,10 +134,28 @@ class UsdLinkServiceImp : UsdLinkService {
         val res :ArrayList<V>
         return try{
             val instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
-            query.`in`(items.first,items.second)
+            query.notIn(items.first,items.second)
             res = instantLink.selectList(query).toCollection(ArrayList<V>())
             res
         }catch (e:Exception){
+            null
+        }
+    }
+
+    override fun <T : Any, V : Any> countLinkBeans(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: List<Pair<KProperty<*>, String>>
+    ): Long? {
+        val query = KtQueryWrapper(linkBean.java)
+        return try{
+            val instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
+            items.forEach {
+                query.eq(it.first,it.second)
+            }
+            instantLink.selectCount(query)
+        }catch (e:Exception)
+        {
             null
         }
     }

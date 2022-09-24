@@ -22,6 +22,16 @@ public class UserDetailsAdapter implements UserDetails {
     private Integer status;
     private String gender;
 
+    private String identification;
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
+
     private String addition;
 
     public String getAddition() {
@@ -78,6 +88,7 @@ public class UserDetailsAdapter implements UserDetails {
         this.id = oauthUser.getId();
         this.addition = oauthUser.getAddition();
         this.gender = oauthUser.getGender() == 0 ? "女" : "男";
+        this.identification = oauthUser.getIdentification();
 
         List<GrantedAuthority> list = new ArrayList<>();
         if (!oauthUser.getRoleList().isEmpty()) {

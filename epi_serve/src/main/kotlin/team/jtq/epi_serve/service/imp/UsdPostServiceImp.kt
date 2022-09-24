@@ -3,6 +3,7 @@ package team.jtq.epi_serve.service.imp
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONArray
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
+import com.baomidou.mybatisplus.extension.kotlin.KtUpdateWrapper
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,7 +27,6 @@ import team.jtq.epi_serve.service.UsdPostService
 import team.jtq.epi_serve.tools.Result
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
-import kotlin.reflect.KType
 
 @Service
 class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService {
@@ -172,7 +172,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
             val groupService = BeanContext.getBeanbyClazz(UsdGroupService::class.java)
             val groups = groupService.selectUserJoinedGroup(token)
             val groupId = (groups.data as List<UsdGroup>).map { it.id }
-            postID = linkService.batchSelectLinkBeans(
+            postID = linkService.batchSelectLinkBeansInList(
                 UsdGroupPostMapper::class,
                 UsdGroupPost::class,
                 Pair(UsdGroupPost::groupId, groupId)
@@ -198,6 +198,24 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
             val post = this.baseMapper.selectOne(query)
             post.likes = post.likes +1
             redisTemplate.opsForValue().set(redisKey,post,1,TimeUnit.MINUTES)
+        }
+        return Result.ok()
+    }
+
+    override fun modfiyPost(token: String, pid: String, entity: PostUpLoadeEntity): Result {
+        val redisKey = POST_CACHE +":"+DigestUtils.md5DigestAsHex(pid.toByteArray(Charsets.UTF_8))
+        if(redisTemplate.hasKey(redisKey))
+        {
+            val obj = redisTemplate.opsForValue().get(redisKey)
+            val expireTime = redisTemplate.opsForValue().operations.getExpire(redisKey)!!
+            val post = JSON.parseObject(JSON.toJSONString(obj),UsdPost::class.java)
+            post.postContent = entity.connect
+            redisTemplate.opsForValue().set(redisKey,post,expireTime,TimeUnit.SECONDS)
+            AppResourceConfig.forceRefresh("POST",redisKey)
+        }else{
+            val query = KtUpdateWrapper(UsdPost::class.java)
+            query.eq(UsdPost::id,pid).set(UsdPost::postContent,entity.connect)
+            this.baseMapper.update(null,query)
         }
         return Result.ok()
     }

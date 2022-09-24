@@ -1,26 +1,29 @@
 package team.jtq.epi_serve.service.imp
 
+import com.alibaba.excel.EasyExcel
+import com.alibaba.excel.context.AnalysisContext
+import com.alibaba.excel.event.AnalysisEventListener
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.apache.commons.io.FileUtils
+import org.apache.commons.io.IOUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.DigestUtils
+import org.springframework.web.multipart.MultipartFile
 import team.jtq.epi_serve.config.AppResourceConfig
 import team.jtq.epi_serve.config.BeanContext
-import team.jtq.epi_serve.entity.FileDocument
-import team.jtq.epi_serve.entity.UsdRace
-import team.jtq.epi_serve.entity.UsdRaceAnnex
-import team.jtq.epi_serve.entity.UsdUserRace
+import team.jtq.epi_serve.entity.*
+import team.jtq.epi_serve.entity.ao.RaceInfo
+import team.jtq.epi_serve.entity.ao.RaceResults
 import team.jtq.epi_serve.entity.ao.RaceUpLoadEntity
 import team.jtq.epi_serve.entity.ao.ResultStatusCode
 import team.jtq.epi_serve.entity.to.FileChunkInfo
 import team.jtq.epi_serve.entity.to.TFileInfo
-import team.jtq.epi_serve.mapper.UsdRaceAnnexMapper
-import team.jtq.epi_serve.mapper.UsdRaceMapper
-import team.jtq.epi_serve.mapper.UsdUserRaceMapper
+import team.jtq.epi_serve.mapper.*
 import team.jtq.epi_serve.service.MongoService
 import team.jtq.epi_serve.service.RaceService
 import team.jtq.epi_serve.service.TokenService
@@ -33,7 +36,8 @@ import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.*
-import kotlin.collections.ArrayList
+import javax.servlet.http.HttpServletResponse
+
 
 @Service
 class RaceServiceImp : ServiceImpl<UsdRaceMapper, UsdRace>(), RaceService {
@@ -61,6 +65,7 @@ class RaceServiceImp : ServiceImpl<UsdRaceMapper, UsdRace>(), RaceService {
                 .toLocalDateTime()
         instant.raceAddition = entity.raceAddition
         instant.raceDescription = entity.raceDescription
+        instant.raceName = entity.raceName
         val systemTime = LocalDateTime.now()
         if (instant.raceStartTime > systemTime)
             instant.status = -1
@@ -190,18 +195,16 @@ class RaceServiceImp : ServiceImpl<UsdRaceMapper, UsdRace>(), RaceService {
         return Result.ok()
     }
 
-    override fun downloadAnnexs(rid: String, token: String): Result {
-        val annexs = linkService.selectLinkinBeans(
+    override fun downloadAnnexList(rid: String, token: String, pageIndex: String, pageItems: String): Result {
+        val page = Page<UsdRaceAnnex>(pageIndex.toLong(),pageItems.toLong())
+        val annexs = linkService.selectLinkinBeansonPage(
             UsdRaceAnnexMapper::class,
             UsdRaceAnnex::class,
-            listOf(Pair(UsdRaceAnnex::raceId,rid))
+            listOf(Pair(UsdRaceAnnex::raceId,rid)),
+            page
         )?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
-        val res = ArrayList<FileDocument>()
-        annexs.forEach {
-            val file = mongoService.findByID(it.annexId)?:return Result.error(ResultStatusCode.FILE_NOT_FIND)
-            res.add(file)
-        }
-        TODO("Not yet implemented")
+        val res = annexs.records.map { it.annexId }
+        return Result.ok(res)
     }
 
     override fun selectUserHoldRace(token: String): Result {
@@ -218,10 +221,134 @@ class RaceServiceImp : ServiceImpl<UsdRaceMapper, UsdRace>(), RaceService {
         val query = KtQueryWrapper(UsdRace::class.java)
         query.eq(UsdRace::Id,rid)
         val res = this.baseMapper.selectOne(query)
-        if(res.status!=-1)
-            return Result.error("比赛已经开始或结束，无法删除")
-        TODO("Not yet implemented")
+        return if(res.status!=-1)
+            Result.error("比赛已经开始或结束，无法删除")
+        else
+            Result.ok()
     }
 
+    override fun selectRaceInfo(token: String, rid: String): Result {
+        val personNumber = linkService.countLinkBeans(
+            UsdUserRaceMapper::class,
+            UsdUserRace::class,
+            listOf(Pair(UsdUserRace::raceId,rid))
+        )?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        val itemsNumber = linkService.countLinkBeans(
+            UsdRaceAnnexMapper::class,
+            UsdRaceAnnex::class,
+            listOf(Pair(UsdRaceAnnex::raceId,rid))
+        )?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        val raceinfo = RaceInfo(personNumber.toInt(),itemsNumber.toInt())
+        return Result.ok(raceinfo)
+    }
+
+    @Transactional
+    override fun noticeEntrants(token: String, rid: String): Result {
+        val json = tokenService.getUserInfo(token)!!
+        val person = linkService.selectLinkinBeans(
+            UsdUserRaceMapper::class,
+            UsdUserRace::class,
+            listOf(Pair(UsdUserRace::raceId,rid))
+        )?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        val res = linkService.batchSelectLinkBeansNotInList(
+            UsdRaceAnnexMapper::class,
+            UsdRaceAnnex::class,
+            Pair(UsdRaceAnnex::raceId,person.map { it.raceId })
+        )?.map { it.uid }?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        val query = KtQueryWrapper(UsdRace::class.java)
+        query.eq(UsdRace::Id,rid)
+        val race = this.baseMapper.selectOne(query)?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        val notice = UsdNotice::class.java.newInstance()
+        notice.context = race.raceName + "产物提交即将截止，请尽快提交"
+        notice.createTime = LocalDateTime.now()
+        notice.createBy = json["user_id"] as String
+        val mapper = BeanContext.getBeanbyClazz(UsdNoticeMapper::class.java)
+        mapper.insert(notice)
+        for (i in res){
+            val add = linkService.addLinkinBeans(
+                UsdUserRaceMapper::class,
+                UsdUserRace::class,
+                Pair(UsdUserRace::raceId.name,rid),
+                Pair(UsdUserRace::uid.name,json["user_id"] as String)
+            )
+            if (!add)
+                throw RuntimeException("Sql Error")
+        }
+        return Result.ok()
+    }
+
+    override fun downloadAnnex(fid: String, rid: String, token: String, response: HttpServletResponse): Result {
+        val fileDocument = mongoService.findByID(fid)?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        response.contentType = fileDocument.contentType
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileDocument.fileName)
+        response.setHeader("Content-Length",fileDocument.fileSize.toString())
+        return try{
+            val out = response.outputStream
+            IOUtils.copy(fileDocument.content!!.inputStream(),out)
+            Result.ok()
+        }catch (e:Exception) {
+            Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        }
+    }
+
+    override fun getAnnexExcel(rid: String, token: String, response: HttpServletResponse): Result {
+        val res = linkService.selectLinkinBeans(
+            UsdRaceAnnexMapper::class,
+            UsdRaceAnnex::class,
+            listOf(Pair(UsdRaceAnnex::raceId,rid))
+        )?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        val infoList = ArrayList<RaceResults>()
+        res.forEach {
+            infoList.add(RaceResults(it.annexId,null))
+        }
+        response.contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        response.characterEncoding = "utf-8"
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''$rid.xlsx")
+        EasyExcel.write(response.outputStream,RaceResults::class.java).sheet(rid).doWrite(infoList)
+        return Result.ok()
+    }
+
+    @Transactional
+    override fun uploadExcel(rid: String, token: String, file: MultipartFile): Result {
+        val resList = ArrayList<RaceResults>(100)
+        val mapper = BeanContext.getBeanbyClazz(UsdUserAwardsMapper::class.java)
+
+        EasyExcel.read(file.inputStream,RaceResults::class.java, object:AnalysisEventListener<RaceResults>(){
+            val BATCH_COUNT = 100
+
+            override fun invoke(data: RaceResults, context: AnalysisContext) {
+                resList.add(data)
+                if(resList.size>=BATCH_COUNT){
+                    save(resList)
+                    resList.clear()
+                }
+            }
+
+            override fun doAfterAllAnalysed(context: AnalysisContext) {
+                save(resList)
+            }
+
+            private fun save(list:List<RaceResults>){
+                val res = linkService.batchSelectLinkBeansInList(
+                    UsdRaceAnnexMapper::class,
+                    UsdRaceAnnex::class,
+                    Pair(UsdRaceAnnex::annexId,list.map { it.annexId })
+                )?:throw RuntimeException("Sql Error")
+                val obj = UsdUserAwards::class.java
+                val listMap = list.map { it.annexId to it.award }.toMap()
+                res.forEach {
+                    if(listMap.containsKey(it.annexId)){
+                        val award = obj.newInstance()
+                        award.raceId = rid
+                        award.uid = it.uid
+                        award.award = listMap[it.annexId]!!
+                        mapper.insert(award)
+                    }
+                }
+            }
+
+        })
+        return Result.ok()
+    }
 
 }

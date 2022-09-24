@@ -24,5 +24,6 @@ data class UsdRace (
     var raceAddition: String,
     var status: Int,
     var organizer:String,
+    var raceName:String
 )
 

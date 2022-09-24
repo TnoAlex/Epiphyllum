@@ -7,5 +7,6 @@ data class RaceUpLoadEntity(
     val startTime:String,
     val endTime:String,
     val raceDescription:String,
-    var raceAddition: String
+    var raceAddition: String,
+    var raceName:String
 )
