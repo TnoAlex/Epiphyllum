@@ -1419,6 +1419,7 @@
 <script>
 
 import {UploadFilled} from '@element-plus/icons-vue'
+import {ElMessage} from 'element-plus'
 import axios from "axios";
 console.log(UploadFilled)
 const ICON_047 = "047.jpg"
@@ -1455,25 +1456,6 @@ export default {
         time:"",
         name:"",
       },
-      tempPost:{
-        avatarImg:"/047.jpg",
-        name:"冀欢",
-        time:"200/9/24",
-        job:"学生",
-        text:"话题内容",
-        imgList:[],
-        liked:0,
-        comments:1,
-        commentsList:[
-          {
-            avatarImg:"",
-            name:"阿庆",
-            time:"2022/9/24",
-            text:"Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
-          }
-        ]
-
-      },
       postList:[{
         id:"123456",
         avatarImg:"/047.jpg",
@@ -1491,7 +1473,27 @@ export default {
 
         ]
 
-      }]
+      }],
+      tempPost:{
+        id:"123",
+        avatarImg:"/047.jpg",
+        name:"冀欢",
+        time:"200/9/24",
+        job:"学生",
+        text:"话题内容",
+        imgList:[],
+        liked:0,
+        comments:1,
+        commentsList:[
+          {
+            avatarImg:"/047.jpg",
+            name:"阿庆",
+            time:"2022/9/24",
+            text:"Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
+          }
+        ]
+
+      },
     }
   },
   created()
@@ -1550,19 +1552,19 @@ export default {
     },
     upload() {
       console.log(this.myUpFileList)
+      let _this = this
       let imageArrayList = []
       for(let i = 0;i<this.myUpFileList.length;i++)
       {
-
         let reader = new FileReader()
         reader.readAsDataURL(this.myUpFileList[i].imageRaw)
         reader.onload=function ()
         {
-          this.tempPost.imgList.push(reader.result)
           imageArrayList.push({"image":reader.result})
+          _this.tempPost.imgList.push(reader.result)
         }
+
       }
-      console.log(imageArrayList)
       axios.request({
         method: "post", // 请求方式
         url: 'https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15',
@@ -1629,22 +1631,25 @@ export default {
     },
     loadMoreComment(index)
     {
-      //发出请求
+      //发出请求，判断请求到的数量
+      ElMessage({
+        message: '没有更多评论啦~',
+        type: 'success',
+      })
+      //将请求到的评论赋值
       let getCommentList = [{
         avatarImg:"/031.jpg",
         name:"阿庆",
         time:"2022/9/24",
         text:"Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
-      },
-        {
-          avatarImg:"/031.jpg",
-          name:"阿庆",
-          time:"2022/9/24",
-          text:"Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
-        }]
-      //判断是否还有多于的页数，若是没有则直接变为已经到底了
+      }]
+      //将请求到的评论拼接
       this.postList[index].commentsList = this.postList[index].commentsList.concat(getCommentList);
-      alert("没有 评论啦")
+
+
+
+
+
     },
     getNowDate()
     {

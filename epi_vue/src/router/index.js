@@ -50,7 +50,11 @@ const router = createRouter({
                 name:"tn",
                 component:()=>import('@/components/notification/tn')
             },
-
+            {
+                path:'/img',
+                name:"tn",
+                component:()=>import('@/components/blog/imgTest')
+            }
 
 
 
