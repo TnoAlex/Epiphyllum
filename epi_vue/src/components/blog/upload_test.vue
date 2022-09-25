@@ -169,25 +169,13 @@ export default {
           this.myDeleteFileList.push(this.myUpFileList[i])
           console.log("查询到相同UID")
           this.myUpFileList.splice(i,1);
-
         }
       }
-
-
     },
-    handleDownload(file) {
-      console.log(file)
-    },
-    handlePictureCardPreview(file) {
-      console.log(file)
-    },
-    handleRemove(file) {
-      console.log(file)
-    }
-
 
   },
-  data() {
+  data()
+  {
     return {
       myUpFileList: [],
       myDeleteFileList:[],
@@ -196,7 +184,6 @@ export default {
       disabled: false,
     }
   }
-
 }
 
 </script>

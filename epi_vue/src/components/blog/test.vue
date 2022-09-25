@@ -28,12 +28,6 @@ export default {
 </script>
 
 <style scoped>
-/*.img{*/
-/*  background-position: center left;*/
-/*  background-size: cover;*/
-/*  width: 200px;*/
-/*  height: 200px;*/
-/*}*/
 @import url(@/css/font.css);
 @import url(@/css/all.min.css);
 @import url(@/css/style.css);

@@ -1,10 +1,22 @@
 <template>
-  <link rel="shortcut icon" href="assets/images/favicon.ico"><!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <div>
-    <li class="nav-item ms-2"><a class="nav-link icon-md btn btn-light p-0" href="messaging.html"><i
-        class="bi bi-chat-left-text-fill fs-6"></i></a></li>
-  </div>
+<!--  <div class="dropdown">-->
+  <span>
+    <a href="#"
+       class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardNotiAction"
+       data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-three-dots"></i>
+    </a>
+    <!-- Card share action dropdown menu -->
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardNotiAction">
+      <li @click="markdownAll">
+        <a class="dropdown-item" href="###"><i class="bi bi-check-lg fa-fw pe-2">
+        </i>全部标记为阅读</a>
+      </li>
+    </ul>
+  </span>
+
+  <input value="dddd">
+<!--  </div>-->
 </template>
 
 <script>

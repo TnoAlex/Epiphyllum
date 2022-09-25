@@ -272,7 +272,7 @@
     <!-- Container START -->
     <div class="container">
       <div class="row g-4">
-        <!-- Sidenav START -->
+
         <div class="col-lg-3">
           <!-- Advanced filter responsive toggler START -->
           <div class="d-flex align-items-center d-lg-none">
@@ -362,9 +362,12 @@
                                                                      alt=""><span>群组 </span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="notifications.html"> <img class="me-2 h-20px fa-fw"
-                                                                            src="../../img/notification-outlined-filled.svg"
-                                                                            alt=""><span>通知 </span></a>
+                        <router-link to="/notification" class="nav-link">
+                          <img class="me-2 h-20px fa-fw"
+                               src="../../img/notification-outlined-filled.svg"
+                               alt=""><span>通知 </span>
+                        </router-link>
+
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="settings.html"> <img class="me-2 h-20px fa-fw"
@@ -411,9 +414,7 @@
           </nav>
           <!-- Navbar END-->
         </div>
-        <!-- Sidenav END -->
 
-        <!-- Main content START -->
         <div class="col-md-8 col-lg-6 vstack gap-4">
           <!-- Story START -->
 
@@ -439,15 +440,7 @@
                   <i class="bi bi-image-fill text-success pe-2"></i>照片
                 </a>
               </li>
-              <!--              <li class="nav-item">-->
-              <!--                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"-->
-              <!--                   data-bs-target="#feedActionVideo"> <i class="bi bi-camera-reels-fill text-info pe-2"></i>视频</a>-->
-              <!--              </li>-->
-              <!--              <li class="nav-item">-->
-              <!--                <a href="#" class="nav-link bg-light py-1 px-2 mb-0" data-bs-toggle="modal"-->
-              <!--                   data-bs-target="#modalCreateEvents"> <i class="bi bi-calendar2-event-fill text-danger pe-2"></i>事件-->
-              <!--                </a>-->
-              <!--              </li>-->
+
               <li class="nav-item">
                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
                    data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>文字</a>
@@ -481,161 +474,176 @@
           <!-- Share feed END -->
 
           <!-- Card feed item START -->
-          <div class="card">
-            <!-- Card header START -->
-            <div class="card-header border-0 pb-0">
-              <div class="d-flex align-items-center justify-content-between">
-                <div class="d-flex align-items-center">
-                  <!-- Avatar -->
-                  <div class="avatar avatar-story me-2">
-                    <a href="#!"> <img class="avatar-img rounded-circle" src="../../img/04.jpg" alt=""> </a>
-                  </div>
-                  <!-- Info -->
-                  <div>
-                    <div class="nav nav-divider">
-                      <h6 class="nav-item card-title mb-0"><a href="#!"> 冀欢 </a></h6>
-                      <span class="nav-item small"> 2hr</span>
-                    </div>
-                    <p class="mb-0 small">职业</p>
-                  </div>
-                </div>
-                <!-- Card feed action dropdown START -->
-                <div class="dropdown">
-                  <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction"
-                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-three-dots"></i>
-                  </a>
-                  <!-- Card feed action dropdown menu -->
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                    <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                    <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori
-                      ferguson </a></li>
-                    <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-                    <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
-                  </ul>
-                </div>
-                <!-- Card feed action dropdown END -->
-              </div>
-            </div>
-            <!-- Card header END -->
-            <!-- Card body START -->
-            <div class="card-body">
-              <p>话题内容</p><!-- Card img --><img class="card-img" src="../../img/017.jpg" alt="Post">
-              <!-- Feed react START -->
-              <ul class="nav nav-stack py-3 small">
-                <li class="nav-item"><a class="nav-link active" href="#!"><i
-                    class="bi bi-hand-thumbs-up-fill pe-1"></i>点赞(56)</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!"><i class="bi bi-chat-fill pe-1"></i>评论(12)</a>
-                </li><!-- Card share action START -->
-                <li class="nav-item dropdown ms-sm-auto"><a class="nav-link mb-0" href="#" id="cardShareAction"
-                                                            data-bs-toggle="dropdown" aria-expanded="false"><i
-                    class="bi bi-reply-fill flip-horizontal ps-1"></i>分享(3) </a>
-                  <!-- Card share action dropdown menu -->
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct
-                      Message</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a>
-                    </li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a>
-                    </li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-share fa-fw pe-2"></i>Share post via …</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News
-                      Feed</a></li>
-                  </ul>
-                </li><!-- Card share action END -->
-              </ul><!-- Feed react END -->
-              <!-- Add comment -->
-              <div class="d-flex mb-3">
-                <!-- Avatar -->
-                <div class="avatar avatar-xs me-2"><a href="#!"><img class="avatar-img rounded-circle"
-                                                                     src="../../img/12.jpg" alt=""></a></div>
-                <!-- Comment box -->
-                <form class="w-100"><textarea data-autoresize="" class="form-control pe-4 bg-light" rows="1"
-                                              placeholder="发表评论"></textarea></form>
-              </div><!-- Comment wrap START -->
-              <ul class="comment-wrap list-unstyled">
-                <!-- Comment item START -->
-                <li class="comment-item">
-                  <div class="d-flex position-relative">
+          <div v-for="(item,index) in postList" :key="index">
+            <div class="card">
+              <!-- Card header START -->
+              <div class="card-header border-0 pb-0">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex align-items-center">
                     <!-- Avatar -->
-                    <div class="avatar avatar-xs"><a href="#!"><img class="avatar-img rounded-circle"
-                                                                    src="../../img/05.jpg" alt=""></a></div>
-                    <div class="ms-2">
-                      <!-- Comment by -->
-                      <div class="bg-light rounded-start-top-0 p-3 rounded">
-                        <div class="d-flex justify-content-between">
-                          <h6 class="mb-1"><a href="#!">阿庆 </a></h6><small class="ms-2">5小时</small>
-                        </div>
-                        <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way
-                          thoroughly unaffected projection.</p>
-                      </div><!-- Comment react -->
-                      <ul class="nav nav-divider py-2 small">
-                        <li class="nav-item"><a class="nav-link" href="#!">点赞(3)</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">回复</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">查看更多回复</a></li>
-                      </ul>
+                    <div class="avatar avatar-story me-2">
+                      <a href="#!"> <img class="avatar-img rounded-circle" :src="item.avatarImg" alt=""> </a>
                     </div>
-                  </div><!-- Comment item nested START -->
-                  <ul class="comment-item-nested list-unstyled">
-
-
-                    <!--                    回复列表-->
-                    <!-- Comment item START -->
-                    <li class="comment-item">
-                      <div class="d-flex">
-                        <!-- Avatar -->
-                        <div class="avatar avatar-xs"><a href="#!"><img class="avatar-img rounded-circle"
-                                                                        src="../../img/06.jpg" alt=""></a></div>
-                        <!-- Comment by -->
-                        <div class="ms-2">
-                          <div class="bg-light p-3 rounded">
-                            <div class="d-flex justify-content-between">
-                              <h6 class="mb-1"><a href="#!">Lori Stevens </a></h6><small class="ms-2">2hr</small>
-                            </div>
-                            <p class="small mb-0">See resolved goodness felicity shy civility domestic had but Drawings
-                              offended yet answered Jennings perceive.</p>
-                          </div><!-- Comment react -->
-                          <ul class="nav nav-divider py-2 small">
-                            <li class="nav-item"><a class="nav-link" href="#!">点赞(5)</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!">回复</a></li>
-                          </ul>
-                        </div>
+                    <!-- Info -->
+                    <div>
+                      <div class="nav nav-divider">
+                        <h6 class="nav-item card-title mb-0"><a href="#!"> {{ item.name}} </a></h6>
+                        <span class="nav-item small">{{item.time}}</span>
                       </div>
-                    </li><!-- Comment item END -->
-                    <!-- Comment item START -->
+<!--                      {{item.job}}-->
+                      <p class="mb-0 small">{{item.job}}</p>
+                    </div>
+                  </div>
+                  <!-- Card feed action dropdown START -->
+                  <div class="dropdown">
+                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-three-dots"></i>
+                    </a>
+                    <!-- Card feed action dropdown menu -->
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+                      <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                      <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori
+                        ferguson </a></li>
+                      <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                      <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                    </ul>
+                  </div>
+                  <!-- Card feed action dropdown END -->
+                </div>
+              </div>
+              <!-- Card header END -->
+              <!-- Card body START -->
+              <div class="card-body" style="padding: 5px">
+                <md-editor-v3   previewOnly="true" v-model="item.text"/>
+<!--                <p>{{ item.text }}</p>&lt;!&ndash; Card img &ndash;&gt;-->
 
 
-                  </ul><!-- Load more replies --><a href="#!" role="button"
-                                                    class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5"
-                                                    data-bs-toggle="button" aria-pressed="true">
-                  <div class="spinner-dots me-2"><span class="spinner-dot"></span><span
-                      class="spinner-dot"></span><span class="spinner-dot"></span></div>
-                  查看更多回复
-                </a><!-- Comment item nested END -->
-                </li><!-- Comment item END -->
-                <!-- Comment item START -->
+<!--                图片列表-->
+                <div v-for="(imgSrc,imgIndex) in item.imgList" :key="imgIndex" >
+                  <img style="height: 200px" class="card-img" :src="imgSrc" alt="Post">
+                </div>
+                <!-- Feed react START -->
+                <ul class="nav nav-stack py-3 small">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#!">
+                      <i class="bi bi-hand-thumbs-up-fill pe-1">
+                      </i>
 
+                      点赞({{item.liked}})
+                    </a>
+                  </li>
+                  <li class="nav-item" @click="transCommentFold">
+                    <a class="" href="#!">
+                      <i class="bi bi-chat-fill pe-1"></i>{{commentIsFold ? `${item.comments}条评论`:'收起评论'}}</a>
+                  </li>
+                  <li class="nav-item dropdown ms-sm-auto">
 
-              </ul><!-- Comment wrap END -->
-            </div><!-- Card body END -->
-            <!-- Card footer START -->
-            <div class="card-footer border-0 pt-0">
-              <!-- Load more comments --><a href="#!" role="button"
-                                            class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center"
-                                            data-bs-toggle="button" aria-pressed="true">
-              <div class="spinner-dots me-2"><span class="spinner-dot"></span><span class="spinner-dot"></span><span
-                  class="spinner-dot"></span></div>
-              查看更多评论
-            </a></div><!-- Card footer END -->
-          </div><!-- Card feed item END -->
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct
+                        Message</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark </a>
+                      </li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a>
+                      </li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-share fa-fw pe-2"></i>Share post via …</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News
+                        Feed</a></li>
+                    </ul>
+                  </li><!-- Card share action END -->
+                </ul><!-- Feed react END -->
+                <!-- Add comment -->
+
+                <ul v-show="!commentIsFold" class="comment-wrap list-unstyled" >
+                  <!-- Comment item START -->
+                  <div class="d-flex mb-3">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-xs me-2" >
+                      <a href="###">
+                        <img class="avatar-img rounded-circle" :src="PersonalInformation.avatarImg" alt="">
+                      </a>
+                    </div>
+                    <!-- Comment box -->
+                    <form class="w-100">
+                      <el-input
+                          v-model="addComment.commentText"
+                          autosize
+                          type="textarea"
+                          placeholder="Please input"
+                      />
+                      <div style="text-align: right">
+                        <el-button @click="commentCommit(index)" style="margin-top: 5px;" type="primary" size="small" round>提交</el-button>
+                      </div>
+
+                    </form>
+                  </div><!-- Comment wrap START -->
+                  <li class="comment-item" v-for="(com,comIndex) in item.commentsList" :key="comIndex">
+
+                    <div class="d-flex position-relative">
+                      <!-- Avatar -->
+                      <div class="avatar avatar-xs"><a href="#!"><img class="avatar-img rounded-circle"
+                                                                      :src="com.avatarImg" alt=""></a></div>
+                      <div class="ms-2">
+                        <!-- Comment by -->
+                        <div class="bg-light rounded-start-top-0 p-3 rounded" style="padding: 8px">
+
+                          <div class="d-flex justify-content-between" style="display: flex;
+                              flex-direction: row;
+                              align-items: center;">
+                            <h6  style="margin: 0px;display: inline-block; ">
+                              <a  href="#!">{{com.name}}
+                              </a>
+                            </h6>
+
+                            <small style="float: right" class="ms-2">{{com.time}}
+                              <span>
+                                <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardNotiAction"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                   <i class="bi bi-three-dots"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardNotiAction">
+                                  <li @click="commentDelete(index,comIndex)">
+                                    <a class="dropdown-item" href="###"><i class="bi bi-check-lg fa-fw pe-2">
+                                    </i>刪除评论</a>
+                                  </li>
+                                </ul>
+                              </span>
+                            </small>
+                          </div>
+
+                          <p class="small mb-0">{{com.text}}
+                          </p>
+
+                        </div><!-- Comment react -->
+                        <ul class="nav nav-divider py-2 small">
+<!--                          <li class="nav-item"><a class="nav-link" href="#!">点赞(3)</a></li>-->
+<!--                          <li class="nav-item"><a class="nav-link" href="#!">回复</a></li>-->
+<!--                          <li class="nav-item"><a class="nav-link" href="#!">查看更多回复</a></li>-->
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <div  style="padding: 5px; display: flex;
+                              flex-direction: row;
+                              align-items: center; ">
+                    <el-button style="display: inline-block" @click="loadMoreComment(index)" size="small" type="primary" round>点击加载更多评论</el-button>
+                  </div>
+                </ul>
+
+              </div><!-- Card body END -->
+              <!-- Card footer START -->
+
+            </div>
+          </div>
+
 
 
           <!-- Load more button START -->
@@ -651,9 +659,7 @@
           <!-- Load more button END -->
 
         </div>
-        <!-- Main content END -->
 
-        <!-- Right sidebar START -->
         <div class="col-lg-3">
           <div class="row g-4">
             <!-- Card follow START -->
@@ -746,9 +752,8 @@
             <!-- Card News END -->
           </div>
         </div>
-        <!-- Right sidebar END -->
 
-      </div> <!-- Row END -->
+      </div>
     </div>
     <!-- Container END -->
 
@@ -1301,116 +1306,7 @@
     </div><!-- Chat END -->
   </div><!-- Main Chat END -->
   <!-- Modal create Feed START -->
-
-
   Modal create Feed photo START
-
-
-  <!-- Modal create Feed photo END -->
-  <!-- Modal create Feed video START -->
-  <!--  <div class="modal fade" id="feedActionVideo" tabindex="-1" aria-labelledby="feedActionVideoLabel" aria-hidden="true">-->
-  <!--    <div class="modal-dialog modal-dialog-centered">-->
-  <!--      <div class="modal-content">-->
-  <!--        &lt;!&ndash; Modal feed header START &ndash;&gt;-->
-  <!--        <div class="modal-header">-->
-  <!--          <h5 class="modal-title" id="feedActionVideoLabel">Add post video</h5><button type="button" class="btn-close"-->
-  <!--                                                                                       data-bs-dismiss="modal" aria-label="Close"></button>-->
-  <!--        </div>&lt;!&ndash; Modal feed header END &ndash;&gt;-->
-  <!--        &lt;!&ndash; Modal feed body START &ndash;&gt;-->
-  <!--        <div class="modal-body">-->
-  <!--          &lt;!&ndash; Add Feed &ndash;&gt;-->
-  <!--          <div class="d-flex mb-3">-->
-  <!--            &lt;!&ndash; Avatar &ndash;&gt;-->
-  <!--            <div class="avatar avatar-xs me-2"><img class="avatar-img rounded-circle" src="../../img/03.jpg" alt="">-->
-  <!--            </div>&lt;!&ndash; Feed box &ndash;&gt;-->
-  <!--            <form class="w-100"><textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2"-->
-  <!--                                          placeholder="Share your thoughts..."></textarea></form>-->
-  <!--          </div>&lt;!&ndash; Dropzone photo START &ndash;&gt;-->
-  <!--          <div><label class="form-label">Upload attachment</label>-->
-  <!--            <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>-->
-  <!--              <div class="dz-message"><i class="bi bi-camera-reels display-3"></i>-->
-  <!--                <p>Drag here or click to upload video.</p>-->
-  <!--              </div>-->
-  <!--            </div>-->
-  <!--          </div>&lt;!&ndash; Dropzone photo END &ndash;&gt;-->
-  <!--        </div>&lt;!&ndash; Modal feed body END &ndash;&gt;-->
-  <!--        &lt;!&ndash; Modal feed footer &ndash;&gt;-->
-  <!--        <div class="modal-footer">-->
-  <!--          &lt;!&ndash; Button &ndash;&gt;<button type="button" class="btn btn-danger-soft me-2"><i-->
-  <!--            class="bi bi-camera-video-fill pe-1"></i>Live video</button><button type="button"-->
-  <!--                                                                                class="btn btn-success-soft">Post</button></div>&lt;!&ndash; Modal feed footer &ndash;&gt;-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>&lt;!&ndash; Modal create Feed video END &ndash;&gt;-->
-  <!-- Modal create events START -->
-  <!--  <div class="modal fade" id="modalCreateEvents" tabindex="-1" aria-labelledby="modalLabelCreateAlbum"-->
-  <!--       aria-hidden="true">-->
-  <!--    <div class="modal-dialog modal-dialog-centered">-->
-  <!--      <div class="modal-content">-->
-  <!--        &lt;!&ndash; Modal feed header START &ndash;&gt;-->
-  <!--        <div class="modal-header">-->
-  <!--          <h5 class="modal-title" id="modalLabelCreateAlbum">Create event</h5><button type="button" class="btn-close"-->
-  <!--                                                                                      data-bs-dismiss="modal" aria-label="Close"></button>-->
-  <!--        </div>&lt;!&ndash; Modal feed header END &ndash;&gt;-->
-  <!--        &lt;!&ndash; Modal feed body START &ndash;&gt;-->
-  <!--        <div class="modal-body">-->
-  <!--          &lt;!&ndash; Form START &ndash;&gt;-->
-  <!--          <form class="row g-4">-->
-  <!--            &lt;!&ndash; Title &ndash;&gt;-->
-  <!--            <div class="col-12"><label class="form-label">Title</label><input type="email" class="form-control"-->
-  <!--                                                                              placeholder="Event name here"></div>&lt;!&ndash; Description &ndash;&gt;-->
-  <!--            <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" rows="2"-->
-  <!--                                                                                       placeholder="Ex: topics, schedule, etc."></textarea></div>&lt;!&ndash; Date &ndash;&gt;-->
-  <!--            <div class="col-sm-4"><label class="form-label">Date</label><input type="text"-->
-  <!--                                                                               class="form-control flatpickr" placeholder="Select date"></div>&lt;!&ndash; Time &ndash;&gt;-->
-  <!--            <div class="col-sm-4"><label class="form-label">Time</label><input type="text"-->
-  <!--                                                                               class="form-control flatpickr" data-enabletime="true" data-nocalendar="true" placeholder="Select time">-->
-  <!--            </div>&lt;!&ndash; Duration &ndash;&gt;-->
-  <!--            <div class="col-sm-4"><label class="form-label">Duration</label><input type="email" class="form-control"-->
-  <!--                                                                                   placeholder="1hr 23m"></div>&lt;!&ndash; Location &ndash;&gt;-->
-  <!--            <div class="col-12"><label class="form-label">Location</label><input type="email" class="form-control"-->
-  <!--                                                                                 placeholder="Logansport, IN 46947"></div>&lt;!&ndash; Add guests &ndash;&gt;-->
-  <!--            <div class="col-12"><label class="form-label">Add guests</label><input type="email" class="form-control"-->
-  <!--                                                                                   placeholder="Guest email"></div>&lt;!&ndash; Avatar group START &ndash;&gt;-->
-  <!--            <div class="col-12 mt-3">-->
-  <!--              <ul class="avatar-group list-unstyled align-items-center mb-0">-->
-  <!--                <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="../../img/01.jpg"-->
-  <!--                                                  alt="avatar"></li>-->
-  <!--                <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="../../img/02.jpg"-->
-  <!--                                                  alt="avatar"></li>-->
-  <!--                <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="../../img/03.jpg"-->
-  <!--                                                  alt="avatar"></li>-->
-  <!--                <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="../../img/04.jpg"-->
-  <!--                                                  alt="avatar"></li>-->
-  <!--                <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="../../img/05.jpg"-->
-  <!--                                                  alt="avatar"></li>-->
-  <!--                <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="../../img/06.jpg"-->
-  <!--                                                  alt="avatar"></li>-->
-  <!--                <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="../../img/07.jpg"-->
-  <!--                                                  alt="avatar"></li>-->
-  <!--                <li class="ms-3"><small>+50 </small></li>-->
-  <!--              </ul>-->
-  <!--            </div>&lt;!&ndash; Upload Photos or Videos &ndash;&gt;-->
-  <!--            &lt;!&ndash; Dropzone photo START &ndash;&gt;-->
-  <!--            <div><label class="form-label">Upload attachment</label>-->
-  <!--              <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>-->
-  <!--                <div class="dz-message"><i class="bi bi-file-earmark-text display-3"></i>-->
-  <!--                  <p>Drop presentation and document here or click to upload.</p>-->
-  <!--                </div>-->
-  <!--              </div>-->
-  <!--            </div>&lt;!&ndash; Dropzone photo END &ndash;&gt;-->
-  <!--          </form>&lt;!&ndash; Form END &ndash;&gt;-->
-  <!--        </div>&lt;!&ndash; Modal feed body END &ndash;&gt;-->
-  <!--        &lt;!&ndash; Modal footer &ndash;&gt;-->
-  <!--        &lt;!&ndash; Button &ndash;&gt;-->
-  <!--        <div class="modal-footer"><button type="button" class="btn btn-danger-soft me-2"-->
-  <!--                                          data-bs-dismiss="modal">Cancel</button><button type="button" class="btn btn-success-soft">Create-->
-  <!--          now</button></div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>&lt;!&ndash; Modal create events END &ndash;&gt;-->
-  <!-- ======================= JS libraries,plugins and custom scripts -->
-  <!-- Bootstrap JS -->
 
   </body>
 
@@ -1429,6 +1325,8 @@
 
           </button>
         </div><!-- Modal feed header END -->
+
+
         <!-- Modal feed body START -->
         <div class="modal-body">
           <!-- Add Feed -->
@@ -1436,38 +1334,78 @@
             <!-- Avatar -->
             <div class="avatar avatar-xs me-2"><img class="avatar-img rounded-circle" src="../../img/03.jpg" alt="">
             </div><!-- Feed box -->
-            <form class="w-100"><textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2"
-                                          placeholder="分享你的想法"></textarea></form>
+            <form class="w-100">
+              <textarea v-model="tempPost.text" class="form-control pe-4 fs-3 lh-1 border-0" rows="10"
+                                          placeholder="分享你的想法">
+
+              </textarea>
+            </form>
 
 
           </div><!-- Dropzone photo START -->
-          <form>
-            <label class="form-label">上传附件</label>
 
-            <div class="dropzone" >
-              <div class="dz-message">
-                <i class="bi bi-images display-3"></i>
-                <p>测试上传</p>
-              </div>
+          <el-upload
+              multiple
+              class="upload-demo"
+              drag
+              action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d51"
+              :show-file-list="false"
+              :on-success="(response, uploadFile, uploadFiles) => myUploadSuccess(response,uploadFile,uploadFiles)"
+              :on-change="(uploadFile, uploadFiles) =>myUploadChange(uploadFile,uploadFiles)"
+              :file-list="myUpFileList"
+              :on-preview="(uploadFile) => myPreview(uploadFile)"
+              :auto-upload="false"
+          >
+            <el-icon class="el-icon--upload">
+              <upload-filled/>
+            </el-icon>
+            <div class="el-upload__text">
+              Drop file here or <em>click to upload</em>
             </div>
-
-
-            <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-              <div class="dz-message"><i class="bi bi-images display-3"></i>
-                <p>拖拽或者点击上传图片</p>
+            <template #tip>
+              <div class="el-upload__tip">
+                jpg/png files with a size less than 500kb
               </div>
-            </div>
+            </template>
+          </el-upload>
+          <ul id="images" class="el-upload-list el-upload-list--picture-card"  v-for="imgItem in myUpFileList" :key="imgItem.uid">
+
+            <li class="el-upload-list__item is-success" tabindex="0" >
+
+              <img  class="el-upload-list__item-thumbnail" :src="imgItem.imgSrc"
+                    alt=""><!--v-if--><label
+                class="el-upload-list__item-status-label"><i class="el-icon el-icon--upload-success el-icon--check">
+              <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor"
+                      d="M406.656 706.944 195.84 496.256a32 32 0 1 0-45.248 45.248l256 256 512-512a32 32 0 0 0-45.248-45.248L406.592 706.944z"></path>
+              </svg>
+            </i></label>
+          <!-- TODO: Fix the incorrect navigation interaction -->
+              <span class="el-upload-list__item-actions">
+               <span
+                   class="el-upload-list__item-delete" @click="imageRemove(imgItem.uid)">
+                 <i class="el-icon el-icon--delete">
+                   <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path
+                       fill="currentColor"
+                       d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"></path></svg></i>
+               </span>
+          </span>
+            </li>
+
+          </ul>
 
 
-          </form><!-- Dropzone photo END -->
         </div><!-- Modal feed body END -->
+
+
+
         <!-- Modal feed footer -->
         <div class="modal-footer ">
           <!-- Button -->
           <button type="button" class="btn btn-danger-soft me-2"
-                  data-bs-dismiss="modal">取消
+                  data-bs-dismiss="modal" @click="modalCancel">关闭
           </button>
-          <button type="button" class="btn btn-success-soft">发送</button>
+          <button type="button" class="btn btn-success-soft"  @click="upload">发送</button>
         </div><!-- Modal feed footer -->
       </div>
 
@@ -1475,250 +1413,19 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalCreateFeed" tabindex="-1" aria-labelledby="modalLabelCreateFeed" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <!-- Modal feed header START -->
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalLabelCreateFeed">Create post</h5>
-          <button type="button" class="btn-close"
-                  data-bs-dismiss="modal" aria-label="Close"></button>
-        </div><!-- Modal feed header END -->
-        <!-- Modal feed body START -->
-        <div class="modal-body">
-          <!-- Add Feed -->
-          <div class="d-flex mb-3">
-            <!-- Avatar -->
-            <div class="avatar avatar-xs me-2"><img class="avatar-img rounded-circle" src="../../img/03.jpg" alt="">
-            </div><!-- Feed box -->
-            <form class="w-100"><textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4"
-                                          placeholder="Share your thoughts..." autofocus=""></textarea></form>
-          </div><!-- Feed rect START -->
-          <div class="hstack gap-2"><a class="icon-md bg-success bg-opacity-10 text-success rounded-circle" href="#"
-                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Photo"><i
-              class="bi bi-image-fill"></i></a><a
-              class="icon-md bg-info bg-opacity-10 text-info rounded-circle" href="#" data-bs-toggle="tooltip"
-              data-bs-placement="top" title="Video"><i class="bi bi-camera-reels-fill"></i></a><a
-              class="icon-md bg-danger bg-opacity-10 text-danger rounded-circle" href="#" data-bs-toggle="tooltip"
-              data-bs-placement="top" title="Events"><i class="bi bi-calendar2-event-fill"></i></a><a
-              class="icon-md bg-warning bg-opacity-10 text-warning rounded-circle" href="#" data-bs-toggle="tooltip"
-              data-bs-placement="top" title="Feeling/Activity"><i class="bi bi-emoji-smile-fill"></i></a><a
-              class="icon-md bg-light text-secondary rounded-circle" href="#" data-bs-toggle="tooltip"
-              data-bs-placement="top" title="Check in"><i class="bi bi-geo-alt-fill"></i></a><a
-              class="icon-md bg-primary bg-opacity-10 text-primary rounded-circle" href="#" data-bs-toggle="tooltip"
-              data-bs-placement="top" title="Tag people on top"><i class="bi bi-tag-fill"></i></a></div>
-          <!-- Feed rect END -->
-        </div><!-- Modal feed body END -->
-        <!-- Modal feed footer -->
-        <div class="modal-footer row justify-content-between">
-          <!-- Select -->
-          <div class="col-lg-3"><select class="form-select js-choice choice-select-text-none" data-position="top"
-                                        data-search-enabled="false">
-            <option value="PB">Public</option>
-            <option value="PV">Friends</option>
-            <option value="PV">Only me</option>
-            <option value="PV">Custom</option>
-          </select><!-- Button -->
-          </div>
-          <div class="col-lg-8 text-sm-end">
-            <button type="button" class="btn btn-danger-soft me-2"><i
-                class="bi bi-camera-video-fill pe-1"></i>Live video
-            </button>
-            <button type="button"
-                    class="btn btn-success-soft">Post
-            </button>
-          </div>
-        </div><!-- Modal feed footer -->
-      </div>
-    </div>
-  </div><!-- Modal create feed END -->
 
 
 </template>
 <script>
-import 'dropzone/dist/dropzone'
-import Dropzone from 'dropzone/dist/dropzone-min'
 
-!function () {
-
-  window.Element.prototype.removeClass = function () {
-    let className = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "",
-        selectors = this;
-    if (!(selectors instanceof HTMLElement) && selectors !== null) {
-      selectors = document.querySelector(selectors);
-    }
-    if (this.isVariableDefined(selectors) && className) {
-      selectors.classList.remove(className);
-    }
-    return this;
-  }
-  window.Element.prototype.addClass = function () {
-    let className = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "",
-        selectors = this;
-    if (!(selectors instanceof HTMLElement) && selectors !== null) {
-      selectors = document.querySelector(selectors);
-    }
-    if (this.isVariableDefined(selectors) && className) {
-      selectors.classList.add(className);
-    }
-    return this;
-  }
-  window.Element.prototype.toggleClass = function () {
-    let className = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "",
-        selectors = this;
-    if (!(selectors instanceof HTMLElement) && selectors !== null) {
-      selectors = document.querySelector(selectors);
-    }
-    if (this.isVariableDefined(selectors) && className) {
-      selectors.classList.toggle(className);
-    }
-    return this;
-  }
-  window.Element.prototype.isVariableDefined = function () {
-    return !!this && typeof (this) != 'undefined' && this != null;
-  }
-}();
-
-
-let e =
-    {
-      init: function () {
-        e.DropZone()
-      },
-      isVariableDefined: function (el) {
-        return typeof !!el && (el) != 'undefined' && el != null;
-      },
-      on: function (selectors, type, listener) {
-        document.addEventListener("DOMContentLoaded", () => {
-          if (!(selectors instanceof HTMLElement) && selectors !== null) {
-            selectors = document.querySelector(selectors);
-          }
-          selectors.addEventListener(type, listener);
-        });
-      },
-      removeClass: function (selectors, className) {
-        if (!(selectors instanceof HTMLElement) && selectors !== null) {
-          selectors = document.querySelector(selectors);
-        }
-        if (e.isVariableDefined(selectors)) {
-          selectors.removeClass(className);
-        }
-      },
-      toggleClass: function (selectors, className) {
-        if (!(selectors instanceof HTMLElement) && selectors !== null) {
-          selectors = document.querySelector(selectors);
-        }
-        if (e.isVariableDefined(selectors)) {
-          selectors.toggleClass(className);
-        }
-      },
-      addClass: function (selectors, className) {
-        if (!(selectors instanceof HTMLElement) && selectors !== null) {
-          selectors = document.querySelector(selectors);
-        }
-        if (e.isVariableDefined(selectors)) {
-          selectors.addClass(className);
-        }
-      },
-      select: function (selectors) {
-        return document.querySelector(selectors);
-      },
-      selectAll: function (selectors) {
-        return document.querySelectorAll(selectors);
-      },
-      DropZone: function () {
-        if (e.isVariableDefined(e.select("[data-dropzone]"))) {
-          window.Dropzone.autoDiscover = false;
-
-          // 1. Default Dropzone Initialization
-          if (e.isVariableDefined(e.select(".dropzone-default"))) {
-            e.selectAll(".dropzone-default").forEach((e => {
-              const a = e.dataset.dropzone ? JSON.parse(e.dataset.dropzone) : {},
-                  b = {
-                    url: '/src/image', // Change this URL to your actual image upload code
-                    // Fake the file upload, since GitHub does not handle file uploads
-                    // and returns a 404
-                    // https://docs.dropzone.dev/getting-started/setup/server-side-implementation
-                    init: function() {
-                      this.on('error', function(file) {
-                        if (file.accepted) {
-                          let mypreview = document.getElementsByClassName('dz-error');
-                          mypreview = mypreview[mypreview.length - 1];
-                          mypreview.classList.toggle('dz-error');
-                          mypreview.classList.toggle('dz-success');
-                        }
-                      });
-                    }
-                  },
-                  c = {
-                    ...b,
-                    ...a
-                  };
-              new Dropzone(e, c);
-            }));
-          }
-
-          // 2. Custom cover and list previews Dropzone Initialization
-          if (e.isVariableDefined(e.select(".dropzone-custom"))) {
-            e.selectAll(".dropzone-custom").forEach((d => {
-              const j = d.dataset.dropzone ? JSON.parse(d.dataset.dropzone) : {},
-                  o = {
-                    addRemoveLinks: true,
-                    previewsContainer: d.querySelector(".dz-preview"),
-                    previewTemplate: d.querySelector(".dz-preview").innerHTML,
-                    url: '/upload', // Change this URL to your actual image upload code
-                    // Now fake the file upload, since GitHub does not handle file uploads
-                    // and returns a 404
-                    // https://docs.dropzone.dev/getting-started/setup/server-side-implementation
-                    init: function() {
-                      this.on('error', function(file) {
-                        if (file.accepted) {
-                          let mypreview = document.getElementsByClassName('dz-error');
-                          mypreview = mypreview[mypreview.length - 1];
-                          mypreview.classList.toggle('dz-error');
-                          mypreview.classList.toggle('dz-success');
-                        }
-                      });
-                    }
-                  },
-                  x = {
-                    ...o,
-                    ...j
-                  };
-              d.querySelector(".dz-preview").innerHTML = '';
-              new Dropzone(d, x);
-            }));
-          }
-        }
-      },
-    };
-e.init();
-
-
-
-
-
-
-
-
-
-
-
-
-window.dataLayer = window.dataLayer || [];
-
-function gtag() {
-  window.dataLayer.push(arguments)
-}
-
-gtag('js', new Date());
-gtag('config', 'G-GMKQ4P9YMZ');
+import {UploadFilled} from '@element-plus/icons-vue'
+import axios from "axios";
+console.log(UploadFilled)
 const ICON_047 = "047.jpg"
 export default {
   name: "index.vue",
   components:
       {
-        // vueDropzone:vue2Dropzone
       },
   maraInfo: {//页面设置
     title: "主页",
@@ -1731,13 +1438,60 @@ export default {
   },
   data() {
     return {
+      PersonalInformation:{
+        avatarImg: "/047.jpg"
+      },
       img_047: require("../../img/" + ICON_047),
-      dropzoneOptions:{
-        url: 'https://httpbin.org/post',
-        thumbnailWidth: 150,
-        maxFilesize: 0.5,
-        headers: { "My-Awesome-Header": "header value" }
-      }
+      commentIsFold:true,
+      commentText:"",//评论内容双向绑定
+      myUpFileList: [],
+      myDeleteFileList:[],
+      dialogImageUrl: "",
+      dialogVisible: false,
+      disabled: false,
+      addComment:{
+        commentText:"",
+        avatarImg:"/047.jpg",
+        time:"",
+        name:"",
+      },
+      tempPost:{
+        avatarImg:"/047.jpg",
+        name:"冀欢",
+        time:"200/9/24",
+        job:"学生",
+        text:"话题内容",
+        imgList:[],
+        liked:0,
+        comments:1,
+        commentsList:[
+          {
+            avatarImg:"",
+            name:"阿庆",
+            time:"2022/9/24",
+            text:"Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
+          }
+        ]
+
+      },
+      postList:[{
+        id:"123456",
+        avatarImg:"/047.jpg",
+        name:"冀欢",
+        time:"200/9/24",
+        job:"学生",
+        text:"话题内容",
+        imgList:[
+            "/img.png",
+            "/031.jpg"
+        ],
+        liked:0,
+        comments:0,
+        commentsList:[
+
+        ]
+
+      }]
     }
   },
   created()
@@ -1745,7 +1499,165 @@ export default {
 
   },methods:
   {
+    myUploadSuccess(response, uploadFile, uploadFiles) {
+      console.log(response)
+      console.log(uploadFile)
+      console.log(uploadFiles)
+      console.log("输出上传图片列表", this.myUpFileList)
+    }
+    ,
+    myUploadChange(uploadFile, uploadFiles)
+    {
 
+      console.log("change",uploadFile,uploadFiles)
+      this.dialogImageUrl = URL.createObjectURL(uploadFile.raw);
+      if(this.myUpFileList.length===0)
+      {
+        let imgUrlSuccess = URL.createObjectURL(uploadFile.raw)
+        this.myUpFileList.push({
+          uid:uploadFile.uid,
+          name:uploadFile.name,
+          imgSrc:imgUrlSuccess,
+          imageRaw:uploadFile.raw})
+      }
+      let judgePush = true;
+      let judgeDelete=true;
+      for(let i =0 ;i<this.myDeleteFileList.length;i++)
+      {
+        if(uploadFile.uid=== this.myDeleteFileList[i].uid)
+        {
+          judgeDelete = false
+        }
+      }
+      for(let i =0 ;i<this.myUpFileList.length;i++)
+      {
+        if(uploadFile.uid=== this.myUpFileList[i].uid)
+        {
+          judgePush = false
+        }
+      }
+      if(judgePush!==false&&judgeDelete===true)
+      {
+        console.log("push成功")
+        let imgUrlSuccess = URL.createObjectURL(uploadFile.raw)
+        this.myUpFileList.push({uid:uploadFile.uid,name:uploadFile.name,imgSrc:imgUrlSuccess,imageRaw:uploadFile.raw})
+      }
+      uploadFiles = this.myUpFileList
+
+    },
+    myPreview(uploadFile) {
+      console.log(uploadFile)
+    },
+    upload() {
+      console.log(this.myUpFileList)
+      let imageArrayList = []
+      for(let i = 0;i<this.myUpFileList.length;i++)
+      {
+
+        let reader = new FileReader()
+        reader.readAsDataURL(this.myUpFileList[i].imageRaw)
+        reader.onload=function ()
+        {
+          this.tempPost.imgList.push(reader.result)
+          imageArrayList.push({"image":reader.result})
+        }
+      }
+      console.log(imageArrayList)
+      axios.request({
+        method: "post", // 请求方式
+        url: 'https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15',
+        dataType:'json', // 上传内容格式
+        contentType: 'application/x-www-form-urlencoded', // 在发送前编码所有字符（默认）
+        data: imageArrayList,  // 上传的json
+        headers: { "Access-Control-Allow-Origin": "*" } // 跨域
+
+      }).then(res=>{
+        console.log("发送成功",res)
+        this.postList.push(this.tempPost)
+      }).catch(err=>{
+        console.log("发送失败",err)
+      });
+      this.modalCancel()
+    },
+    imageRemove(imageUid)
+    {
+      console.log(imageUid)
+      for (let i = 0;i<this.myUpFileList.length;i++)
+      {
+        if(this.myUpFileList[i].uid===imageUid)
+        {
+          this.myDeleteFileList.push(this.myUpFileList[i])
+          console.log("查询到相同UID")
+          this.myUpFileList.splice(i,1);
+
+        }
+      }
+
+    },
+    modalCancel()
+    {
+      this.myUpFileList.splice(0,this.myUpFileList.length)
+    },
+    commentCommit(index)
+    {
+      this.addComment.name="阿庆";
+      this.addComment.time=this.getNowDate();
+      this.addComment.avatarImg = '/031.jpg';
+      //获取该帖子所对应的id,到数据库里面去查找id，然后将新增的评论插入进去
+      //this.postList[index].id;
+      //将评论插入到前端代码
+      this.postList[index].commentsList.push(
+          { name:this.addComment.name,
+            avatarImg: this.addComment.avatarImg,
+            time:this.addComment.time,
+            text: this.addComment.commentText
+          });
+      //发出请求，修改数据库
+      //请求完成之后，修改评论内容为空,双向绑定
+      this.addComment.commentText="";
+      this.postList[index].comments = this.postList[index].comments+1;
+
+    },
+    commentDelete(index,comIndex)
+    {
+        this.postList[index].commentsList.splice(comIndex,1);
+      this.postList[index].comments = this.postList[index].comments-1;
+    },
+    transCommentFold()
+    {
+      this.commentIsFold = !this.commentIsFold;
+    },
+    loadMoreComment(index)
+    {
+      //发出请求
+      let getCommentList = [{
+        avatarImg:"/031.jpg",
+        name:"阿庆",
+        time:"2022/9/24",
+        text:"Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
+      },
+        {
+          avatarImg:"/031.jpg",
+          name:"阿庆",
+          time:"2022/9/24",
+          text:"Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
+        }]
+      //判断是否还有多于的页数，若是没有则直接变为已经到底了
+      this.postList[index].commentsList = this.postList[index].commentsList.concat(getCommentList);
+      alert("没有 评论啦")
+    },
+    getNowDate()
+    {
+      let date = new Date();
+      let yy = date.getFullYear();//年
+      let mm = date.getMonth() + 1;//月
+      let dd = date.getDate();//日
+      let hh = date.getHours();//时
+      let mf = date.getMinutes()<10 ? '0'+date.getMinutes() : date.getMinutes();
+      let ss = date.getSeconds()<10 ? '0'+date.getSeconds() : date.getSeconds();
+      let str = yy+'-'+mm+'-'+dd+' '+hh+':'+mf+':'+ss;
+      return str;
+    }
   }
 
 

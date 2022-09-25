@@ -25,7 +25,7 @@ const router = createRouter({
                 component:()=>import('@/components/blog/test')
             },
             {
-                path:"/test_index",
+                path:"/ti",
                 name:"test_index",
                 component:()=>import('@/components/blog/test_index')
             },
@@ -34,15 +34,21 @@ const router = createRouter({
                 name:"test_P",
                 component:()=>import('@/components/blog/photoPost')
             },
-            {
-                path:"/m",
-                name:"test_m",
-                component:()=>import('@/components/blog/mutai')
-            },
+
             {
                 path:'/u',
                 name:"test_u",
                 component:()=>import('@/components/blog/upload_test')
+            },
+            {
+                path:'/notification',
+                name:"notification",
+                component:()=>import('@/components/notification/Notifications')
+            },
+            {
+                path:'/tn',
+                name:"tn",
+                component:()=>import('@/components/notification/tn')
             },
 
 

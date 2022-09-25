@@ -1,98 +1,60 @@
 <template>
-  <div class="modal-backdrop">
-    <div class="modal" >
-      <div class="modal-header">
-        <h3>我是一个Modal的标题</h3>
-      </div>
-      <div class="modal-body">
-        <p>我是一个Modal的内容</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-close" @click="closeSelf">关闭</button>
-        <button type="button" class="btn-confirm" @click="confirm">确认</button>
-      </div>
-    </div>
-
+<!--  <div class="md-preview github-theme md-scrn" v-html="htmlText">-->
+<!--  </div>-->
+  <div class="modal-dialog modal-dialog-centered" style="width: 1500px">
+  <div class="modal-content">
+  <div class="modal-body">
+  <div class="d-flex mb-3">
+    <!-- Avatar -->
+    <div class="avatar avatar-xs me-2"><img class="avatar-img rounded-circle" src="../../img/03.jpg" alt="">
+    </div><!-- Feed box -->
+    <form class="w-100">
+      <textarea v-model="text" class="form-control pe-4 fs-3 lh-1 border-0" rows="15"
+                                  placeholder="分享你的想法">
+    </textarea>
+    </form>
   </div>
+  </div>
+  </div>
+  </div>
+  <div v-for="(item,index) in textList" :key="index">
+    <md-editor-v3   previewOnly="true" v-model="textList[index]"/>
+  </div>
+  <p>分隔</p>
 </template>
 
-<style>
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0,0,0,.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.modal {
-  background-color: #fff;
-  box-shadow: 2px 2px 20px 1px;
-  overflow-x:auto;
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
-  width: 700px;
-}
-.modal-header {
-  border-bottom: 1px solid #eee;
-  color: #313131;
-  justify-content: space-between;
-  padding: 15px;
-  display: flex;
-}
-.modal-footer {
-  border-top: 1px solid #eee;
-  justify-content: flex-end;
-  padding: 15px;
-  display: flex;
-}
-.modal-body {
-  position: relative;
-  padding: 20px 10px;
-}
-.btn-close, .btn-confirm {
-  border-radius: 8px;
-  margin-left:16px;
-  width:56px;
-  height: 36px;
-  border:none;
-  cursor: pointer;
-}
-.btn-close {
-  color: #313131;
-  background-color:transparent;
-}
-.btn-confirm {
-  color: #fff;
-  background-color: #2d8cf0;
-}
 
-
-</style>
 
 <script>
 export default {
-  name: 'PhotoModal',
+  name: 'test_p',
   props: {
 
-  },
-  data() {
+  }, data () {
     return {
-    }
+      text:'Hello Editor!!',
+      textList:[
+          "dfdsf",
+          "dfdfd",
+          "qdfef",
+      ]
+      }
+
   },
   methods: {
-    closeSelf() {
-      this.$emit("closeme");
-    },
-    confirm()
+      gethtml(h)
+      {
+        console.log(h)
+      },
+    gethtml1(h1)
     {
-      this.$emit("closeme");
+      console.log(h1)
     }
-
   }
 }
 </script>
+<style scoped>
+@import url(@/css/font.css);
+@import url(@/css/all.min.css);
+@import url(@/css/style.css);
+</style>
