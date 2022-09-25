@@ -54,6 +54,11 @@ const router = createRouter({
                 path:'/img',
                 name:"tn",
                 component:()=>import('@/components/blog/imgTest')
+            },
+            {
+                path:'/group',
+                name:"group",
+                component:()=>import('@/components/group/groups')
             }
 
 

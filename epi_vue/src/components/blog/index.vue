@@ -437,34 +437,34 @@
               <li class="nav-item">
                 <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
                    data-bs-target="#feedActionPhoto">
-                  <i class="bi bi-image-fill text-success pe-2"></i>照片
+                  <i class="bi bi-image-fill text-success pe-2"></i>贴子编辑
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
-                   data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>文字</a>
-              </li>
+<!--              <li class="nav-item">-->
+<!--                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"-->
+<!--                   data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>文字</a>-->
+<!--              </li>-->
               <li class="nav-item dropdown ms-lg-auto">
-                <a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" data-bs-toggle="dropdown"
-                   aria-expanded="false">
-                  <i class="bi bi-three-dots"></i>
-                </a>
+<!--                <a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" data-bs-toggle="dropdown"-->
+<!--                   aria-expanded="false">-->
+<!--                  <i class="bi bi-three-dots"></i>-->
+<!--                </a>-->
                 <!-- Dropdown menu -->
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="feedActionShare">
-                  <!--                    创建一个投票-->
-                  <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>创建一个投票</a></li>
+<!--                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="feedActionShare">-->
+<!--                  &lt;!&ndash;                    创建一个投票&ndash;&gt;-->
+<!--                  <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>创建一个投票</a></li>-->
 
-                  <li>
-                    <a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>发布一个话题</a>
-                  </li>
+<!--                  <li>-->
+<!--                    <a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>发布一个话题</a>-->
+<!--                  </li>-->
 
-                  <li>
-                    <hr class="dropdown-divider">
-                  </li>
+<!--                  <li>-->
+<!--                    <hr class="dropdown-divider">-->
+<!--                  </li>-->
 
-                  <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>帮助</a></li>
-                </ul>
+<!--                  <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>帮助</a></li>-->
+<!--                </ul>-->
 
               </li>
 
@@ -525,11 +525,11 @@
 
 <!--                图片列表-->
                 <div v-for="(imgSrc,imgIndex) in item.imgList" :key="imgIndex" >
-                  <img style="height: 200px" class="card-img" :src="imgSrc" alt="Post">
+                  <img style="height: 200px; margin-top: 5px" class="card-img" :src="imgSrc" alt="Post">
                 </div>
                 <!-- Feed react START -->
                 <ul class="nav nav-stack py-3 small">
-                  <li class="nav-item">
+                  <li class="nav-item" @click="transLiked(index)">
                     <a class="nav-link active" href="#!">
                       <i class="bi bi-hand-thumbs-up-fill pe-1">
                       </i>
@@ -634,7 +634,10 @@
                   <div  style="padding: 5px; display: flex;
                               flex-direction: row;
                               align-items: center; ">
-                    <el-button style="display: inline-block" @click="loadMoreComment(index)" size="small" type="primary" round>点击加载更多评论</el-button>
+
+                    <el-button style="display: inline-block" @click="loadMoreComment(index)" size="small" type="primary" round>
+                      点击加载更多评论</el-button>
+
                   </div>
                 </ul>
 
@@ -645,18 +648,11 @@
           </div>
 
 
-
-          <!-- Load more button START -->
-          <a href="#!" role="button" class="btn btn-loader btn-primary-soft" data-bs-toggle="button"
-             aria-pressed="true">
-            <span class="load-text"> 查看更多话题 </span>
-            <div class="load-icon">
-              <div class="spinner-grow spinner-grow-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
+          <div class="card-body p-2" >
+            <div  class=" border-0 py-3 text-center position-relative d-grid pt-0">
+              <el-button @click="loadMorePost" type="primary" >{{postLoading ? '点击加载更多' : '已经到底啦~'}}</el-button>
             </div>
-          </a>
-          <!-- Load more button END -->
+          </div>
 
         </div>
 
@@ -709,7 +705,7 @@
 
                   <!-- View more button -->
                   <div class="d-grid mt-3">
-                    <a class="btn btn-sm btn-primary-soft" href="#!">查看更多</a>
+                    <span class="btn btn-sm btn-primary-soft">  查看更多</span>
                   </div>
                 </div>
                 <!-- Card body END -->
@@ -738,11 +734,7 @@
                   <a href="#!" role="button"
                      class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center"
                      data-bs-toggle="button" aria-pressed="true">
-                    <div class="spinner-dots me-2">
-                      <span class="spinner-dot"></span>
-                      <span class="spinner-dot"></span>
-                      <span class="spinner-dot"></span>
-                    </div>
+                    <span style="margin-right: 2px" class="iconfont icon-gengduo"></span>
                     查看更多
                   </a>
                 </div>
@@ -1443,6 +1435,8 @@ export default {
         avatarImg: "/047.jpg"
       },
       img_047: require("../../img/" + ICON_047),
+      postLoading:true,
+      postPageIndex:0,
       commentIsFold:true,
       commentText:"",//评论内容双向绑定
       myUpFileList: [],
@@ -1460,7 +1454,7 @@ export default {
         id:"123456",
         avatarImg:"/047.jpg",
         name:"冀欢",
-        time:"200/9/24",
+        time:"2022-9-25 19:25:46",
         job:"学生",
         text:"话题内容",
         imgList:[
@@ -1478,7 +1472,7 @@ export default {
         id:"123",
         avatarImg:"/047.jpg",
         name:"冀欢",
-        time:"200/9/24",
+        time:"2022-9-25 19:25:46",
         job:"学生",
         text:"话题内容",
         imgList:[],
@@ -1488,7 +1482,7 @@ export default {
           {
             avatarImg:"/047.jpg",
             name:"阿庆",
-            time:"2022/9/24",
+            time:"2022-9-25 19:25:46",
             text:"Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
           }
         ]
@@ -1498,6 +1492,8 @@ export default {
   },
   created()
   {
+      this.getPosts(1);
+      this.postPageIndex = this.postPageIndex+1;
 
   },methods:
   {
@@ -1602,6 +1598,17 @@ export default {
     },
     commentCommit(index)
     {
+      //输入为空评论失败
+      if(this.addComment.commentText.length===0)
+      {
+        ElMessage({
+          message: '输入空白，评论失败~',
+          grouping: true,
+          type: 'warning',
+        })
+        return ;
+      }
+
       this.addComment.name="阿庆";
       this.addComment.time=this.getNowDate();
       this.addComment.avatarImg = '/031.jpg';
@@ -1634,6 +1641,7 @@ export default {
       //发出请求，判断请求到的数量
       ElMessage({
         message: '没有更多评论啦~',
+        grouping: true,
         type: 'success',
       })
       //将请求到的评论赋值
@@ -1645,11 +1653,31 @@ export default {
       }]
       //将请求到的评论拼接
       this.postList[index].commentsList = this.postList[index].commentsList.concat(getCommentList);
-
-
-
-
-
+    },
+    transLiked(index)
+    {
+      //前端将点数数增加
+      this.postList[index].liked = this.postList[index].liked+1;
+      //将点赞信息上传到后台
+    },
+    loadMorePost()
+    {
+      let winHeight = window.innerHeight || document.documentElement.clientHeight;
+      let docHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+      this.postPageIndex = this.postPageIndex+1;
+      this.getPosts(this.postPageIndex)
+      document.documentElement.scrollTop = docHeight-winHeight-1
+    },
+    getPosts(postPageIndex)
+    {
+      //向后端发起请求当前数据库中的贴子
+      //如果获取的贴子数量为0则将this.postLoading改为false
+      // if()
+      // {
+      //
+      // }
+      console.log("请求第几页的贴子",postPageIndex)
+      this.postList = this.postList.concat(this.postList)
     },
     getNowDate()
     {
@@ -1672,8 +1700,10 @@ export default {
 </script>
 
 <style>
+@import url(@/Icon/threePoint01/iconfont.css);
 @import url(@/css/font.css);
 @import url(@/css/all.min.css);
 @import url(@/css/style.css);
+@import url(@/css/css2.css);
 </style>
 

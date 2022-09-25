@@ -362,10 +362,6 @@
                   </div>
                 </li><!-- Notif item -->
               </ul>
-              <!--              <div class="loading">-->
-              <!--                <i v-show="loading" class="iconfont icon-jiazai"></i>-->
-              <!--                <span>{{loading ? '正在加载中...' : '已经到底啦~'}}</span>-->
-              <!--              </div>-->
               <div id="loadDiv" class="card-footer border-0 py-3 text-center position-relative d-grid pt-0">
                 <el-button @click="loadMore" type="primary" round>{{loading ? '点击加载更多' : '已经到底啦~'}}</el-button>
               </div>
