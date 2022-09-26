@@ -46,7 +46,7 @@ class PostController {
     }
 
     //查找收藏的帖子
-    @PostMapping("/usd/post/favorite/all-post/{token}/{pageIndex}/{pageItems}")
+    @PostMapping("/usd/post/favorite/all-post/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun selectAllFavorite(@PathVariable token: String, @PathVariable pageIndex: String, @PathVariable pageItems: String): Result {
         return postService.selectAllFavorite(token,pageIndex.toLong(),pageItems.toLong())
@@ -54,35 +54,35 @@ class PostController {
 
 
     //查看所有帖子
-    @PostMapping("/usd/post/all-post/{token}/{pageIndex}/{pageItems}")
+    @PostMapping("/usd/post/all-post/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun selectAllPost(@PathVariable token: String, @PathVariable pageIndex: String, @PathVariable pageItems: String): Result {
         return postService.selectAllPost(token,pageIndex.toLong(),pageItems.toLong())
     }
 
     //点赞帖子
-    @PostMapping("/usd/post/like-post/{token}/{pid}")
+    @PostMapping("/usd/post/like-post/{pid}/{token}")
     @ResponseBody
     fun likePost(@PathVariable pid: String, @PathVariable token: String): Result {
         return postService.likePost(token,pid)
     }
 
     //修改帖子
-    @PostMapping("/usd/post/modfiy-post/{token}/{pid}")
+    @PostMapping("/usd/post/modfiy-post/{pid}/{token}")
     @ResponseBody
     fun modfiyPost(@PathVariable pid: String, @PathVariable token: String,entity: PostUpLoadeEntity): Result {
         return postService.modfiyPost(token, pid,entity)
     }
 
     //发评论
-    @PostMapping("/usd/post/comment/{token}/{pid}")
+    @PostMapping("/usd/post/comment/{pid}/{token}")
     @ResponseBody
     fun postComment(@PathVariable pid: String, @PathVariable token: String,@RequestBody comment:String): Result {
         return postService.postComment(token, pid,comment)
     }
 
     //显示帖子评论
-    @PostMapping("/usd/post/get-comment/{token}/{pid}/{pageIndex}/{pageItems}")
+    @PostMapping("/usd/post/get-comment/{pid}/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun selectPostComment(@PathVariable pid: String, @PathVariable token: String, @PathVariable pageIndex: String,
                           @PathVariable pageItems: String

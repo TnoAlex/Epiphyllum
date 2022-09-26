@@ -11,6 +11,7 @@ data class RegisterEntity(
     var account:String,
     var password:String,
     var phone:String,
+    var identification:String,
     var gender:Int,
     var accountLevel:Int,
     var addition:String

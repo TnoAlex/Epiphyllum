@@ -10,45 +10,60 @@ const router = createRouter({
                 component: () => import ('@/components/Login')
             },
             {
-                path:"/404",
-                name:"404",
-                component:()=>import('@/components/404')
+                path: "/sing-in",
+                name: "sing-in",
+                component: () => import('@/components/Sing-in')
             },
             {
-                path:"/index",
-                name:"index_vue",
-                component:()=>import('@/components/blog/index')
+                path: "/sing-up",
+                name: "sing-up",
+                component: () => import('@/components/Sing-up')
             },
             {
-                path:"/test",
-                name:"test",
-                component:()=>import('@/components/blog/test')
+                path:"/forgot-password",
+                name:"forgot-password",
+                component:()=>import('@/components/Forgot-Password')
             },
             {
-                path:"/ti",
-                name:"test_index",
-                component:()=>import('@/components/blog/test_index')
+                path: "/404",
+                name: "404",
+                component: () => import('@/components/404')
             },
             {
-                path:"/p",
-                name:"test_P",
-                component:()=>import('@/components/blog/photoPost')
+                path: "/index",
+                name: "index_vue",
+                component: () => import('@/components/blog/index')
+            },
+            {
+                path: "/test",
+                name: "test",
+                component: () => import('@/components/blog/test')
+            },
+            {
+                path: "/ti",
+                name: "test_index",
+                component: () => import('@/components/blog/test_index')
+            },
+            {
+                path: "/p",
+                name: "test_P",
+                component: () => import('@/components/blog/photoPost')
             },
 
             {
-                path:'/u',
-                name:"test_u",
-                component:()=>import('@/components/blog/upload_test')
+                path: '/u',
+                name: "test_u",
+                component: () => import('@/components/blog/upload_test')
             },
             {
-                path:'/notification',
-                name:"notification",
-                component:()=>import('@/components/notification/Notifications')
+                path: '/notification',
+                name: "notification",
+                component: () => import('@/components/notification/Notifications')
             },
             {
-                path:'/tn',
-                name:"tn",
-                component:()=>import('@/components/notification/tn')
+                path: '/tn',
+                name: "tn",
+                component: () => import('@/components/notification/tn')
             },
             {
                 path:'/img',

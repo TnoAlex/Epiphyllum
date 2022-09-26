@@ -28,7 +28,7 @@ class RaceController {
     }
 
     //查看所有竞赛
-    @GetMapping("/usd/race/all-race/{token}/{pageIndex}/{pageItems}")
+    @GetMapping("/usd/race/all-race/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun selectAllRace(
         @PathVariable token: String,
@@ -39,7 +39,7 @@ class RaceController {
     }
 
     //报名比赛
-    @PostMapping("/race/registration/{token}/{rid}")
+    @PostMapping("/race/registration/{rid}/{token}")
     @ResponseBody
     fun registrationRace(@PathVariable rid: String, @PathVariable token: String): Result {
         return raceService.registrationRace(token, rid)
@@ -53,35 +53,35 @@ class RaceController {
     }
 
     //取消报名比赛
-    @PostMapping("/race/user/cancel-registration/{token}/{rid}")
+    @PostMapping("/race/user/cancel-registration/{rid}/{token}")
     @ResponseBody
     fun cancelRegistration(@PathVariable rid: String, @PathVariable token: String): Result {
         return raceService.cancelRegistration(token, rid)
     }
 
     //上传比赛附件
-    @PostMapping("/usd/user/upload-annex/{token}/{rid}")
+    @PostMapping("/usd/user/upload-annex/{rid}/{token}")
     @ResponseBody
     fun uploadAnnex(@PathVariable rid: String, @PathVariable token: String, chunk: FileChunkInfo): Result {
         return raceService.uploadAnnex(rid, token, chunk)
     }
 
     //回调（不对用户展示）
-    @PostMapping("/usd/user/finish-upload/{token}/{rid}")
+    @PostMapping("/usd/user/finish-upload/{rid}/{token}")
     @ResponseBody
     fun finishUpload(@PathVariable rid: String, @PathVariable token: String, @RequestBody fileInfo: TFileInfo): Result {
         return raceService.finishUpload(rid, token, fileInfo)
     }
 
     //删除附件
-    @PostMapping("/usd/user/delete-annex/{token}/{rid}")
+    @PostMapping("/usd/user/delete-annex/{rid}/{token}")
     @ResponseBody
     fun deleteAnnex(@PathVariable rid: String, @PathVariable token: String): Result {
         return raceService.deleteAnnex(rid, token)
     }
 
     //查看附件列表（机构）
-    @PostMapping("/usd/race/download-annex-list/{token}/{rid}/{pageIndex}/{pageItems}")
+    @PostMapping("/usd/race/download-annex-list/{rid}/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun downloadAnnexList(
         @PathVariable rid: String, @PathVariable token: String, @PathVariable pageIndex: String,
@@ -98,35 +98,35 @@ class RaceController {
     }
 
     //取消已经发布的比赛
-    @PostMapping("/usd/race/cancel-race/{token}/{rid}")
+    @PostMapping("/usd/race/cancel-race/{rid}/{token}")
     @ResponseBody
     fun cancelRace(@PathVariable rid: String, @PathVariable token: String): Result {
         return raceService.cancelRace(token, rid)
     }
 
     //查看比赛报名和提交信息
-    @PostMapping("/usd/race/race-info/{token}/{rid}")
+    @PostMapping("/usd/race/race-info/{rid}/{token}")
     @ResponseBody
     fun raceInfo(@PathVariable rid: String, @PathVariable token: String): Result {
         return raceService.selectRaceInfo(token, rid)
     }
 
     //提醒参赛者提交产物
-    @PostMapping("/usd/race/notice-entrants/{token}/{rid}")
+    @PostMapping("/usd/race/notice-entrants/{rid}/{token}")
     @ResponseBody
     fun noticeEntrants(@PathVariable rid: String, @PathVariable token: String): Result {
         return raceService.noticeEntrants(token, rid)
     }
 
     //获取参赛者列表（excel下载）
-    @PostMapping("/usd/race/entrants/{token}/{rid}")
+    @PostMapping("/usd/race/entrants/{rid}/{token}")
     @ResponseBody
     fun getEntrantsExcel(@PathVariable rid: String, @PathVariable token: String): Result {
         return raceService.getAnnexExcel(rid, token, response)
     }
 
     //上传获奖情况
-    @PostMapping("/usd/race/race-info/upload-awards/{token}/{rid}")
+    @PostMapping("/usd/race/race-info/upload-awards/{rid}/{token}")
     @ResponseBody
     fun uploadExcel(@PathVariable rid: String, @PathVariable token: String, file: MultipartFile): Result {
         return raceService.uploadExcel(rid, token, file)

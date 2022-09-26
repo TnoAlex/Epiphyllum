@@ -22,21 +22,21 @@ class GroupController {
     }
 
     //加入群组
-    @PostMapping("/usd/group/join/{token}/{gid}")
+    @PostMapping("/usd/group/join/{gid}/{token}")
     @ResponseBody
     fun joinGroup(@PathVariable gid: String, @PathVariable token: String): Result {
         return groupService.joinGroup(token,gid)
     }
 
     //退出群组
-    @PostMapping("/usd/group/exit/{token}/{gid}")
+    @PostMapping("/usd/group/exit/{gid}/{token}")
     @ResponseBody
     fun exitGroup(@PathVariable gid: String, @PathVariable token: String):Result{
         return groupService.exitGroup(token, gid)
     }
 
     //注销群组
-    @PostMapping("/usd/group/revoked/{token}/{gid}")
+    @PostMapping("/usd/group/revoked/{gid}/{token}")
     @ResponseBody
     fun revokedGroup(@PathVariable gid: String, @PathVariable token: String):Result{
         return groupService.revokedGroup(token, gid)

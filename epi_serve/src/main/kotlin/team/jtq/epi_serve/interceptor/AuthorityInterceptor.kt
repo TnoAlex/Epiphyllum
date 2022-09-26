@@ -18,7 +18,7 @@ class AuthorityInterceptor: HandlerInterceptor {
 
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        val token = request.getParameter("token")
+        val token = request.getServletPath().split("/").last()
         val json = tokenService.getUserInfo(token)!!
         if(json["authorities"] as String == "ROLE_user"){
             returnJson(response,"权限不足","403")

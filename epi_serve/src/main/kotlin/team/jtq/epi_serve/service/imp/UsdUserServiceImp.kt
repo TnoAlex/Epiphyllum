@@ -88,7 +88,7 @@ class UsdUserServiceImp : ServiceImpl<UsdUserMapper, UsdUser>(), UsdUserService 
         val json = tokenService.getUserInfo(token)!!
         val userProtectedInfo = UserProtectedInfo(
             phoneMask(json["user_phone"] as String), (json["user_account"] as String), (json["user_gender"] as String),
-            (json["user_identification"] as String)
+            idCardMask(json["user_identification"] as String)
         )
         return Result.ok(userProtectedInfo)
     }

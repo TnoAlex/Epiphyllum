@@ -18,11 +18,7 @@ class AccessInterceptor: HandlerInterceptor {
     private lateinit var tokenService: TokenService
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        val token = request.getParameter("token")
-        if(token == null){
-            returnJson(response,"Token缺失","401")
-            return false
-        }
+        val token = request.getServletPath().split("/").last()
         val res = tokenService.checkToken(token)
         if(res.code != ResultStatusCode.OK.code)
         {

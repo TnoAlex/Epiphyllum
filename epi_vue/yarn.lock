@@ -4331,6 +4331,11 @@ js-message@1.0.7:
   resolved "https://registry.npmmirror.com/js-message/-/js-message-1.0.7.tgz"
   integrity sha512-efJLHhLjIyKRewNS9EGZ4UpI8NguuL6fKkhRxVuMmrGV2xN/0APGdQYwLFky5w9naebSZ0OwAGp0G6/2Cg90rA==
 
+js-sha256@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.npmmirror.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
+  integrity sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmmirror.com/js-tokens/-/js-tokens-4.0.0.tgz"
@@ -6553,6 +6558,11 @@ vue-axios@^3.4.1:
   resolved "https://registry.npmmirror.com/vue-axios/-/vue-axios-3.4.1.tgz"
   integrity sha512-8YZYUOQrBEJktxoQtrM4rr2LfVcDaWfJqv8MqtLlgLlkuBvCYKFSZSo6AXQ4YcCzdgccDqstmuaEh68lcH9xWA==
 
+vue-cookies@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.npmmirror.com/vue-cookies/-/vue-cookies-1.8.1.tgz#8aeadd7ff9933b820de8c3f121c2be27c5ead7b5"
+  integrity sha512-PDq1EaiRRyau5PBQVscXboHW+iWtcG4wRY2UKIz1j0nrjb3KESRU1PUyNUDdOajAwy4RH1IfiNR0suhWRXQdrA==
+
 vue-demi@*:
   version "0.13.11"
   resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.13.11.tgz"
@@ -6584,6 +6594,11 @@ vue-loader@^17.0.0:
     chalk "^4.1.0"
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
+
+vue-password-strength-meter@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.npmmirror.com/vue-password-strength-meter/-/vue-password-strength-meter-1.7.2.tgz#ddaae2246fb8a53fd8cdc5b1084b1d16cc401505"
+  integrity sha512-S17DsEbXciTcI0fKq1PXia7i3COM/AJOT7os8AVyGxglc5ho1EBssE+ogDa5cFh6Rn8pPgqfVCt/KBcNpgPBiA==
 
 vue-router@^4.1.5:
   version "4.1.5"
@@ -6908,3 +6923,8 @@ yorkie@^2.0.0:
     is-ci "^1.0.10"
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
+
+zxcvbn@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.npmmirror.com/zxcvbn/-/zxcvbn-4.4.2.tgz#28ec17cf09743edcab056ddd8b1b06262cc73c30"
+  integrity sha512-Bq0B+ixT/DMyG8kgX2xWcI5jUvCwqrMxSFam7m0lAf78nf04hv6lNCsyLYdyYTrCVMqNDY/206K7eExYCeSyUQ==

@@ -38,7 +38,7 @@ class TokenServiceImp : TokenService {
         if (token.isEmpty())
             return Result.error(ResultStatusCode.TOKEN_MISS)
         val redisKey  = TOKEN_PREFIX +":"+ DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
-        val encryptList = listOf("user_account","user_name","user_gender","user_phone","user_status","user_id","authorities","user_identification")
+        val encryptList = listOf("user_account","user_name","user_gender","user_phone","user_status","user_id","user_identification")
         if(redisTemplate.hasKey(redisKey)){
             val obj = redisTemplate.opsForValue().get(redisKey)
             val json = JSON.parseObject(JSON.toJSONString(obj))
@@ -67,7 +67,7 @@ class TokenServiceImp : TokenService {
             encryptList.forEach { i->responseRes[i] = json[i] }
 
             redisTemplate.opsForValue().set(redisKey,responseRes,1,TimeUnit.DAYS)
-            return Result.ok(json)
+            return Result.ok()
         }
         return Result.error(ResultStatusCode.UNKONW_ERROR)
     }

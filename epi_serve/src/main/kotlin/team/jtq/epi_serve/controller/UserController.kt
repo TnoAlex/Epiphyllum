@@ -46,7 +46,7 @@ class UserController {
     //回调（用户不可见）
     @PostMapping("/doLogin/{code}")
     @ResponseBody
-    fun getUser(@PathVariable code: String):Result{
+    fun getUser(@PathVariable code: String): Result {
         return tokenService.checkToken(code)
     }
 

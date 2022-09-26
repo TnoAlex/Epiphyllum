@@ -101,6 +101,7 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
         instance.updateBy = systemID
         instance.createTime = systemTime
         instance.updateTime = systemTime
+        instance.identification = entity.identification
 
         super<ServiceImpl>.save(instance)
         userClientService.addLinkedInUserClient(instance.id,entity.addition)

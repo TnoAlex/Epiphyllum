@@ -6,7 +6,7 @@ import team.jtq.epi_serve.annotation.NoArg
 @NoArg
 @Data
 data class LoginEntity(
-    var appid:String,
+    var appid:String?,
     val username: String,
     val password: String,
     val code: String,

@@ -22,6 +22,7 @@
         <result column="status" property="status" />
         <result column="del_flag" property="delFlag" />
         <result column="addition" property="addition" />
+        <result column="identification" property="identification"/>
 
         <collection property="roleList" ofType="team.jtq.auth.oauth_serve.entity.OauthRole">
             <id column="roleId" property="id"/>
