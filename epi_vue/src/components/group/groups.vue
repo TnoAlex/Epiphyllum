@@ -7,420 +7,15 @@
     <meta name="description" content="Bootstrap based News, Magazine and Blog Theme">
   </head>
   <body>
-  <!-- ======================= Header START -->
-  <header class="navbar-light fixed-top header-static bg-mode">
-    <!-- Logo Nav START -->
-    <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <!-- Logo START --><a class="navbar-brand" href=""><img class="light-mode-item navbar-brand-item"
-                                                                src="../../img/logo.svg" alt="logo"><img
-          class="dark-mode-item navbar-brand-item" src="../../img/logo.svg"
-          alt="logo"></a><!-- Logo END -->
-        <!-- Responsive navbar toggler -->
-        <button class="navbar-toggler ms-auto icon-md btn btn-light p-0" type="button"
-                data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
-                aria-expanded="false" aria-label="Toggle navigation"><span
-            class="navbar-toggler-animation"><span></span><span></span><span></span></span></button>
-        <!-- Main navbar START -->
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <!-- Nav Search START -->
-          <div class="nav mt-3 mt-lg-0 flex-nowrap align-items-center px-4 px-lg-0">
-            <div class="nav-item w-100">
-              <form class="rounded position-relative"><input class="form-control ps-5 bg-light" type="search"
-                                                             placeholder="搜索" aria-label="Search">
-                <button
-                    class="btn bg-transparent px-2 py-0 position-absolute top-50 start-0 translate-middle-y"
-                    type="submit"><i class="bi bi-search fs-5"></i></button>
-              </form>
-            </div>
-          </div><!-- Nav Search END -->
-          <ul class="navbar-nav navbar-nav-scroll ms-auto">
-            <!-- Nav item 1 Demos -->
-            <li class="nav-item dropdown"><a class="nav-link active dropdown-toggle" href="#" id="homeMenu"
-                                             data-bs-toggle="dropdown" aria-haspopup="true"
-                                             aria-expanded="false">Demo</a>
-              <ul class="dropdown-menu" aria-labelledby="homeMenu">
-                <li><a class="dropdown-item active" href="">主页</a></li>
-                <!--                <li><a class="dropdown-item" href="index-classic.html">Home classic</a></li>-->
-                <!--                <li><a class="dropdown-item" href="index-post.html">Home post</a></li>-->
-                <!--                <li><a class="dropdown-item" href="index-video.html">Home video</a></li>-->
-                <!--                <li><a class="dropdown-item" href="index-event.html">Home event</a></li>-->
-                <!--                <li><a class="dropdown-item" href="landing.html">Landing page</a></li>-->
-                <!--                <li><a class="dropdown-item" href="app-download.html">App download</a></li>-->
-                <!--                <li class="dropdown-divider"></li>-->
-                <!--                <li><a class="dropdown-item" href=""><i-->
-                <!--                    class="text-success fa-fw bi bi-cloud-download-fill me-2"></i>Buy Social!</a></li>-->
-              </ul>
-            </li><!-- Nav item 2 Pages -->
-
-
-            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="pagesMenu"
-                                             data-bs-toggle="dropdown" aria-haspopup="true"
-                                             aria-expanded="false">Pages</a>
-              <ul class="dropdown-menu" aria-labelledby="pagesMenu">
-                <li><a class="dropdown-item" href="albums.html">Albums</a></li>
-                <li><a class="dropdown-item" href="celebration.html">Celebration</a></li>
-                <li><a class="dropdown-item" href="messaging.html">Messaging</a></li><!-- Dropdown submenu -->
-                <li class="dropdown-submenu dropend"><a class="dropdown-item dropdown-toggle" href="#!">Profile</a>
-                  <ul class="dropdown-menu" data-bs-popper="none">
-                    <li><a class="dropdown-item" href="my-profile.html">Feed</a></li>
-                    <li><a class="dropdown-item" href="my-profile-about.html">About</a></li>
-                    <li><a class="dropdown-item" href="my-profile-connections.html">Connections</a></li>
-                    <li><a class="dropdown-item" href="my-profile-media.html">Media</a></li>
-                    <li><a class="dropdown-item" href="my-profile-videos.html">Videos</a></li>
-                    <li><a class="dropdown-item" href="my-profile-events.html">Events</a></li>
-                    <li><a class="dropdown-item" href="my-profile-activity.html">Activity</a></li>
-                  </ul>
-                </li>
-                <li><a class="dropdown-item" href="events.html">Events</a></li>
-                <li><a class="dropdown-item" href="events-2.html">Events 2</a></li>
-                <li><a class="dropdown-item" href="event-details.html">Event details</a></li>
-                <li><a class="dropdown-item" href="event-details-2.html">Event details 2</a></li>
-                <li><a class="dropdown-item" href="groups.html">群组</a></li>
-                <li><a class="dropdown-item" href="group-details.html">Group details</a></li>
-                <li><a class="dropdown-item" href="post-videos.html">Post videos</a></li>
-                <li><a class="dropdown-item" href="post-video-details.html">Post video details</a></li>
-                <li><a class="dropdown-item" href="post-details.html">Post details</a></li>
-                <li><a class="dropdown-item" href="video-details.html">Video details</a></li>
-                <li><a class="dropdown-item" href="blog.html">Blog</a></li>
-                <li><a class="dropdown-item" href="blog-details.html">Blog details</a></li>
-                <!-- Dropdown submenu levels -->
-                <li class="dropdown-divider"></li>
-                <li class="dropdown-submenu dropend"><a class="dropdown-item dropdown-toggle" href="#">Dropdown
-                  levels</a>
-                  <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                    <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                    <li><a class="dropdown-item" href="#">Dropdown item</a></li><!-- dropdown submenu open left -->
-                    <li class="dropdown-submenu dropstart"><a class="dropdown-item dropdown-toggle"
-                                                              href="#">Dropdown(start)</a>
-                      <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                        <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                        <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                      </ul>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li><!-- Nav item 3 Post -->
-            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="postMenu"
-                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account </a>
-              <ul class="dropdown-menu" aria-labelledby="postMenu">
-                <!--                <li><a class="dropdown-item" href="create-page.html">Create a page</a></li>-->
-                <!--                <li><a class="dropdown-item" href="settings.html">Settings</a></li>-->
-                <!--                <li><a class="dropdown-item" href="notifications.html">Notifications</a></li>-->
-                <!--                <li><a class="dropdown-item" href="help.html">Help center</a></li>-->
-                <!--                <li><a class="dropdown-item" href="help-details.html">Help details</a></li>-->
-                <!-- dropdown submenu open left -->
-                <li class="dropdown-submenu dropstart"><a class="dropdown-item dropdown-toggle"
-                                                          href="#">Authentication</a>
-                  <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                    <li><a class="dropdown-item" href="sign-in.html">Sign in</a></li>
-                    <li><a class="dropdown-item" href="sign-up.html">Sing up</a></li>
-                    <li><a class="dropdown-item" href="forgot-password.html">Forgot password</a></li>
-                    <li class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="sign-in-advance.html">Sign in advance</a></li>
-                    <li><a class="dropdown-item" href="sign-up-advance.html">Sing up advance</a></li>
-                    <li><a class="dropdown-item" href="forgot-password-advance.html">Forgot password advance</a></li>
-                  </ul>
-                </li>
-                <!--                <li><a class="dropdown-item" href="error-404.html">Error 404</a></li>-->
-                <!--                <li><a class="dropdown-item" href="offline.html">Offline</a></li>-->
-                <!--                <li><a class="dropdown-item" href="privacy-and-terms.html">Privacy & terms</a></li>-->
-              </ul>
-            </li><!-- Nav item 4 Mega menu -->
-            <!--            <li class="nav-item"><a class="nav-link" href="my-profile-connections.html">My network</a></li>-->
-          </ul>
-        </div><!-- Main navbar END -->
-        <!-- Nav right START -->
-
-
-        <ul class="nav flex-nowrap align-items-center ms-sm-3 list-unstyled">
-          <li class="nav-item ms-2"><a class="nav-link icon-md btn btn-light p-0" href="messaging.html">
-            <ChatLineRound style="width: 25px; height: 25px; margin-right: 0px"/>
-          </a></li>
-
-          <li class="nav-item ms-2"><a class="nav-link icon-md btn btn-light p-0" href="settings.html">
-            <Setting style="width: 25px; height: 25px; margin-right: 0px"/>
-          </a></li>
-
-
-          <li class="nav-item dropdown ms-2">
-            <a class="nav-link icon-md btn btn-light p-0" href="#" id="notifDropdown"
-               role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-              <span class="badge-notif animation-blink"></span>
-              <Bell style="width: 25px; height: 25px; margin-right: 0px"/>
-            </a>
-            <div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg border-0"
-                 aria-labelledby="notifDropdown">
-              <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                  <h6 class="m-0">通知<span class="badge bg-danger bg-opacity-10 text-danger ms-2">4
-                      new</span></h6><a class="small" href="#">清除全部</a>
-                </div>
-                <div class="card-body p-0">
-                  <ul class="list-group list-group-flush list-unstyled p-2">
-                    <!-- Notif item -->
-                    <li>
-                      <div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3">
-                        <div class="avatar text-center d-none d-sm-inline-block"><img class="avatar-img rounded-circle"
-                                                                                      src="../../img/01.jpg" alt="">
-                        </div>
-                        <div class="ms-sm-3">
-                          <div class=" d-flex">
-                            <p class="small mb-2"><b>Judy Nguyen</b>sent you a friend request.</p>
-                            <p class="small ms-3 text-nowrap">Just now</p>
-                          </div>
-                          <div class="d-flex">
-                            <button class="btn btn-sm py-1 btn-primary me-2">Accept</button>
-                            <button
-                                class="btn btn-sm py-1 btn-danger-soft">Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li><!-- Notif item -->
-                    <li>
-                      <div
-                          class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3 position-relative">
-                        <div class="avatar text-center d-none d-sm-inline-block"><img class="avatar-img rounded-circle"
-                                                                                      src="../../img/02.jpg" alt="">
-                        </div>
-                        <div class="ms-sm-3 d-flex">
-                          <div>
-                            <p class="small mb-2">Wish <b>Amanda Reed</b>a happy birthday(Nov 12)</p>
-                            <button
-                                class="btn btn-sm btn-outline-light py-1 me-2">Say happy birthday 🎂
-                            </button>
-                          </div>
-                          <p class="small ms-3">2min</p>
-                        </div>
-                      </div>
-                    </li><!-- Notif item -->
-                    <li><a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 mb-1 p-3">
-                      <div class="avatar text-center d-none d-sm-inline-block">
-                        <div class="avatar-img rounded-circle bg-success"><span
-                            class="text-white position-absolute top-50 start-50 translate-middle fw-bold">WB</span>
-                        </div>
-                      </div>
-                      <div class="ms-sm-3">
-                        <div class="d-flex">
-                          <p class="small mb-2">Webestica has 15 like and 1 new activity</p>
-                          <p class="small ms-3">1hr</p>
-                        </div>
-                      </div>
-                    </a></li><!-- Notif item -->
-                    <li><a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 p-3 mb-1">
-                      <div class="avatar text-center d-none d-sm-inline-block"><img class="avatar-img rounded-circle"
-                                                                                    src="../../img/12.svg" alt=""></div>
-                      <div class="ms-sm-3 d-flex">
-                        <p class="small mb-2"><b>Bootstrap in the news:</b>The search giant’s parent
-                          company,Alphabet,just joined an exclusive club of tech stocks.</p>
-                        <p class="small ms-3">4hr</p>
-                      </div>
-                    </a></li>
-                  </ul>
-                </div>
-                <div class="card-footer text-center"><a href="#" class="btn btn-sm btn-primary-soft">See all incoming
-                  activity</a></div>
-              </div>
-            </div>
-          </li><!-- Notification dropdown END -->
-
-
-          <li class="nav-item ms-2 dropdown"><a class="nav-link btn icon-md p-0" href="#" id="profileDropdown"
-                                                role="button" data-bs-auto-close="outside" data-bs-display="static"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"><img class="avatar-img rounded-2"
-                                                                           src="../../img/07.jpg" alt=""></a>
-            <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3"
-                aria-labelledby="profileDropdown">
-              <!-- Profile info -->
-              <li class="px-3">
-                <div class="d-flex align-items-center position-relative">
-                  <!-- Avatar -->
-                  <div class="avatar me-3"><img class="avatar-img rounded-circle" src="../../img/07.jpg" alt="avatar">
-                  </div>
-                  <div><a class="h6 stretched-link" href="#">Lori Ferguson</a>
-                    <p class="small m-0">Web Developer</p>
-                  </div>
-                </div>
-                <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" href="my-profile.html">View
-                  profile</a>
-              </li><!-- Links -->
-              <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings &
-                Privacy</a></li>
-              <li><a class="dropdown-item" href=""><i class="fa-fw bi bi-life-preserver me-2"></i>Support </a></li>
-              <li><a class="dropdown-item" href=""><i class="fa-fw bi bi-card-text me-2"></i>Documentation </a></li>
-              <li class="dropdown-divider"></li>
-              <li><a class="dropdown-item bg-danger-soft-hover" href="sign-in-advance.html"><i
-                  class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li><!-- Dark mode switch START -->
-              <li>
-                <div class="modeswitch-wrap" id="darkModeSwitch">
-                  <div class="modeswitch-item">
-                    <div class="modeswitch-icon"></div>
-                  </div>
-                  <span>Dark mode</span>
-                </div>
-              </li><!-- Dark mode switch END -->
-            </ul>
-          </li><!-- Profile START -->
-        </ul><!-- Nav right END -->
-
-
-      </div>
-    </nav><!-- Logo Nav END -->
-  </header><!-- ======================= Header END -->
-  <!-- **************** MAIN CONTENT START **************** -->
+  <HeaderNav></HeaderNav>
   <main>
     <!-- Container START -->
     <div class="container">
       <div class="row g-4">
         <!-- Sidenav START -->
-        <div class="col-lg-3">
-          <!-- Advanced filter responsive toggler START -->
-          <div class="d-flex align-items-center d-lg-none">
-            <button class="border-0 bg-transparent" type="button"
-                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar"
-                    aria-controls="offcanvasSideNavbar"><i
-                class="btn btn-primary fw-bold fa-solid fa-sliders-h"></i><span
-                class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span></button>
-          </div>
-          <!-- Advanced filter responsive toggler END -->
-          <!-- Navbar START-->
-          <nav class="navbar navbar-expand-lg mx-0">
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideNavbar">
-              <!-- Offcanvas header -->
-              <div class="offcanvas-header">
-                <button type="button" class="btn-close text-reset ms-auto"
-                        data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div><!-- Offcanvas body -->
-              <div class="offcanvas-body d-block px-2 px-lg-0">
-                <!-- Card START -->
-                <div class="card overflow-hidden">
-                  <!-- Cover image -->
-                  <div class="h-50px"
-                       :style="{ 'backgroundImage': 'url('+img_047+')'} "
-                       style=" background-position: center left; background-size: cover; background-repeat: no-repeat;">
-                  </div><!-- Card body START -->
-                  <div class="card-body pt-0">
-                    <div class="text-center">
-                      <!-- Avatar -->
-                      <div class="avatar avatar-lg mt-n5 mb-3"><a href="#!"><img
-                          class="avatar-img rounded border border-white border-3" src="../../img/07.jpg" alt=""></a>
-                      </div><!-- Info -->
-                      <h5 class="mb-0"><a href="#!">阿庆 </a></h5>
-                      <small>职业</small>
-                      <p class="mt-3">路尽隐香处 ，翩然雪海间。</p>
 
-                      <!-- User stat START -->
-                      <div class="hstack gap-2 gap-xl-3 justify-content-center">
-                        <!-- User stat item -->
-                        <!--                        <div>-->
-                        <!--                          <h6 class="mb-0">256</h6>-->
-                        <!--                          <small>我的话题</small>-->
-                        <!--                        </div>-->
-                        <!--                        &lt;!&ndash; Divider &ndash;&gt;-->
-                        <!--                        <div class="vr"></div>-->
-                        <!--                        &lt;!&ndash; User stat item &ndash;&gt;-->
-                        <!--                        <div>-->
-                        <!--                          <h6 class="mb-0">2.5K</h6>-->
-                        <!--                          <small>粉丝</small>-->
-                        <!--                        </div>-->
-                        <!--                        &lt;!&ndash; Divider &ndash;&gt;-->
-                        <!--                        <div class="vr"></div>-->
-                        <!--                        &lt;!&ndash; User stat item &ndash;&gt;-->
-                        <!--                        <div>-->
-                        <!--                          <h6 class="mb-0">365</h6>-->
-                        <!--                          <small>关注</small>-->
-                        <!--                        </div>-->
-                      </div>
-                      <!-- User stat END -->
-                    </div>
-
-                    <!-- Divider -->
-                    <hr>
-
-                    <!-- Side Nav START -->
-                    <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
-                      <li class="nav-item">
-                        <a class="nav-link" href="my-profile.html"> <img class="me-2 h-20px fa-fw"
-                                                                         src="../../img/home-outline-filled.svg" alt=""><span>收藏话题 </span></a>
-                      </li>
-                      <!--                      <li class="nav-item">-->
-                      <!--                        <a class="nav-link" href="my-profile-connections.html"> <img class="me-2 h-20px fa-fw"-->
-                      <!--                                                                                     src="../../img/person-outline-filled.svg" alt=""><span>Connections </span></a>-->
-                      <!--                      </li>-->
-                      <li class="nav-item">
-                        <a class="nav-link" href="blog.html"> <img class="me-2 h-20px fa-fw"
-                                                                   src="../../img/earth-outline-filled.svg"
-                                                                   alt=""><span>最新新闻</span></a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="events.html"> <img class="me-2 h-20px fa-fw"
-                                                                     src="../../img/calendar-outline-filled.svg" alt=""><span>事件</span></a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="groups.html"> <img class="me-2 h-20px fa-fw"
-                                                                     src="../../img/chat-outline-filled.svg"
-                                                                     alt=""><span>群组 </span></a>
-                      </li>
-                      <li class="nav-item">
-                        <router-link to="/notification" class="nav-link">
-                          <img class="me-2 h-20px fa-fw"
-                               src="../../img/notification-outlined-filled.svg"
-                               alt=""><span>通知 </span>
-                        </router-link>
-
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="settings.html"> <img class="me-2 h-20px fa-fw"
-                                                                       src="../../img/cog-outline-filled.svg"
-                                                                       alt=""><span>设置 </span></a>
-                      </li>
-                    </ul>
-                    <!-- Side Nav END -->
-                  </div>
-                  <!-- Card body END -->
-                  <!-- Card footer -->
-                  <!--                  <div class="card-footer text-center py-2">-->
-                  <!--                    <a class="btn btn-link btn-sm" href="my-profile.html">View Profile </a>-->
-                  <!--                  </div>-->
-                </div>
-                <!-- Card END -->
-
-                <!-- Helper link START -->
-                <ul class="nav small mt-4 justify-content-center lh-1">
-                  <li class="nav-item">
-                    <a class="nav-link" href="my-profile-about.html">About</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="settings.html">Settings</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="login">Support </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="">Docs </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="help.html">Help</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="privacy-and-terms.html">Privacy & terms</a>
-                  </li>
-                </ul>
-                <!-- Helper link END -->
-                <!-- Copyright -->
-                <p class="small text-center mt-1">©2022 <a class="text-body" href="/"> Webestica </a></p>
-              </div>
-            </div>
-          </nav>
-          <!-- Navbar END-->
-        </div>
+        <IndexLeft>
+        </IndexLeft>
         <!-- Sidenav END -->
 
         <!-- Main content START -->
@@ -432,71 +27,80 @@
               <div class="row g-2">
                 <div class="col-lg-2">
                   <!-- Card title -->
-                  <h1 class="h4 card-title mb-lg-0">Group</h1>
+                  <h1 class="h4 card-title mb-lg-0">群组</h1>
                 </div>
                 <div class="col-sm-6 col-lg-3 ms-lg-auto">
                   <!-- Select Groups -->
-                  <select class="form-select js-choice choice-select-text-none" data-search-enabled="false">
-                    <option value="AB">Alphabetical</option>
-                    <option value="NG">Newest group</option>
-                    <option value="RA">Recently active</option>
-                    <option value="SG">Suggested</option>
-                  </select>
+<!--                  <select class="form-select js-choice choice-select-text-none" data-search-enabled="false">-->
+<!--                    <option value="AB">Alphabetical</option>-->
+<!--                    <option value="NG">Newest group</option>-->
+<!--                    <option value="RA">Recently active</option>-->
+<!--                    <option value="SG">Suggested</option>-->
+<!--                  </select>-->
                 </div>
                 <div class="col-sm-6 col-lg-3">
                   <!-- Button modal -->
                   <a class="btn btn-primary-soft ms-auto w-100" href="#" data-bs-toggle="modal"
-                     data-bs-target="#modalCreateGroup"> <i class="fa-solid fa-plus pe-1"></i> Create group</a>
+                     data-bs-target="#modalCreateGroup"> <i class="fa-solid fa-plus pe-1"></i> 新建一个群组</a>
                 </div>
               </div>
             </div>
             <!-- Card header START -->
             <!-- Card body START -->
             <div class="card-body">
-              <!-- Tab nav line -->
+              <!-- Tab nav line 分类导航栏-->
               <ul class="nav nav-tabs nav-bottom-line justify-content-center justify-content-md-start">
-                <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#tab-1"> Friends' groups
-                </a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-2">Suggested for you </a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-3">Popular near you </a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-4">More suggestions </a></li>
+<!--                <li class="nav-item">
+                      <a class="nav-link active" data-bs-toggle="tab" href="#tab-1"> Friends' groups-->
+<!--                  </a>
+                    </li>-->
               </ul>
               <div class="tab-content mb-0 pb-0">
-                <!-- Friends groups tab START -->
-                <div class="tab-pane fade show active" id="tab-1">
                   <div class="row g-4">
+
+
                     <div class="col-sm-6 col-lg-4">
                       <!-- Card START -->
                       <div class="card">
                         <div class="h-80px rounded-top"
-                             style="background-image:url(assets/img/011.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                             style="background-image:url(public/047.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
                         </div><!-- Card body START -->
                         <div class="card-body text-center pt-0">
                           <!-- Avatar -->
                           <div class="avatar avatar-lg mt-n5 mb-3"><a href="group-details.html"><img
                               class="avatar-img rounded-circle border border-white border-3 bg-white"
-                              src="assets/img/081.svg" alt=""></a></div><!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">All in the Mind</a></h5><small><i
-                            class="bi bi-lock pe-1"></i>Private Group</small><!-- Group stat START -->
-                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">32k</h6><small>Members</small>
-                            </div><!-- Divider -->
-                            <div class="vr"></div><!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">20</h6><small>Post per day</small>
-                            </div>
-                          </div><!-- Group stat END -->
+                              src="/01.jpg" alt=""></a></div><!-- Info -->
+                          <h5 class="mb-0"><a href="group-details.html">前端开发</a></h5>
+                          <div>
+                            <small>
+                              <span class="iconfont icon-yuanshuju-chuangjianren"></span> 阿庆
+                            </small>
+                          </div>
+                          <div>
+                            <small>
+                              <span class="iconfont icon-yuanshuju-chuangjianshijian"></span> 2022-9-25 19:25:46
+                            </small>
+                          </div>
+                          <!-- Group stat START -->
+<!--                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">-->
+<!--                            &lt;!&ndash; Group stat item &ndash;&gt;-->
+<!--                            <div>-->
+<!--                              <h6 class="mb-0">32k</h6><small>Members</small>-->
+<!--                            </div>&lt;!&ndash; Divider &ndash;&gt;-->
+<!--                            <div class="vr"></div>&lt;!&ndash; Group stat item &ndash;&gt;-->
+<!--                            <div>-->
+<!--                              <h6 class="mb-0">20</h6><small>Post per day</small>-->
+<!--                            </div>-->
+<!--                          </div>-->
                           <!-- Avatar group START -->
                           <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/02.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/03.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/04.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/05.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
                             <li class="avatar avatar-xs">
                               <div class="avatar-img rounded-circle bg-primary"><span
@@ -506,7 +110,7 @@
                           </ul><!-- Avatar group END -->
                         </div><!-- Card body END -->
                         <!-- Card Footer START -->
-                        <div class="card-footer text-center"><a class="btn btn-success-soft btn-sm" href="#!">Join group
+                        <div class="card-footer text-center"><a class="btn btn-success-soft btn-sm" href="#!">加入群组
                         </a></div><!-- Card Footer END -->
                       </div><!-- Card END -->
                     </div>
@@ -514,120 +118,47 @@
                       <!-- Card START -->
                       <div class="card">
                         <div class="h-80px rounded-top"
-                             style="background-image:url(assets/img/027.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                             style="background-image:url(public/01.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
                         </div><!-- Card body START -->
                         <div class="card-body text-center pt-0">
                           <!-- Avatar -->
                           <div class="avatar avatar-lg mt-n5 mb-3"><a href="group-details.html"><img
                               class="avatar-img rounded-circle border border-white border-3 bg-white"
-                              src="assets/img/021.svg" alt=""></a></div><!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">Beauty queens</a></h5><small><i
-                            class="bi bi-globe pe-1"></i>Public Group</small><!-- Group stat START -->
-                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">23k</h6><small>Members</small>
-                            </div><!-- Divider -->
-                            <div class="vr"></div><!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">12</h6><small>Post per day</small>
-                            </div>
-                          </div><!-- Group stat END -->
+                              src="/01.jpg" alt=""></a></div><!-- Info -->
+                          <h5 class="mb-0"><a href="group-details.html">后端开发</a></h5>
+                          <div>
+                            <small>
+                              <span class="iconfont icon-yuanshuju-chuangjianren"></span> 冀欢
+                            </small>
+                          </div>
+                          <div>
+                            <small>
+                              <span class="iconfont icon-yuanshuju-chuangjianshijian"></span> 2022-9-25 19:25:46
+                            </small>
+                          </div>
+
+                          <!-- Group stat START -->
+<!--                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">-->
+<!--                            &lt;!&ndash; Group stat item &ndash;&gt;-->
+<!--                            <div>-->
+<!--                              <h6 class="mb-0">32k</h6><small>Members</small>-->
+<!--                            </div>&lt;!&ndash; Divider &ndash;&gt;-->
+<!--                            <div class="vr"></div>&lt;!&ndash; Group stat item &ndash;&gt;-->
+<!--                            <div>-->
+<!--                              <h6 class="mb-0">05</h6><small>Post per day</small>-->
+<!--                            </div>-->
+<!--                          </div>&lt;!&ndash; Group stat END &ndash;&gt;-->
                           <!-- Avatar group START -->
                           <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/06.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/07.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/09.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
-                            <li class="avatar avatar-xs">
-                              <div class="avatar-img rounded-circle bg-primary"><span
-                                  class="smaller text-white position-absolute top-50 start-50 translate-middle">+13</span>
-                              </div>
-                            </li>
-                          </ul><!-- Avatar group END -->
-                        </div><!-- Card body END -->
-                        <!-- Card Footer START -->
-                        <div class="card-footer text-center"><a class="btn btn-success-soft btn-sm" href="#!">Join group
-                        </a></div><!-- Card Footer END -->
-                      </div><!-- Card END -->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                      <!-- Card START -->
-                      <div class="card">
-                        <div class="h-80px rounded-top"
-                             style="background-image:url(assets/img/035.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div><!-- Card body START -->
-                        <div class="card-body text-center pt-0">
-                          <!-- Avatar -->
-                          <div class="avatar avatar-lg mt-n5 mb-3"><a href="group-details.html"><img
-                              class="avatar-img rounded-circle border border-white border-3 bg-white"
-                              src="assets/img/091.svg" alt=""></a></div><!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">Eternal triangle</a></h5><small><i
-                            class="bi bi-globe pe-1"></i>Public Group</small><!-- Group stat START -->
-                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">45k</h6><small>Members</small>
-                            </div><!-- Divider -->
-                            <div class="vr"></div><!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">16</h6><small>Post per day</small>
-                            </div>
-                          </div><!-- Group stat END -->
-                          <!-- Avatar group START -->
-                          <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/11.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/10.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs">
-                              <div class="avatar-img rounded-circle bg-primary"><span
-                                  class="smaller text-white position-absolute top-50 start-50 translate-middle">+12</span>
-                              </div>
-                            </li>
-                          </ul><!-- Avatar group END -->
-                        </div><!-- Card body END -->
-                        <!-- Card Footer START -->
-                        <div class="card-footer text-center"><a class="btn btn-danger-soft btn-sm" href="#!">Leave group
-                        </a></div><!-- Card Footer END -->
-                      </div><!-- Card END -->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                      <!-- Card START -->
-                      <div class="card">
-                        <div class="h-80px rounded-top"
-                             style="background-image:url(assets/img/046.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div><!-- Card body START -->
-                        <div class="card-body text-center pt-0">
-                          <!-- Avatar -->
-                          <div class="avatar avatar-lg mt-n5 mb-3"><a href="group-details.html"><img
-                              class="avatar-img rounded-circle border border-white border-3 bg-white"
-                              src="assets/img/101.svg" alt=""></a></div><!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">Mountain movers</a></h5><small><i
-                            class="bi bi-lock pe-1"></i>Private Group</small><!-- Group stat START -->
-                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">32k</h6><small>Members</small>
-                            </div><!-- Divider -->
-                            <div class="vr"></div><!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">05</h6><small>Post per day</small>
-                            </div>
-                          </div><!-- Group stat END -->
-                          <!-- Avatar group START -->
-                          <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/10.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/142.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/132.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/12.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/11.jpg"
+                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
                                                               alt="avatar"></li>
                             <li class="avatar avatar-xs">
                               <div class="avatar-img rounded-circle bg-primary"><span
@@ -637,275 +168,12 @@
                           </ul><!-- Avatar group END -->
                         </div><!-- Card body END -->
                         <!-- Card Footer START -->
-                        <div class="card-footer text-center"><a class="btn btn-danger-soft btn-sm" href="#!">Leave group
-                        </a></div><!-- Card Footer END -->
-                      </div><!-- Card END -->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                      <!-- Card START -->
-                      <div class="card">
-                        <div class="h-80px rounded-top"
-                             style="background-image:url(assets/img/052.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div><!-- Card body START -->
-                        <div class="card-body text-center pt-0">
-                          <!-- Avatar -->
-                          <div class="avatar avatar-lg mt-n5 mb-3"><a href="group-details.html"><img
-                              class="avatar-img rounded-circle border border-white border-3 bg-white"
-                              src="assets/img/12.svg" alt=""></a></div><!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">Hard workers</a></h5><small><i
-                            class="bi bi-lock pe-1"></i>Private Group</small><!-- Group stat START -->
-                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">12k</h6><small>Members</small>
-                            </div><!-- Divider -->
-                            <div class="vr"></div><!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">05</h6><small>Post per day</small>
-                            </div>
-                          </div><!-- Group stat END -->
-                          <!-- Avatar group START -->
-                          <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/082.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/04.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="assets/img/06.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs">
-                              <div class="avatar-img rounded-circle bg-primary"><span
-                                  class="smaller text-white position-absolute top-50 start-50 translate-middle">+23</span>
-                              </div>
-                            </li>
-                          </ul><!-- Avatar group END -->
-                        </div><!-- Card body END -->
-                        <!-- Card Footer START -->
-                        <div class="card-footer text-center"><a class="btn btn-success-soft btn-sm" href="#!">Join group
+                        <div class="card-footer text-center"><a class="btn btn-danger-soft btn-sm" href="#!">离开群组
                         </a></div><!-- Card Footer END -->
                       </div><!-- Card END -->
                     </div>
                   </div>
-                </div><!-- Friends' groups tab END -->
-
-                <!-- Suggested for you START -->
-                <div class="tab-pane fade" id="tab-2">
-                  <div class="row g-4">
-                    <div class="col-sm-6 col-lg-4">
-                      <!-- Card START -->
-                      <div class="card">
-                        <div class="h-80px rounded-top"
-                             style="background-image:url(assets/img/011.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div>
-                        <!-- Card body START -->
-                        <div class="card-body text-center pt-0">
-                          <!-- Avatar -->
-                          <div class="avatar avatar-lg mt-n5 mb-3">
-                            <a href="group-details.html"><img
-                                class="avatar-img rounded-circle border border-white border-3 bg-white"
-                                src="assets/img/011.svg" alt=""></a>
-                          </div>
-                          <!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">Real humans</a></h5>
-                          <small> <i class="bi bi-globe pe-1"></i> Public Group</small>
-                          <!-- Group stat START -->
-                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">23k</h6>
-                              <small>Members</small>
-                            </div>
-                            <!-- Divider -->
-                            <div class="vr"></div>
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">12</h6>
-                              <small>Post per day</small>
-                            </div>
-                          </div>
-                          <!-- Group stat END -->
-                          <!-- Avatar group START -->
-                          <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/06.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/07.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/09.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <div class="avatar-img rounded-circle bg-primary"><span
-                                  class="smaller text-white position-absolute top-50 start-50 translate-middle">+12</span>
-                              </div>
-                            </li>
-                          </ul>
-                          <!-- Avatar group END -->
-                        </div>
-                        <!-- Card body END -->
-                        <!-- Card Footer START -->
-                        <div class="card-footer text-center">
-                          <a class="btn btn-danger-soft btn-sm" href="#!"> Leave group </a>
-                        </div>
-                        <!-- Card Footer END -->
-                      </div>
-                      <!-- Card END -->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                      <!-- Card START -->
-                      <div class="card">
-                        <div class="h-80px rounded-top"
-                             style="background-image:url(assets/img/027.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div>
-                        <!-- Card body START -->
-                        <div class="card-body text-center pt-0">
-                          <!-- Avatar -->
-                          <div class="avatar avatar-lg mt-n5 mb-3">
-                            <a href="group-details.html"><img
-                                class="avatar-img rounded-circle border border-white border-3 bg-white"
-                                src="assets/img/031.svg" alt=""></a>
-                          </div>
-                          <!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">Strong signals</a></h5>
-                          <small> <i class="bi bi-lock pe-1"></i> Private Group</small>
-                          <!-- Group stat START -->
-                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">45k</h6>
-                              <small>Members</small>
-                            </div>
-                            <!-- Divider -->
-                            <div class="vr"></div>
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">16</h6>
-                              <small>Post per day</small>
-                            </div>
-                          </div>
-                          <!-- Group stat END -->
-                          <!-- Avatar group START -->
-                          <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/11.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/10.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <div class="avatar-img rounded-circle bg-primary"><span
-                                  class="smaller text-white position-absolute top-50 start-50 translate-middle">+05</span>
-                              </div>
-                            </li>
-                          </ul>
-                          <!-- Avatar group END -->
-                        </div>
-                        <!-- Card body END -->
-                        <!-- Card Footer START -->
-                        <div class="card-footer text-center">
-                          <a class="btn btn-success-soft btn-sm" href="#!"> Join group </a>
-                        </div>
-                        <!-- Card Footer END -->
-                      </div>
-                      <!-- Card END -->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                      <!-- Card START -->
-                      <div class="card">
-                        <div class="h-80px rounded-top"
-                             style="background-image:url(assets/img/035.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div>
-                        <!-- Card body START -->
-                        <div class="card-body text-center pt-0">
-                          <!-- Avatar -->
-                          <div class="avatar avatar-lg mt-n5 mb-3">
-                            <a href="group-details.html"><img
-                                class="avatar-img rounded-circle border border-white border-3 bg-white"
-                                src="assets/img/051.svg" alt=""></a>
-                          </div>
-                          <!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">Team yes, we can</a></h5>
-                          <small> <i class="bi bi-lock pe-1"></i> Private Group</small>
-                          <!-- Group stat START -->
-                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">32k</h6>
-                              <small>Members</small>
-                            </div>
-                            <!-- Divider -->
-                            <div class="vr"></div>
-                            <!-- Group stat item -->
-                            <div>
-                              <h6 class="mb-0">05</h6>
-                              <small>Post per day</small>
-                            </div>
-                          </div>
-                          <!-- Group stat END -->
-                          <!-- Avatar group START -->
-                          <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/10.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/142.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/132.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/12.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <img class="avatar-img rounded-circle" src="assets/img/11.jpg" alt="avatar">
-                            </li>
-                            <li class="avatar avatar-xs">
-                              <div class="avatar-img rounded-circle bg-primary"><span
-                                  class="smaller text-white position-absolute top-50 start-50 translate-middle">+08</span>
-                              </div>
-                            </li>
-                          </ul>
-                          <!-- Avatar group END -->
-                        </div>
-                        <!-- Card body END -->
-                        <!-- Card Footer START -->
-                        <div class="card-footer text-center">
-                          <a class="btn btn-success-soft btn-sm" href="#!"> Join group </a>
-                        </div>
-                        <!-- Card Footer END -->
-                      </div>
-                      <!-- Card END -->
-                    </div>
-                  </div>
                 </div>
-                <!-- Suggested for you END -->
-
-                <!-- Popular near you START -->
-                <div class="tab-pane fade" id="tab-3">
-                  <!-- Add group -->
-                  <div class="my-sm-5 py-sm-5 text-center">
-                    <i class="display-1 text-muted bi bi-people"> </i>
-                    <h4 class="mt-2 mb-3 text-body">No group founds</h4>
-                    <button class="btn btn-primary-soft btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#modalCreateGroup"> Click here to add </button>
-                  </div>
-                </div>
-                <!-- Popular near you END -->
-
-                <!-- More suggestions START -->
-                <div class="tab-pane fade" id="tab-4">
-                  <!-- Add group -->
-                  <div class="my-sm-5 py-sm-5 text-center">
-                    <i class="display-1 text-muted bi bi-people"> </i>
-                    <h4 class="mt-2 mb-3 text-body">No group founds</h4>
-                    <button class="btn btn-primary-soft btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#modalCreateGroup"> Click here to add </button>
-                  </div>
-                </div>
-                <!-- More suggestions END -->
-
               </div>
             </div>
             <!-- Card body END -->
@@ -913,15 +181,12 @@
           <!-- Card END -->
         </div>
         <!-- Right sidebar END -->
-
       </div> <!-- Row END -->
-    </div>
     <!-- Container END -->
 
   </main>
-  <!-- **************** MAIN CONTENT END **************** -->
-
-  <!-- Modal create group START -->
+  </body>
+  <!--模态框  -->
   <div class="modal fade" id="modalCreateGroup" tabindex="-1" aria-labelledby="modalLabelCreateGroup"
        aria-hidden="true">
     <div class="modal-dialog">
@@ -951,7 +216,7 @@
                   </div><!-- Avatar preview -->
                   <div class="avatar avatar-xl position-relative"><img id="avatar-preview"
                                                                        class="avatar-img rounded-circle border border-white border-3 shadow"
-                                                                       src="assets/img/placeholder.jpg" alt=""></div>
+                                                                       src="/047.jpg" alt=""></div>
                 </div><!-- Avatar remove button -->
                 <div class="avatar-remove"><button type="button" id="avatar-reset-img"
                                                    class="btn btn-light">Delete</button></div>
@@ -974,15 +239,23 @@
         <div class="modal-footer"><button type="button" class="btn btn-success-soft">Create now</button></div>
       </div>
     </div>
-  </div><!-- Modal create group END -->
-  <!-- ======================= JS libraries,plugins and custom scripts -->
-  <!-- Bootstrap JS -->
-  </body>
+  </div>
 </template>
-
 <script>
+import headerNav from "@/components/UniversalComponents/headerNav";
+import indexLeft from '@/components/UniversalComponents/indexLeft'
 export default {
-  name: "groups"
+  name: "groups",
+  components:{
+    'IndexLeft':indexLeft,
+    'HeaderNav':headerNav
+  },
+  data()
+  {
+    return {
+
+    }
+  }
 }
 </script>
 
@@ -990,4 +263,6 @@ export default {
 @import url(@/css/all.min.css);
 @import url(@/css/style.css);
 @import url(@/css/css2.css);
+@import url(@/Icon/createPerson/iconfont.css);
+@import url(@/Icon/createTime/iconfont.css);
 </style>
