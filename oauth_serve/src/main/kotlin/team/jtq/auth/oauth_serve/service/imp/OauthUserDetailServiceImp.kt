@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.EnableTransactionManagement
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.Base64Utils
 import org.springframework.util.DigestUtils
 import team.jtq.auth.oauth_serve.adapter.UserDetailsAdapter
@@ -82,16 +85,18 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
         return false
     }
 
+    @Transactional
     override fun addAccount(entity: RegisterEntity): String? {
         val obj = OauthUser::class.java
         val instance = obj.newInstance()
         val systemID = roleService.lodeSystemRole()
         val systemTime = LocalDateTime.now()
         val role = roleService.getAllGeneralizableRole()
+        val encoder = BCryptPasswordEncoder()
 
         instance.account = entity.account
         instance.userName = entity.username
-        instance.password = entity.password
+        instance.password = encoder.encode(entity.password)
         instance.phone = entity.phone
         instance.delFlag = 0
         instance.gender = entity.gender
@@ -115,6 +120,9 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
                 if (OAuthServerConfig.domainName.endsWith("/")) OAuthServerConfig.domainName else OAuthServerConfig.domainName + "/" +
                         "oauth/confirm_account/" + Base64Utils.encodeToString(instance.id.toByteArray(Charsets.UTF_8))+"/" +code
             val email = emailService.sendConfirmationEmail(address, entity.account, "Epiphyllum注册确认")
+            if(!email){
+                throw RuntimeException("Email Error")
+            }
             return instance.id
         } else {
             try {
@@ -149,7 +157,7 @@ class OauthUserDetailServiceImp : ServiceImpl<OauthUserMapper, OauthUser>(), Oau
                     }
                 }
             } catch (e: Exception) {
-                return null
+                throw RuntimeException("Sql Error")
             }
         }
         return null

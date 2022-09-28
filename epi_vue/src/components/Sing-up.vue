@@ -9,36 +9,39 @@
           <div class="card card-body rounded-3 p-4 p-sm-5">
             <div class="text-center">
               <!-- Title -->
-              <h1 class="mb-2">Sign up</h1><span class="d-block">Already have an account? <router-link to="sing-in">Sing in</router-link></span>
+              <h1 class="mb-2">Sign up</h1><span class="d-block">Already have an account?
+              <router-link to="sing-in">Sing in</router-link>
+            </span>
             </div><!-- Form START -->
             <form class="mt-4">
               <!-- Email -->
               <div class="mb-3 input-group-lg">
-                <input type="email" class="form-control"
-                                                      placeholder="Enter email" v-model="SingUpForm.account">
+                <input type="text" class="form-control" placeholder="Nick Name" v-model="SingUpForm.username">
+              </div>
+              <div class="mb-3 input-group-lg">
+                <input type="email" class="form-control" placeholder="Enter email" v-model="SingUpForm.account">
               </div><!-- New password -->
               <div class="mb-3 position-relative">
-
-                <div class="input-group input-group-lg"><input class="form-control fakepassword"
-                                                               type="password" id="psw-input"
-                                                               placeholder="Enter new password"
-                                                               v-model="SingUpForm.password" @input="passwordcomplex">
+                <div class="input-group input-group-lg">
+                  <input class="form-control fakepassword" type="password" id="psw-input" placeholder="Enter new password"
+                         v-model="SingUpForm.password" @input="passwordcomplex">
                 </div><!-- Pswmeter -->
                 <el-form-item>
                   <div class="input_span">
-                    <span :style="{'background-color':(score>0&&score<25)?'#FC5F76':((score>=25&&score<35)?'#FF9900':(score>=35?'#33CC00':'#BBBBBB'))}"></span>
+                    <span :style="{'background-color':(score>=0&&score<25)?'#FC5F76':((score>=25&&score<35)?'#FF9900':(score>=35?'#33CC00':'#BBBBBB'))}"></span>
                     <span :style="{'background-color':((score>=25&&score<35)?'#FF9900':(score>=35?'#33CC00':'#BBBBBB'))}"></span>
                     <span :style="{'background-color':score>=35?'#33CC00':'#BBBBBB'}"></span>
                   </div>
                 </el-form-item>
               </div><!-- Confirm password -->
-              <div class="mb-3 input-group-lg"><input class="form-control" type="password" placeholder="Confirm password" v-model="ConfirmPassword">
+              <div class="mb-3 input-group-lg">
+                <input class="form-control" type="password" placeholder="Confirm password" v-model="ConfirmPassword">
               </div>
               <div class="mb-3 input-group-lg">
                 <input class="form-control" type="text" placeholder="Phone Number" v-model="SingUpForm.phone">
               </div>
               <div class="mb-3 input-group-lg">
-                <input class="form-control" type="text" placeholder="ID Number" v-model="SingUpForm.identification">
+                <input class="form-control" type="password" placeholder="ID Number" v-model="SingUpForm.identification">
               </div>
               <div style="margin-top: 2px;margin-left: 10px;margin-bottom: 5px">
                 <el-switch
@@ -48,31 +51,33 @@
                     @change="genderFormat"
                 />
               </div>
-
               <small>We'll never share your Info with anyone else.</small>
               <div class="d-grid mt-2">
-                <button type="submit" class="btn btn-lg btn-primary">Sign me up</button>
+                <button type="button" class="btn btn-lg btn-primary" @click="submitSingUpForm">Sign me up</button>
               </div><!-- Copyright -->
               <p class="mb-0 mt-3 text-center">©2022 <a href="/">Epiphyllum.</a>All rights reserved</p>
-            </form><!-- Form END -->
-          </div><!-- Sign up END -->
+            </form>
+          </div>
         </div>
-      </div><!-- Row END -->
-    </div><!-- Container END -->
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
 
+import {ElMessage} from "element-plus";
+import sha256 from "js-sha256";
+
 
 export default {
   name: "Sing-up",
-
   data() {
     return {
       SingUpForm: {
         account: '',
         password: '',
+        username:'',
         phone:'',
         identification:'',
         gender:''
@@ -82,7 +87,6 @@ export default {
       score:-1
     }
   },
-
   methods: {
     genderFormat(){
       if(this.vgender){
@@ -91,6 +95,53 @@ export default {
       else{
         this.SingUpForm.gender=0
       }
+    },
+    messageBox(msg,type){
+      ElMessage({
+        showClose:false,
+        message:msg,
+        type:type,
+        grouping: true
+      })
+    },
+    async submitSingUpForm(){
+      if(this.SingUpForm.account.length === 0){
+        this.messageBox("请输入邮箱","error")
+        return
+      }
+      if(this.SingUpForm.password.length === 0){
+        this.messageBox("请输入密码","error")
+        return
+      }
+      if(this.SingUpForm.phone.length === 0){
+        this.messageBox("请输入手机号","error")
+        return
+      }
+      if(this.SingUpForm.identification.length === 0){
+        this.messageBox("请输入身份证","error")
+        return
+      }
+      // if(this.score<25){
+      //   this.messageBox("密码强度太低，请重新输入","error")
+      // }
+      // let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+      // if(!reg.test(this.SingUpForm.identification)){
+      //   this.messageBox("身份证格式错误","error")
+      // }
+      this.SingUpForm.password = sha256.sha256(this.SingUpForm.password)
+      await this.$axios.post('/register',this.SingUpForm)
+          .then(res=>{
+            if(res.data.code === 200){
+              this.$router.push({path:'/sing-in'})
+            }
+            else{
+              this.messageBox(res.data.msg,"error")
+
+            }
+          })
+          .catch(err=>{
+            this.messageBox(err.data.msg,"error")
+          })
     },
     passwordcomplex(){
       let passwordscore = 0
@@ -144,7 +195,7 @@ export default {
       let countinuedCount = 0;
       for(let i =0;i<pwdArr.length;i++){
         if(pwdArr[i+1]){
-          if((pwdArr[i].charCodeAt(0)+1==pwdArr[i+1].charCodeAt(0))||(pwdArr[i].charCodeAt(0)-1==pwdArr[i+1].charCodeAt(0))){  //如果相邻两个字符连续
+          if((pwdArr[i].charCodeAt(0)+1===pwdArr[i+1].charCodeAt(0))||(pwdArr[i].charCodeAt(0)-1===pwdArr[i+1].charCodeAt(0))){  //如果相邻两个字符连续
             isContinued = true;  //开始记录连续
             countinuedCount++    //记录连续次数
           }else{
@@ -156,7 +207,7 @@ export default {
           }
         }
       }
-      if(countinuedCount == pwdArr.length-1){
+      if(countinuedCount === pwdArr.length-1){
         passwordscore = 0   //如果整个密码连续，分数为0
       }else{
         passwordscore -= countinuedCount
@@ -165,9 +216,9 @@ export default {
         passwordscore = 0
       }
       for(let i = 0;i<pwdArr.length;i++){  //如果整个密码由单一字符构成，分数为0
-        if(i ==pwdArr.length-1){
+        if(i ===pwdArr.length-1){
           passwordscore = 0
-        }else if(pwdArr[i]!=pwdArr[i+1]){
+        }else if(pwdArr[i]!==pwdArr[i+1]){
           break
         }
       }

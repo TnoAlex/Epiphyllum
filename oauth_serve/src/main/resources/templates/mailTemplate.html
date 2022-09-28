@@ -54,14 +54,14 @@
 
                                                             <p class="cTMail-content"
                                                                style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;">
-                                                                <span style="color: rgb(51, 51, 51); font-size: 14px;" th:text="'点击以下按钮，激活您的账号，链接有效期'|${aliveTime}|'分钟'">
+                                                                <span style="color: rgb(51, 51, 51); font-size: 14px;" th:text="${PromptInfo}">
                                                                     <span style="font-weight: bold;">非本人操作可忽略。</span>
                                                                 </span>
                                                             </p>
 
                                                             <p class="cTMail-content"
                                                                style="font-size: 14px; color: rgb(51, 51, 51); line-height: 24px; margin: 6px 0px 0px; word-wrap: break-word; word-break: break-all;">
-                                                                <a id="cTMail-btn" href="" th:attr="${confirmAddress}"
+                                                                <a id="cTMail-btn" th:href="${confirmAddress}"
                                                                    style="font-size: 16px; line-height: 45px; display: block; background-color: rgb(0, 164, 255); color: rgb(255, 255, 255); text-align: center; text-decoration: none; margin-top: 20px; border-radius: 3px;">
                                                                     点击此处验证邮箱
                                                                 </a>
@@ -73,7 +73,7 @@
                                                                     <br>
                                                                     无法正常显示？请复制以下链接至浏览器打开：
                                                                     <br>
-                                                                    <a href=""  th:attr="${confirmAddress}"
+                                                                    <a th:href= "${confirmAddress}"
                                                                        style="color: rgb(0, 164, 255); text-decoration: none; word-break: break-all; overflow-wrap: normal; font-size: 14px;">
                                                                         这里是激活账号的链接
                                                                     </a>

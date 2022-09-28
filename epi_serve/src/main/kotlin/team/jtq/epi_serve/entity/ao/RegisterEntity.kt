@@ -12,7 +12,7 @@ data class RegisterEntity(
     var phone:String,
     var gender:Int,
     val identification:String,
-    var accountLevel:Int,
-    var addition:String
+    var accountLevel:Int?,
+    var addition:String?
 ) {
 }

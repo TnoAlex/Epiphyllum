@@ -59,19 +59,30 @@ class UserController {
 
 
     //查看消息
-    @PostMapping("/usd/user/notice/{token}/{pageIndex}/{pageItems}")
+    @PostMapping("/usd/user/notice/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun selectNotice(@PathVariable token: String, @PathVariable pageIndex: String, @PathVariable pageItems: String): Result {
         return userService.selectUserNotice(token,pageIndex, pageItems)
     }
 
     //已读消息
-    @PostMapping("/usd/user/notice/mark-notice/{token}/{nid}")
+    @PostMapping("/usd/user/notice/mark-notice/{nid}/{token}")
     @ResponseBody
     fun markNotice(@PathVariable nid: String, @PathVariable token: String): Result {
         return userService.markNotice(token, nid)
     }
 
+    @PostMapping("/usd/user/notice/remove-notice/{nid}/{token}")
+    @ResponseBody
+    fun removeNotice(@PathVariable nid: String, @PathVariable token: String): Result {
+        return userService.removeNotice(token, nid)
+    }
+
+    @PostMapping("/usd/user/notice/markall-notice/{token}")
+    @ResponseBody
+    fun markAllNotice(@PathVariable token: String, @RequestBody nidList: List<String>): Result {
+        return userService.markAllNotice(token,nidList)
+    }
     //获取用户基础信息
     @PostMapping("/usd/user/info/common/{token}")
     @ResponseBody
@@ -94,7 +105,7 @@ class UserController {
     }
 
     //查看比赛结果
-    @PostMapping("/usd/user/race/result/{token}/{pageIndex}/{pageItems}")
+    @PostMapping("/usd/user/race/result/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun userRaceResult(@PathVariable token: String, @PathVariable pageIndex: String, @PathVariable pageItems: String): Result {
         return userService.selectUserRaceResult(token, pageIndex, pageItems)

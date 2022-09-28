@@ -15,3 +15,4 @@ data class UsdUser(
     var portrait:String,
     var nickName:String
 )
+

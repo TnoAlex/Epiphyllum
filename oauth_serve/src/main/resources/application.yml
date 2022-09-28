@@ -13,6 +13,12 @@ spring:
     password: QCWALYFSSZANWCAY
     username: tommills@163.com
     test-connection: false
+    properties:
+      mail:
+        smtp:
+          auth: true
+
+
   security:
     oauth2:
       resourceserver:
@@ -59,5 +65,5 @@ mybatis-plus:
 
 deploy:
   domainName: http://127.0.0.1:8088
-  minimumCheckLevel: 2
+  minimumCheckLevel: 3
   maxConfirmCodeLive: 10

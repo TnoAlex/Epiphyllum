@@ -56,3 +56,5 @@ authorization-server:
   UTCTimeZone: '+8'
   RSAPath: /rsa/appPrivateKey
   appCachePath: E:\springCache
+  defaultUserIco: /ico/default_ico.png
+  userAccountLevel: 1

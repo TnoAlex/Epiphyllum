@@ -59,12 +59,10 @@
 </template>
 
 <script>
-import axios from "axios";
 import {ElMessage} from "element-plus";
-// import sha256 from 'js-sha256';
-let codetime = 0
-axios.defaults.baseURL = '/api'
+import sha256 from "js-sha256";
 
+let codetime = 0
 export default {
   name: "Sing-in",
   data() {
@@ -79,7 +77,7 @@ export default {
   },
   beforeMount() {
     codetime = new Date().getTime().toString().substr(0, 10)
-    axios.get('/code/' + codetime)
+    this.$axios.get('/code/' + codetime)
         .then(res => {
           this.$refs.v_code.src = res.data.data
         })
@@ -87,81 +85,69 @@ export default {
   methods: {
     loadVCode() {
       codetime = new Date().getTime().toString().substr(0, 10)
-      axios.get('/code/' + codetime)
+      this.$axios.get('/code/' + codetime)
           .then(res => {
             this.$refs.v_code.src = res.data.data
           })
     },
+    messageBox(msg,type){
+      ElMessage({
+        showClose:false,
+        message:msg,
+        type:type,
+        grouping: true
+      })
+    },
     async submitLogin() {
       if (this.LoginForm.code.length === 0) {
-        ElMessage({
-          showClose: false,
-          message: '请输入验证码',
-          type: 'error',
-          grouping: true
-        })
+        this.messageBox("请输入验证码","error")
+        return
       }
       if (this.LoginForm.username.length === 0) {
-        ElMessage({
-          showClose: false,
-          message: '请输入用户名',
-          type: 'error',
-          grouping: true
-        })
+        this.messageBox("请输入用户名","error")
+        return
       }
       if (this.LoginForm.password.length === 0) {
-        ElMessage({
-          showClose: false,
-          message: '请输入密码',
-          type: 'error',
-          grouping: true
-        })
+        this.messageBox("请输入密码","error")
+        return
       }
       this.LoginForm.timestamp = codetime
-      // this.LoginForm.password = sha256.sha256(this.LoginForm.password)
-      await axios.post('/login', this.LoginForm)
+      this.LoginForm.password = sha256.sha256(this.LoginForm.password)
+      await this.$axios.post('/login', this.LoginForm)
           .then( res => {
             this.$cookies.set("tokens", res.data.data)
           })
           .catch(err => {
-            ElMessage({
-              showClose: false,
-              message: err.data.msg,
-              type: 'error',
-              grouping: true
-            })
-          })
-      axios.interceptors.response.use(res => {
-            if (res.data.code > 200) {
-              ElMessage({
-                showClose: false,
-                message: res.data.msg,
-                type: 'error',
-                grouping: true
-              })
-            }
-            return res
-          }, err => {
-            ElMessage({
-              showClose: false,
-              message: err.data.msg,
-              type: 'error',
-              grouping: true
-            })
-            return err
+            this.messageBox(err.data.msg,"error")
           }
       )
       const url = "/doLogin/" + this.$cookies.get("tokens").accessToken
-      await axios.post(url)
+      await this.$axios.post(url)
           .then( async res => {
             if (res.data.code === 200) {
               const url = '/usd/user/info/common/' + this.$cookies.get("tokens").accessToken
-              await axios.post(url)
+              await this.$axios.post(url)
                   .then(res => {
-                    this.$cookies.set("userCommonInfo", res.data.data)
+                    if(res.data.code===200){
+                      localStorage.setItem("userCommonInfo",JSON.stringify(res.data.data))
+                      this.$router.push({path: '/index'})
+                    }else{
+                      this.messageBox(res.data.msg,"error")
+                    }
+
+                  })
+                  .catch(err=>{
+                    this.messageBox(err.data.msg,"error")
                   })
             }
+            else{
+              this.messageBox(res.data.msg,"error")
+            }
           })
+          .catch(err=>{
+            this.messageBox(err.data.msg,"error")
+          })
+
     },
   }
 }

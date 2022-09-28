@@ -22,6 +22,7 @@ object AppResourceConfig {
     lateinit var UTCTimeZone: String
     lateinit var RSAPath:String
     lateinit var appCachePath:String
+    lateinit var defaultUserIco:String
 
     @Autowired
     lateinit var redisTemplate:RedisTemplate<String,Any>

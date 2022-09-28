@@ -8,8 +8,10 @@ import team.jtq.epi_serve.tools.Result
 interface UsdUserService : IService<UsdUser> {
     fun selectUserNotice(token: String, pageIndex: String, pageItems: String): Result
     fun markNotice(token: String, nid: String): Result
+    fun removeNotice(token: String,nid: String):Result
     fun getUserCommonInfo(token: String): Result
     fun getUserProtectedInfo(token: String): Result
     fun modfiyUser(token: String, entity: ModifyUserEntity): Result
     fun selectUserRaceResult(token: String, pageIndex: String, pageItems: String): Result
+    fun markAllNotice(token: String,list: List<String>):Result
 }
