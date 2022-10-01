@@ -3,6 +3,7 @@ package team.jtq.epi_serve.controller
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import team.jtq.epi_serve.entity.ao.CommentUploadEntity
 import team.jtq.epi_serve.entity.ao.PostUpLoadeEntity
 import team.jtq.epi_serve.service.UsdPostService
 import team.jtq.epi_serve.tools.Result
@@ -73,8 +74,8 @@ class PostController {
     //发评论
     @PostMapping("/usd/post/comment/{pid}/{token}")
     @ResponseBody
-    fun postComment(@PathVariable pid: String, @PathVariable token: String,@RequestBody comment:String): Result {
-        return postService.postComment(token, pid,comment)
+    fun postComment(@PathVariable pid: String, @PathVariable token: String,@RequestBody comment:CommentUploadEntity): Result {
+        return postService.postComment(token, pid,comment.content)
     }
 
     //显示帖子评论

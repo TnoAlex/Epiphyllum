@@ -52,8 +52,6 @@
                           </h6>
                           <span class="nav-item small">{{ item.createTime }}</span>
                         </div>
-                        <!-- {{item.job}}-->
-                        <p class="mb-0 small">{{ item.favorites }}</p>
                       </div>
                     </div>
                     <!-- Card feed action dropdown START -->
@@ -112,10 +110,15 @@
                         <i class="bi bi-hand-thumbs-up-fill pe-1">
                         </i>点赞({{ item.likes }})</a>
                     </li>
+                    <li class="nav-item" @click="transFavorites(index)">
+                      <a class="nav-link active" href="#!">
+                        <i class="bi bi-star-fill pe-1">
+                        </i>收藏({{ item.favorites }})</a>
+                    </li>
                     <li class="nav-item" @click="transCommentFold">
                       <a class="" href="#!">
                         <i class="bi bi-chat-fill pe-1">
-                        </i>{{ commentIsFold ? `${item.comments}条评论` : '收起评论' }}</a>
+                        </i>{{ commentIsFold ? `展开评论` : '收起评论' }}</a>
                     </li>
                     <li class="nav-item dropdown ms-sm-auto">
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
@@ -164,11 +167,9 @@
                       </div>
                       <!-- Comment box -->
                       <form class="w-100">
-                        <el-input v-model="addComment.commentText" autosize type="textarea" placeholder="Please input"/>
+                        <el-input v-model="newComment" autosize type="textarea" placeholder="说点什么~"/>
                         <div style="text-align: right">
-                          <el-button @click="commentCommit(index)" style="margin-top: 5px;" type="primary" size="small"
-                                     round>提交
-                          </el-button>
+                          <el-button @click="commentCommit(index)" style="margin-top: 5px;" type="primary" size="small" round>提交</el-button>
                         </div>
                       </form>
                     </div>
@@ -178,7 +179,7 @@
                         <!-- Avatar -->
                         <div class="avatar avatar-xs">
                           <a href="#!">
-                            <img class="avatar-img rounded-circle" :src="com.avatarImg" alt="">
+                            <img class="avatar-img rounded-circle" :src="com.createRavatar" alt="">
                           </a>
                         </div>
                         <div class="ms-2">
@@ -188,9 +189,9 @@
                             flex-direction: row;
                             align-items: center;">
                               <h6 style="margin: 0px;display: inline-block; ">
-                                <a href="#!">{{ com.name }}</a>
+                                <a href="#!">{{ com.createBy }}</a>
                               </h6>
-                              <small style="float: right" class="ms-2">{{ com.time }}
+                              <small style="float: right" class="ms-2">{{ com.createTime }}
                                 <span>
                                   <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2"
                                      id="cardNotiAction" data-bs-toggle="dropdown" aria-expanded="false">
@@ -206,7 +207,7 @@
                                 </span>
                               </small>
                             </div>
-                            <p class="small mb-0">{{ com.text }}</p>
+                            <p class="small mb-0">{{ com.commentContext }}</p>
                           </div>
                           <!-- Comment react -->
                           <ul class="nav nav-divider py-2 small">
@@ -1062,8 +1063,7 @@
               <div class="el-upload__tip">Upload up to four photos</div>
             </template>
           </el-upload>
-          <ul id="images" class="el-upload-list el-upload-list--picture-card" v-for="imgItem in tempPost.images"
-              :key="imgItem.index">
+          <ul id="images" class="el-upload-list el-upload-list--picture-card" v-for="imgItem in tempPost.images" :key="imgItem.index">
             <li class="el-upload-list__item is-success" tabindex="0">
               <img class="el-upload-list__item-thumbnail" :src="imgItem.imgSrc" alt="">
               <!--v-if-->
@@ -1144,11 +1144,12 @@ export default {
       commentText: "",//评论内容双向绑定
       dialogVisible: false,
       disabled: false,
-      addComment: {
-        commentText: "",
-        avatarImg: "/047.jpg",
-        time: "",
-        name: "",
+      newComment:'',
+      commentsList:{
+        commentContext:'',
+        createTime:'',
+        createBy:'',
+        createRavatar:''
       },
       postList: [],
       tempPost: {
@@ -1175,7 +1176,8 @@ export default {
                 createTime: i.createTime,
                 createUser: i.createUser,
                 likes: i.likes,
-                favorites: i.favorites
+                favorites: i.favorites,
+                commentsList:[]
               })
             }
             this.postLoading = res.data.data.length !== 8;
@@ -1234,7 +1236,6 @@ export default {
             groupId: "0",
             connect: JSON.stringify(this.tempPost)
           }
-          console.log(post)
           await this.$axios.post(url, post)
               .then(res => {
                 if (res.data.code === 200) {
@@ -1257,41 +1258,36 @@ export default {
         modalCancel() {
           this.tempPost.images = []
         },
-        commentCommit(index) {
+        async commentCommit(index) {
           //输入为空评论失败
-          if (this.addComment.commentText.length === 0) {
-            ElMessage({
-              message: '输入空白，评论失败~',
-              grouping: true,
-              type: 'warning',
-            })
+          if (this.newComment.length === 0) {
+            this.messageBox("请至少输入一个文字~","warning")
             return;
           }
-
-          this.addComment.name = "阿庆";
-          this.addComment.time = this.getNowDate();
-          this.addComment.avatarImg = '/031.jpg';
-          //获取该帖子所对应的id,到数据库里面去查找id，然后将新增的评论插入进去
-          //this.postList[index].id;
-          //将评论插入到前端代码
-          this.postList[index].commentsList.push(
-              {
-                name: this.addComment.name,
-                avatarImg: this.addComment.avatarImg,
-                time: this.addComment.time,
-                text: this.addComment.commentText
-              });
-          //发出请求，修改数据库
-          //请求完成之后，修改评论内容为空,双向绑定
-          this.addComment.commentText = "";
-          this.postList[index].comments = this.postList[index].comments + 1;
-
+          const url ="/usd/post/comment/"+this.postList[index].pid+"/"+this.$cookies.get("tokens").accessToken
+          await this.$axios.post(url,{content:JSON.stringify(this.newComment)})
+              .then(res=>{
+                if(res.data.code === 200){
+                  this.postList[index].commentsList.splice(0,0,{
+                    commentContext: this.newComment,
+                    createTime: this.getNowDate(),
+                    createBy: JSON.parse(localStorage.getItem("userCommonInfo")).nickName,
+                    createRavatar: JSON.parse(localStorage.getItem("userCommonInfo")).portrait
+                  })
+                  this.newComment = "";
+                }
+                else{
+                  this.messageBox(res.data.msg,"error")
+                }
+              }).catch(err=>{
+                this.messageBox(err,"error")
+              })
         },
         commentDelete(index, comIndex) {
           this.postList[index].commentsList.splice(comIndex, 1);
           this.postList[index].comments = this.postList[index].comments - 1;
         },
-        transCommentFold() {
+        async transCommentFold() {
           this.commentIsFold = !this.commentIsFold;
         },
         loadMoreComment(index) {
@@ -1313,8 +1309,11 @@ export default {
         },
         transLiked(index) {
           //前端将点数数增加
-          this.postList[index].liked = this.postList[index].liked + 1;
+          this.postList[index].likes = this.postList[index].likes + 1;
           //将点赞信息上传到后台
+        },
+        transFavorites(index){
+          this.postList[index].favorites = this.postList[index].favorites+ 1;
         },
         loadMorePost() {
           let winHeight = window.innerHeight || document.documentElement.clientHeight;

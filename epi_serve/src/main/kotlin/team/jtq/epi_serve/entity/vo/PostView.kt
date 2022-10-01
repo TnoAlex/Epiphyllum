@@ -10,5 +10,6 @@ data class PostView(
     var createTime:String,
     var createUser:String,
     var likes: Int,
-    var favorites: Int
+    var favorites: Int,
+    var comment:Int,
 )

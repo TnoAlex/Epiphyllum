@@ -1,6 +1,7 @@
 package team.jtq.epi_serve.tools
 
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
+import org.springframework.data.redis.core.RedisTemplate
 import team.jtq.epi_serve.config.BeanContext
 import team.jtq.epi_serve.entity.UsdPost
 import team.jtq.epi_serve.entity.UsdUser
