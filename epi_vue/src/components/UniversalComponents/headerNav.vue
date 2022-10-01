@@ -163,7 +163,7 @@ export default {
   name: "headerNav",
   data(){
     return {
-      userIco: require('@/static/imgs/default_ico.png'),
+      userIco: require('@/static/imgs/default_ico.jpg'),
     }
   },
   beforeMount() {

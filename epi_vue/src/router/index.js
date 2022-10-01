@@ -10,14 +10,14 @@ const router = createRouter({
                 component: () => import ('@/components/Login')
             },
             {
-                path: "/sing-in",
-                name: "sing-in",
-                component: () => import('@/components/Sing-in')
+                path: "/sign-in",
+                name: "sign-in",
+                component: () => import('@/components/Sign-in')
             },
             {
-                path: "/sing-up",
-                name: "sing-up",
-                component: () => import('@/components/Sing-up')
+                path: "/sign-up",
+                name: "sign-up",
+                component: () => import('@/components/Sign-up')
             },
             {
                 path:"/forgot-password",
@@ -31,7 +31,7 @@ const router = createRouter({
             },
             {
                 path: "/index",
-                name: "index_vue",
+                name: "index",
                 component: () => import('@/components/blog/index')
             },
             {

@@ -4,24 +4,30 @@ import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONArray
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.kotlin.KtUpdateWrapper
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.DigestUtils
+import team.jtq.epi_serve.config.BeanContext
 import team.jtq.epi_serve.entity.UsdGroup
+import team.jtq.epi_serve.entity.UsdGroupPost
 import team.jtq.epi_serve.entity.UsdGroupUser
+import team.jtq.epi_serve.entity.UsdPost
 import team.jtq.epi_serve.entity.ao.GroupUpLoadeEntity
 import team.jtq.epi_serve.entity.ao.ModifyGroupEntity
 import team.jtq.epi_serve.entity.ao.ResultStatusCode
 import team.jtq.epi_serve.mapper.UsdGroupMapper
+import team.jtq.epi_serve.mapper.UsdGroupPostMapper
 import team.jtq.epi_serve.mapper.UsdGroupUserMapper
+import team.jtq.epi_serve.mapper.UsdPostMapper
 import team.jtq.epi_serve.service.TokenService
 import team.jtq.epi_serve.service.UsdGroupService
 import team.jtq.epi_serve.service.UsdLinkService
 import team.jtq.epi_serve.tools.Result
-import java.security.acl.Group
+import team.jtq.epi_serve.tools.adapterPostView
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 import javax.annotation.Resource
@@ -40,6 +46,7 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
     private lateinit var tokenService: TokenService
 
     private val USER_JOINED_GROUP ="USER_JOINED_GROUP"
+    private val GROUPS = "GROUPS"
 
     @Transactional
     override fun addGroup(entity: GroupUpLoadeEntity, token: String): Result {
@@ -190,6 +197,32 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
         query.eq(UsdGroup::createUser, userId)
         val beanList = this.baseMapper.selectList(query)
         return Result.ok(beanList)
+    }
+
+    override fun selectGroupPost(token: String, gid: String, pageIndex: String, pageItems: String): Result {
+        val redisKey = GROUPS+":"+DigestUtils.md5DigestAsHex(gid.toByteArray(Charsets.UTF_8))
+        val postsId:List<String>
+        if(redisTemplate.hasKey(redisKey)){
+            val obj = redisTemplate.opsForValue().get(redisKey)
+            postsId = JSONArray.parseArray(obj as String,String::class.java)
+        }
+        else{
+             postsId = linkService.selectLinkinBeans(
+                 UsdGroupPostMapper::class,
+                 UsdGroupPost::class,
+                 listOf(Pair(UsdGroupPost::groupId,gid))
+             )?.map { it.postId }?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            redisTemplate.opsForValue().set(redisKey,JSONArray.toJSONString(postsId),10,TimeUnit.MINUTES)
+        }
+        val page = Page<UsdPost>(pageIndex.toLong(),pageItems.toLong())
+        val posts = linkService.batchSelectLinkBeansInListOnPage(
+            UsdPostMapper::class,
+            UsdPost::class,
+            Pair(UsdPost::id,postsId),
+            page
+        )?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        val res = adapterPostView(posts.records)?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        return Result.ok(res)
     }
 
     override fun selectUnJoinedGroup(token: String): Result {

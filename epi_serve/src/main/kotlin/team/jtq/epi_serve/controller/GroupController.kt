@@ -70,5 +70,12 @@ class GroupController {
         return groupService.selectUnJoinedGroup(token)
     }
 
+    @GetMapping("/usd/group/group-post/{gid}/{pageIndex}/{pageItems}/{token}")
+    @ResponseBody
+    fun selectGroupPost(@PathVariable token: String, @PathVariable gid: String, @PathVariable pageIndex: String,
+                        @PathVariable pageItems: String
+    ): Result {
+        return groupService.selectGroupPost(token, gid,pageIndex, pageItems)
+    }
 
 }

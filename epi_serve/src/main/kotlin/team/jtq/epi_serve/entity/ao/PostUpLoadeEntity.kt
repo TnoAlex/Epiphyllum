@@ -4,6 +4,6 @@ import team.jtq.epi_serve.annotation.NoArg
 
 @NoArg
 data class PostUpLoadeEntity(
-    val groupId:String,
+    var groupId:String?,
     val connect:String,
 )

@@ -53,7 +53,9 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
         instant.postContent = entity.connect
         instant.likes = 0
         instant.status = 1
-
+        if(entity.groupId==null){
+            entity.groupId = "0" //未指明的帖子统一认为是默认群组
+        }
         super<ServiceImpl>.save(instant)
         try {
             val link1Res = linkService.addLinkinBeans(
@@ -67,7 +69,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
             val link2Res = linkService.addLinkinBeans(
                 UsdGroupPostMapper::class,
                 UsdGroupPost::class,
-                Pair(UsdGroupPost::groupId.name, entity.groupId), Pair(UsdGroupPost::postId.name, instant.id)
+                Pair(UsdGroupPost::groupId.name, entity.groupId!!), Pair(UsdGroupPost::postId.name, instant.id)
             )
             if (!link2Res)
                 throw RuntimeException("Sql Error!")

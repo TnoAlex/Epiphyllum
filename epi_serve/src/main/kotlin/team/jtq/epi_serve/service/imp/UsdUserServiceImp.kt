@@ -16,6 +16,7 @@ import team.jtq.epi_serve.entity.ao.ModifyUserEntity
 import team.jtq.epi_serve.entity.ao.ResultStatusCode
 import team.jtq.epi_serve.entity.ao.UserProtectedInfo
 import team.jtq.epi_serve.entity.vo.NoticeView
+import team.jtq.epi_serve.entity.vo.UserInfoView
 import team.jtq.epi_serve.mapper.UsdNoticeMapper
 import team.jtq.epi_serve.mapper.UsdUserAwardsMapper
 import team.jtq.epi_serve.mapper.UsdUserMapper
@@ -98,7 +99,12 @@ class UsdUserServiceImp : ServiceImpl<UsdUserMapper, UsdUser>(), UsdUserService 
         val query = KtQueryWrapper(UsdUser::class.java)
         query.eq(UsdUser::uid, json["user_id"] as String)
         val user = this.baseMapper.selectOne(query) ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
-        return Result.ok(user)
+        val obj = UserInfoView::class.java.newInstance()
+        obj.nickName = user.nickName
+        obj.portrait = user.portrait
+        obj.occupation = user.occupation
+        obj.signature = user.signature
+        return Result.ok(obj)
     }
 
     private fun idCardMask(idCardNum: String): String {

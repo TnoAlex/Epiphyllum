@@ -1,15 +1,10 @@
 <template>
   <head>
-    <title>Social - Network,Community and Event Theme</title><!-- Meta Tags -->
+    <title>Notification</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Webestica.com">
-    <meta name="description" content="Bootstrap 5 based Social Media Network and Community Theme"><!-- Favicon -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
   </head>
   <body>
   <HeaderNav></HeaderNav>
- <!-- ======================= Header END -->
   <main>
     <!-- Container START -->
     <div class="container">
@@ -109,11 +104,11 @@
                 <el-button @click="loadMore" type="primary" round>{{ loading ? '点击加载更多' : '已经到底啦~' }}</el-button>
               </div>
             </div>
-          </div><!-- Card END -->
+          </div>
         </div>
-      </div><!-- Row END -->
-    </div><!-- Container END -->
-  </main><!-- **************** MAIN CONTENT END **************** -->
+      </div>
+    </div>
+  </main>
   </body>
 
 
@@ -236,7 +231,6 @@ export default {
           }).catch(err=>{
             this.messageBox(err.data.msg,"error")
           })
-      //然后发送给后端
     },
     timeTranslate(times) {
       const dateTime = times.split('T')

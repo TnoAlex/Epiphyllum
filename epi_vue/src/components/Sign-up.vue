@@ -71,7 +71,7 @@ import sha256 from "js-sha256";
 
 
 export default {
-  name: "Sing-up",
+  name: "Sign-up",
   data() {
     return {
       SingUpForm: {

@@ -2,10 +2,7 @@ package team.jtq.epi_serve.controller
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.*
 import team.jtq.epi_serve.entity.ao.PostUpLoadeEntity
 import team.jtq.epi_serve.service.UsdPostService
 import team.jtq.epi_serve.tools.Result
@@ -46,15 +43,14 @@ class PostController {
     }
 
     //查找收藏的帖子
-    @PostMapping("/usd/post/favorite/all-post/{pageIndex}/{pageItems}/{token}")
+    @GetMapping("/usd/post/favorite/all-post/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun selectAllFavorite(@PathVariable token: String, @PathVariable pageIndex: String, @PathVariable pageItems: String): Result {
         return postService.selectAllFavorite(token,pageIndex.toLong(),pageItems.toLong())
     }
 
-
     //查看所有帖子
-    @PostMapping("/usd/post/all-post/{pageIndex}/{pageItems}/{token}")
+    @GetMapping("/usd/post/all-post/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun selectAllPost(@PathVariable token: String, @PathVariable pageIndex: String, @PathVariable pageItems: String): Result {
         return postService.selectAllPost(token,pageIndex.toLong(),pageItems.toLong())
@@ -82,7 +78,7 @@ class PostController {
     }
 
     //显示帖子评论
-    @PostMapping("/usd/post/get-comment/{pid}/{pageIndex}/{pageItems}/{token}")
+    @GetMapping("/usd/post/get-comment/{pid}/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
     fun selectPostComment(@PathVariable pid: String, @PathVariable token: String, @PathVariable pageIndex: String,
                           @PathVariable pageItems: String

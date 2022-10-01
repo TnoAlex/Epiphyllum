@@ -15,6 +15,6 @@ interface UsdGroupService : IService<UsdGroup> {
     fun modifyGroup(entity: ModifyGroupEntity, token: String): Result
     fun selectUserJoinedGroup(token: String): Result
     fun selectUserCreatedGroup(token: String): Result
-
+    fun selectGroupPost(token: String, gid: String, pageIndex: String, pageItems: String):Result
     fun selectUnJoinedGroup(token: String): Result
 }

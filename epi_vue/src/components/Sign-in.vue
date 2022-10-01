@@ -64,7 +64,7 @@ import sha256 from "js-sha256";
 
 let codetime = 0
 export default {
-  name: "Sing-in",
+  name: "Sign-in",
   data() {
     return {
       LoginForm: {
@@ -115,7 +115,12 @@ export default {
       this.LoginForm.password = sha256.sha256(this.LoginForm.password)
       await this.$axios.post('/login', this.LoginForm)
           .then( res => {
-            this.$cookies.set("tokens", res.data.data)
+            if(res.data.code ===200){
+              this.$cookies.set("tokens", res.data.data)
+            }
+            else{
+              this.messageBox(res.data.msg,"error")
+            }
           })
           .catch(err => {
             this.messageBox(err.data.msg,"error")
@@ -137,7 +142,7 @@ export default {
 
                   })
                   .catch(err=>{
-                    this.messageBox(err.data.msg,"error")
+                    this.messageBox(err,"error")
                   })
             }
             else{
@@ -145,7 +150,7 @@ export default {
             }
           })
           .catch(err=>{
-            this.messageBox(err.data.msg,"error")
+            this.messageBox(err,"error")
           })
 
     },
