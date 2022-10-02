@@ -1,0 +1,30 @@
+{
+  "id": "3241042",
+  "name": "myFirstPro",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "629339",
+      "name": "时间",
+      "font_class": "shijian",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "10392611",
+      "name": "奖杯",
+      "font_class": "jiangbei",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "12959345",
+      "name": "机构队伍",
+      "font_class": "jigouduiwu",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    }
+  ]
+}

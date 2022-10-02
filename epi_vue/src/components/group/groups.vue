@@ -12,15 +12,9 @@
     <!-- Container START -->
     <div class="container">
       <div class="row g-4">
-        <!-- Sidenav START -->
+        <IndexLeft></IndexLeft>
 
-        <IndexLeft>
-        </IndexLeft>
-        <!-- Sidenav END -->
-
-        <!-- Main content START -->
         <div class="col-md-8 col-lg-6 vstack gap-4">
-          <!-- Card START -->
           <div class="card">
             <!-- Card header START -->
             <div class="card-header border-0 pb-0">
@@ -30,159 +24,130 @@
                   <h1 class="h4 card-title mb-lg-0">群组</h1>
                 </div>
                 <div class="col-sm-6 col-lg-3 ms-lg-auto">
-                  <!-- Select Groups -->
-<!--                  <select class="form-select js-choice choice-select-text-none" data-search-enabled="false">-->
-<!--                    <option value="AB">Alphabetical</option>-->
-<!--                    <option value="NG">Newest group</option>-->
-<!--                    <option value="RA">Recently active</option>-->
-<!--                    <option value="SG">Suggested</option>-->
-<!--                  </select>-->
                 </div>
                 <div class="col-sm-6 col-lg-3">
                   <!-- Button modal -->
-                  <a class="btn btn-primary-soft ms-auto w-100" href="#" data-bs-toggle="modal"
-                     data-bs-target="#modalCreateGroup"> <i class="fa-solid fa-plus pe-1"></i> 新建一个群组</a>
+                  <span class="btn btn-primary-soft  w-100"  data-bs-toggle="modal"
+                     data-bs-target="#modalCreateGroup"> <i class="fa-solid fa-plus pe-1"></i> 创建一个群组</span>
                 </div>
               </div>
             </div>
-            <!-- Card header START -->
-            <!-- Card body START -->
+
+
             <div class="card-body">
-              <!-- Tab nav line 分类导航栏-->
+
               <ul class="nav nav-tabs nav-bottom-line justify-content-center justify-content-md-start">
-<!--                <li class="nav-item">
-                      <a class="nav-link active" data-bs-toggle="tab" href="#tab-1"> Friends' groups-->
-<!--                  </a>
-                    </li>-->
+                <li @click="tabTranslate(1)" class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#tab-1">未加入
+                </a></li>
+                <li @click="tabTranslate(2)" class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-2">已加入 </a></li>
               </ul>
               <div class="tab-content mb-0 pb-0">
+
+                <div class="tab-pane fade show active" id="tab-1">
                   <div class="row g-4">
-
-
-                    <div class="col-sm-6 col-lg-4">
-                      <!-- Card START -->
+                    <div class="col-sm-6 col-lg-4" v-for="(item,index) in groupJoinedInformation " :key="index">
                       <div class="card">
                         <div class="h-80px rounded-top"
-                             style="background-image:url(public/047.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div><!-- Card body START -->
+                              :style="{backgroundImage:`url(${item.backgroundImageSrc})`,
+                                      'background-position':'center',
+                                      'background-size':'cover',
+                                      'background-repeat':'no-repeat'
+                                      }">
+                        </div>
                         <div class="card-body text-center pt-0">
-                          <!-- Avatar -->
                           <div class="avatar avatar-lg mt-n5 mb-3"><a href="group-details.html"><img
                               class="avatar-img rounded-circle border border-white border-3 bg-white"
-                              src="/01.jpg" alt=""></a></div><!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">前端开发</a></h5>
+                              :src="item.backgroundImageSrc" alt=""></a></div><!-- Info -->
+                          <h5 class="mb-0">
+                            <router-link :to="{path:'/groupDetail',query:{groupId:item.id,
+                                                                          bigImageSrc:item.bigImageSrc,
+                                                                          groupName:item.groupName,
+                                                                          createTime:item.createTime,
+                                                                          groupDescription: item.groupDescription
+                                                                          }}">{{item.groupName}}</router-link>
+                          </h5>
                           <div>
                             <small>
-                              <span class="iconfont icon-yuanshuju-chuangjianren"></span> 阿庆
-                            </small>
-                          </div>
-                          <div>
-                            <small>
-                              <span class="iconfont icon-yuanshuju-chuangjianshijian"></span> 2022-9-25 19:25:46
-                            </small>
-                          </div>
-                          <!-- Group stat START -->
-<!--                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">-->
-<!--                            &lt;!&ndash; Group stat item &ndash;&gt;-->
-<!--                            <div>-->
-<!--                              <h6 class="mb-0">32k</h6><small>Members</small>-->
-<!--                            </div>&lt;!&ndash; Divider &ndash;&gt;-->
-<!--                            <div class="vr"></div>&lt;!&ndash; Group stat item &ndash;&gt;-->
-<!--                            <div>-->
-<!--                              <h6 class="mb-0">20</h6><small>Post per day</small>-->
-<!--                            </div>-->
-<!--                          </div>-->
-                          <!-- Avatar group START -->
-                          <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs">
-                              <div class="avatar-img rounded-circle bg-primary"><span
-                                  class="smaller text-white position-absolute top-50 start-50 translate-middle">+22</span>
-                              </div>
-                            </li>
-                          </ul><!-- Avatar group END -->
-                        </div><!-- Card body END -->
-                        <!-- Card Footer START -->
-                        <div class="card-footer text-center"><a class="btn btn-success-soft btn-sm" href="#!">加入群组
-                        </a></div><!-- Card Footer END -->
-                      </div><!-- Card END -->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                      <!-- Card START -->
-                      <div class="card">
-                        <div class="h-80px rounded-top"
-                             style="background-image:url(public/01.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-                        </div><!-- Card body START -->
-                        <div class="card-body text-center pt-0">
-                          <!-- Avatar -->
-                          <div class="avatar avatar-lg mt-n5 mb-3"><a href="group-details.html"><img
-                              class="avatar-img rounded-circle border border-white border-3 bg-white"
-                              src="/01.jpg" alt=""></a></div><!-- Info -->
-                          <h5 class="mb-0"><a href="group-details.html">后端开发</a></h5>
-                          <div>
-                            <small>
-                              <span class="iconfont icon-yuanshuju-chuangjianren"></span> 冀欢
-                            </small>
-                          </div>
-                          <div>
-                            <small>
-                              <span class="iconfont icon-yuanshuju-chuangjianshijian"></span> 2022-9-25 19:25:46
+                              <span class="iconfont icon-yuanshuju-chuangjianren"></span>{{item.createPersonName}}
                             </small>
                           </div>
 
-                          <!-- Group stat START -->
-<!--                          <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">-->
-<!--                            &lt;!&ndash; Group stat item &ndash;&gt;-->
-<!--                            <div>-->
-<!--                              <h6 class="mb-0">32k</h6><small>Members</small>-->
-<!--                            </div>&lt;!&ndash; Divider &ndash;&gt;-->
-<!--                            <div class="vr"></div>&lt;!&ndash; Group stat item &ndash;&gt;-->
-<!--                            <div>-->
-<!--                              <h6 class="mb-0">05</h6><small>Post per day</small>-->
-<!--                            </div>-->
-<!--                          </div>&lt;!&ndash; Group stat END &ndash;&gt;-->
-                          <!-- Avatar group START -->
+                          <div>
+                            <small>
+                              <span class="iconfont icon-yuanshuju-chuangjianshijian"></span> {{ item.createTime }}
+                            </small>
+                          </div>
                           <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs"><img class="avatar-img rounded-circle" src="/01.jpg"
-                                                              alt="avatar"></li>
-                            <li class="avatar avatar-xs">
-                              <div class="avatar-img rounded-circle bg-primary"><span
-                                  class="smaller text-white position-absolute top-50 start-50 translate-middle">+08</span>
-                              </div>
+                            <li  class="avatar avatar-xs" v-for="(avatarImgSrc,avatarIndex) in item.avatarList.slice(0,5)" :key="avatarIndex">
+                              <img  class="avatar-img rounded-circle" :src="avatarImgSrc.littleAvatarImage" alt="avatar">
                             </li>
-                          </ul><!-- Avatar group END -->
-                        </div><!-- Card body END -->
-                        <!-- Card Footer START -->
-                        <div class="card-footer text-center"><a class="btn btn-danger-soft btn-sm" href="#!">离开群组
-                        </a></div><!-- Card Footer END -->
-                      </div><!-- Card END -->
+                          </ul>
+                        </div>
+
+                        <div class="card-footer text-center" >
+                          <span class="btn btn-success-soft"  style="" @click="joinGroup(index)" >加入群组
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div class="tab-pane fade" id="tab-2">
+                  <div class="row g-4">
+                    <div class="col-sm-6 col-lg-4" v-for="(item,index) in groupNoJoinedInformation " :key="index">
+                      <div class="card">
+                        <div class="h-80px rounded-top"
+                             :style="{backgroundImage:`url(${item.backgroundImageSrc})`,
+                                      'background-position':'center',
+                                      'background-size':'cover',
+                                      'background-repeat':'no-repeat'
+                                      }">
+                        </div><!-- Card body START -->
+                        <div class="card-body text-center pt-0">
+                          <!-- Avatar -->
+                          <div class="avatar avatar-lg mt-n5 mb-3"><a href="group-details.html"><img
+                              class="avatar-img rounded-circle border border-white border-3 bg-white"
+                              :src="item.backgroundImageSrc" alt=""></a></div><!-- Info -->
+                          <h5 class="mb-0"><span >{{item.groupName}}</span></h5>
+                          <div>
+                            <small>
+                              <span class="iconfont icon-yuanshuju-chuangjianren"></span>  {{item.createPersonName}}
+                            </small>
+                          </div>
+
+                          <div>
+                            <small>
+                              <span class="iconfont icon-yuanshuju-chuangjianshijian"></span>{{item.createTime}}
+                            </small>
+                          </div>
+
+
+                          <ul class="avatar-group list-unstyled align-items-center justify-content-center mb-0 mt-3">
+                            <li  v-for="(avatarImgSrc,avatarIndex) in item.avatarList.slice(0,5)" :key="avatarIndex" class="avatar avatar-xs">
+                              <img  class="avatar-img rounded-circle" :src="avatarImgSrc.littleAvatarImage"
+                                                              alt="avatar"></li>
+
+                          </ul><!-- Avatar group END -->
+                        </div><!-- Card body END -->
+                        <!-- Card Footer START -->
+                        <div class="card-footer text-center">
+                          <span @click="leaveGroup(index)" class="btn btn-danger-soft">离开群组
+                          </span>
+                        </div><!-- Card Footer END -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
             </div>
-            <!-- Card body END -->
           </div>
-          <!-- Card END -->
         </div>
-        <!-- Right sidebar END -->
-      </div> <!-- Row END -->
-    <!-- Container END -->
+
+        </div>
+      </div>
+
 
   </main>
   </body>
@@ -193,57 +158,56 @@
       <div class="modal-content">
         <!-- Title -->
         <div class="modal-header">
-          <h5 class="modal-title" id="modalLabelCreateGroup">Create Group</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="modalLabelCreateGroup">创建群组</h5>
+          <button ref="modalClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <!-- Form START -->
           <form>
             <!-- Group name -->
             <div class="mb-3">
-              <label class="form-label">Group name</label>
-              <input type="text" class="form-control" placeholder="Add Group name here">
+              <label class="form-label">群组名</label>
+              <input ref="groupNameRef" type="text" class="form-control" placeholder="添加一个群组名">
             </div>
             <!-- Group picture -->
             <div class="mb-3">
-              <label class="form-label">Group picture</label>
+              <label class="form-label">群组照片</label>
               <!-- Avatar upload START -->
               <div class="d-flex align-items-center">
                 <div class="avatar-uploader me-3">
                   <!-- Avatar edit -->
                   <div class="avatar-edit">
-                    <input type='file' id="avatarUpload" accept=".png, .jpg, .jpeg"><label for="avatarUpload"></label>
+                    <input type='file' id="avatarUpload" accept=".png, .jpg, .jpeg" @change="change($event)"><label for="avatarUpload"></label>
                   </div><!-- Avatar preview -->
-                  <div class="avatar avatar-xl position-relative"><img id="avatar-preview"
-                                                                       class="avatar-img rounded-circle border border-white border-3 shadow"
-                                                                       src="/047.jpg" alt=""></div>
+                  <div class="avatar avatar-xl position-relative">
+                    <img id="avatar-preview" class="avatar-img rounded-circle border border-white border-3 shadow"
+                         :src="imageUrl ? imageUrl : baseImg" alt=""></div>
                 </div><!-- Avatar remove button -->
-                <div class="avatar-remove"><button type="button" id="avatar-reset-img"
-                                                   class="btn btn-light">Delete</button></div>
+<!--                <div class="avatar-remove"><button type="button" id="avatar-reset-img"-->
+<!--                                                   class="btn btn-light">删除</button></div>-->
               </div><!-- Avatar upload END -->
             </div><!-- Select audience -->
-            <div class="mb-3"><label class="form-label d-block">Select audience</label>
-              <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
-                                                               name="PublicRadioOptions" id="publicRadio1" value="option1"><label class="form-check-label"
-                                                                                                                                  for="publicRadio1">Public</label></div>
-              <div class="form-check form-check-inline"><input class="form-check-input" type="radio"
-                                                               name="PublicRadioOptions" id="privateRadio2" value="option2"><label class="form-check-label"
-                                                                                                                                   for="privateRadio2">Private</label></div>
-            </div><!-- Invite friend -->
-            <div class="mb-3"><label class="form-label">Invite friend </label><input type="text" class="form-control"
-                                                                                     placeholder="Add friend name here"></div><!-- Group description -->
-            <div class="mb-3"><label class="form-label">Group description </label><textarea class="form-control"
-                                                                                            rows="3" placeholder="Description here"></textarea></div>
+
+
+            <!-- Invite friend -->
+
+            <!-- Group description -->
+            <div class="mb-3"><label class="form-label">群组简介 </label><textarea ref="groupDescriptionRef" class="form-control"
+                                                                                            rows="3" placeholder="添加群组简介"></textarea></div>
           </form><!-- Form END -->
         </div><!-- Modal footer -->
-        <div class="modal-footer"><button type="button" class="btn btn-success-soft">Create now</button></div>
+        <div class="modal-footer">
+          <span  class="btn btn-success-soft" @click="createGroup">立即创建</span>
+
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import headerNav from "@/components/UniversalComponents/headerNav";
+import headerNav from "@/components/UniversalComponents/headerNav"
 import indexLeft from '@/components/UniversalComponents/indexLeft'
+import {ElMessage} from 'element-plus'
 export default {
   name: "groups",
   components:{
@@ -253,8 +217,357 @@ export default {
   data()
   {
     return {
+      baseImg:"/047.jpg",
+      imageUrl:"",
+      pageIndex:0,
+      tabIndex:1,
+      groupJoinedInformation:[],
+      groupNoJoinedInformation:[],
+      testGroupJoinedInformation:[
+        {
+          id:"123456",
+          isJoined:true,
+          backgroundImageSrc:"/047.jpg",
+          groupDescription:"这是关于群组的介绍",
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+        {
+          id:"123456",
+          backgroundImageSrc:"/047.jpg",
+          groupDescription:"这是关于群组的介绍",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+      ],
+      testGroupNoJoinedInformation:[
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:false,
+          bigImageSrc:"/047.jpg",
+          groupName:"前端开发",
+          createPersonName:"阿庆",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
 
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:false,
+          bigImageSrc:"/047.jpg",
+          groupName:"前端开发",
+          createPersonName:"阿庆",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+        {
+          id:"123456",
+          groupDescription:"这是关于群组的介绍",
+          backgroundImageSrc:"/047.jpg",
+          isJoined:true,
+          bigImageSrc:"/047.jpg",
+          groupName:"后端开发",
+          createPersonName:"冀欢",
+          createTime:"2022-9-27 23:43:30",
+          avatarList:[
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"},
+            {littleAvatarImage:"/047.jpg"}
+          ]
+        },
+      ]
     }
+  },
+  methods:{
+    getMoreGroupInformation(tabIndex)
+    {
+
+
+      if(tabIndex===1)
+      {
+        //后台发出请求
+        this.pageIndex = this.pageIndex+1
+        this.groupJoinedInformation = this.groupJoinedInformation.concat(this.testGroupJoinedInformation)
+        //如果请求到的数据为空
+        ElMessage({
+          message: '没有更多群组啦~',
+          grouping: true,
+          type: 'warning',
+        })
+      }
+      else if(tabIndex===2)
+      {
+        //后台发出请求
+        this.pageIndex = this.pageIndex+1
+        this.groupNoJoinedInformation = this.groupNoJoinedInformation.concat(this.testGroupNoJoinedInformation)
+        //如果请求到的数据为空
+        ElMessage({
+          message: '没有更多群组啦~',
+          grouping: true,
+          type: 'warning',
+        })
+      }
+
+    },
+    scrollFn()
+    {
+      let winHeight = window.innerHeight || document.documentElement.clientHeight;
+      //滚出去的高度
+      let st = document.documentElement.scrollTop || document.body.scrollTop;
+      //文档高度
+      let docHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+      if(winHeight+st>=docHeight-5)
+      {
+        console.log("触底")
+        this.getMoreGroupInformation(this.tabIndex)
+      }
+    },
+    tabTranslate(tabIndex)
+    {
+      this.tabIndex = tabIndex
+      //首先将pageIndex清0
+      this.pageIndex=0
+      console.log(tabIndex)
+      this.groupJoinedInformation=[]
+      this.groupNoJoinedInformation=[]
+      this.getMoreGroupInformation(tabIndex)
+    },
+    joinGroup(index)
+    {
+      //修改数据库
+      console.log("加入成功",index)
+      this.groupJoinedInformation.splice(index,1);
+    },
+    leaveGroup(index)
+    {
+      //修改数据库
+      this.groupNoJoinedInformation.splice(index,1)
+    },
+    async change(e)
+    {
+      console.log(e.target.files[0].name);
+      // 判断是不是规定格式
+      // let name  =  e.target.files[0].name
+
+      // 获取到第一张图片
+      let file = e.target.files[0]
+      await this.toBase64(file).then(res=>{
+        console.log(res)
+        this.imageUrl = res
+    })
+
+    },
+    toBase64(file) {
+      return new Promise(function (resolve) {
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = function () {
+          resolve(this.result)
+        }
+      })
+    },
+    createGroup()
+    {
+      let groupName  = this.$refs.groupNameRef.value
+      let groupDescription =this.$refs.groupDescriptionRef.value
+      if(groupName ===""||groupDescription===""||this.imageUrl==="")
+      {
+        ElMessage({
+          message: '请将信息填写完整',
+          grouping: true,
+          type: 'warning',
+        })
+        return
+      }
+
+      let groupObj = {
+        groupName:groupName,
+        groupDescription:groupDescription,
+        groupAvatar:this.imageUrl
+      }
+      console.log(groupObj)
+      //给后台发送内容
+
+
+      //当上传成功之后将所有值设置为空，然后退出模态框
+      this.$refs.groupNameRef.value = ""
+      this.$refs.groupDescriptionRef.value = ""
+      this.imageUrl = ""
+      //调用关闭
+      this.$refs.modalClose.click()
+    }
+  },
+  beforeMount() {
+    this.getMoreGroupInformation(1)
+  },
+  mounted() {
+  //监听滚动
+  window.addEventListener("scroll",this.scrollFn);
+  },
+  beforeUnmount() {
+  //移除滚动
+    window.removeEventListener("scroll",this.scrollFn);
   }
 }
 </script>
