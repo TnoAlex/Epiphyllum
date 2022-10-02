@@ -17,4 +17,5 @@ interface UsdPostService : IService<UsdPost> {
     fun modfiyPost(token: String, pid: String, entity: PostUpLoadeEntity): Result
     fun postComment(token: String, pid: String, comment: String): Result
     fun selectPostComment(token: String, pid: String, pageIndex: String, pageItems: String): Result
+    fun deletePostComment(token: String, pid: String, cid: String): Result
 }

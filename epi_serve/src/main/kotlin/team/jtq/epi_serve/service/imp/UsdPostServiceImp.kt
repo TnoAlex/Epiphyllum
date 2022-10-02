@@ -22,6 +22,7 @@ import team.jtq.epi_serve.service.UsdGroupService
 import team.jtq.epi_serve.service.UsdLinkService
 import team.jtq.epi_serve.service.UsdPostService
 import team.jtq.epi_serve.tools.Result
+import team.jtq.epi_serve.tools.adapterCommentView
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
@@ -106,12 +107,24 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
     override fun favoritePosts(token: String, pid: String): Result {
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
         val user = json["user_id"] as String
+        val obj = linkService.selectLinkinBeans(
+            UsdUserFavoritesMapper::class,
+            UsdUserFavorites::class,
+            listOf(Pair(UsdUserFavorites::uid,user),Pair(UsdUserFavorites::postId,pid))
+        )?:throw RuntimeException("Sql Error")
+        if(obj.isNotEmpty())
+        {
+            return Result.error(ResultStatusCode.INVALID_OPERATION)
+        }
         val res = linkService.addLinkinBeans(
             UsdUserFavoritesMapper::class,
             UsdUserFavorites::class,
             Pair(UsdUserFavorites::postId.name, pid),
             Pair(UsdUserFavorites::uid.name, user)
         )
+        val query = KtUpdateWrapper(UsdPost::class.java)
+        query.eq(UsdPost::id,pid).setSql("`favorites` = `favorites`+1")
+        this.baseMapper.update(null,query)
         return if (res)
             Result.ok()
         else
@@ -183,21 +196,11 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
         return Result.ok(pages.records)
     }
 
+    @Transactional
     override fun likePost(token: String, pid: String): Result {
-        val redisKey = POST_CACHE + ":" + DigestUtils.md5DigestAsHex(pid.toByteArray(Charsets.UTF_8))
-        if (redisTemplate.hasKey(redisKey)) {
-            val obj = redisTemplate.opsForValue().get(redisKey)
-            val expireTime = redisTemplate.opsForValue().operations.getExpire(redisKey)!!
-            val post = JSON.parseObject(JSON.toJSONString(obj), UsdPost::class.java)
-            post.likes = post.likes + 1
-            redisTemplate.opsForValue().set(redisKey, post, expireTime, TimeUnit.SECONDS)
-        } else {
-            val query = KtQueryWrapper(UsdPost::class.java)
-            query.eq(UsdPost::id, pid)
-            val post = this.baseMapper.selectOne(query)
-            post.likes = post.likes + 1
-            redisTemplate.opsForValue().set(redisKey, post, 1, TimeUnit.MINUTES)
-        }
+        val query = KtUpdateWrapper(UsdPost::class.java)
+        query.eq(UsdPost::id,pid).setSql("`likes` = `likes`+1")
+        this.baseMapper.update(null,query)
         return Result.ok()
     }
 
@@ -233,7 +236,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
             mapOf(UsdPostComment::commentId to obj.id, UsdPostComment::postId to pid)
         )
         return if (res)
-            Result.ok()
+            Result.ok(obj.id)
         else
             throw RuntimeException("Sql Error")
     }
@@ -243,15 +246,14 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
         val commentIds: List<String>
         if (redisTemplate.hasKey(redisKey)) {
             val obj = redisTemplate.opsForValue().get(redisKey)
-            commentIds = JSONArray.parseArray(JSON.toJSONString(obj), String::class.java)
-
+            commentIds = JSONArray.parseArray(obj as String, String::class.java)
         } else {
             val query = KtQueryWrapper(UsdPostComment::class.java)
             query.eq(UsdPostComment::postId, pid)
             val mapper = BeanContext.getBeanbyClazz(UsdPostCommentMapper::class.java)
             commentIds =
-                mapper.selectList(query)?.map { it.id } ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
-            redisTemplate.opsForValue().set(redisKey, JSON.toJSONString(commentIds))
+                mapper.selectList(query)?.map { it.commentId} ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            redisTemplate.opsForValue().set(redisKey, JSONArray.toJSONString(commentIds),30,TimeUnit.SECONDS)
         }
         val page = Page<UsdComment>(pageIndex.toLong(), pageItems.toLong())
 
@@ -261,7 +263,29 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
             Pair(UsdComment::id, commentIds),
             page
         ) ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
-        return Result.ok(res.records)
+        if(res.records.isEmpty())
+            return Result.ok()
+        val view = adapterCommentView(res.records)?:return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+        return Result.ok(view)
+    }
+
+    @Transactional
+    override fun deletePostComment(token: String, pid: String, cid: String): Result {
+        var res = linkService.deleteLinkinBeans(
+            UsdCommentMapper::class,
+            UsdComment::class,
+            listOf(Pair(UsdComment::id,cid))
+        )
+        if(!res)
+            throw RuntimeException("Sql Error")
+        res = linkService.deleteLinkinBeans(
+            UsdPostCommentMapper::class,
+            UsdPostComment::class,
+            listOf(Pair(UsdPostComment::postId,pid), Pair(UsdPostComment::commentId,cid))
+        )
+        if(!res)
+            throw RuntimeException("Sql Error")
+        return Result.ok()
     }
 
 }

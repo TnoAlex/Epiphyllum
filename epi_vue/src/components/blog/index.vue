@@ -31,7 +31,7 @@
               </li>
             </ul>
           </div>
-          <div v-if="postList.length!==0" >
+          <div v-if="postList.length!==0">
             <div v-for="(item,index) in postList" :key="index">
               <div class="card">
                 <!-- Card header START -->
@@ -115,10 +115,10 @@
                         <i class="bi bi-star-fill pe-1">
                         </i>收藏({{ item.favorites }})</a>
                     </li>
-                    <li class="nav-item" @click="transCommentFold">
+                    <li class="nav-item" @click="transCommentFold(index)">
                       <a class="" href="#!">
                         <i class="bi bi-chat-fill pe-1">
-                        </i>{{ commentIsFold ? `展开评论` : '收起评论' }}</a>
+                        </i>{{ item.commentIsFold ? `展开评论` : '收起评论' }}</a>
                     </li>
                     <li class="nav-item dropdown ms-sm-auto">
                       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction">
@@ -156,7 +156,7 @@
                   </ul>
                   <!-- Feed react END -->
                   <!-- Add comment -->
-                  <ul v-show="!commentIsFold" class="comment-wrap list-unstyled">
+                  <ul v-show="!item.commentIsFold" class="comment-wrap list-unstyled">
                     <!-- Comment item START -->
                     <div class="d-flex mb-3">
                       <!-- Avatar -->
@@ -169,7 +169,9 @@
                       <form class="w-100">
                         <el-input v-model="newComment" autosize type="textarea" placeholder="说点什么~"/>
                         <div style="text-align: right">
-                          <el-button @click="commentCommit(index)" style="margin-top: 5px;" type="primary" size="small" round>提交</el-button>
+                          <el-button @click="commentCommit(index)" style="margin-top: 5px;" type="primary" size="small"
+                                     round>提交
+                          </el-button>
                         </div>
                       </form>
                     </div>
@@ -198,16 +200,19 @@
                                     <i class="bi bi-three-dots"></i>
                                   </a>
                                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardNotiAction">
+                                    <div v-if="com.createId === userInfo.uid">
                                     <li @click="commentDelete(index,comIndex)">
                                       <a class="dropdown-item" href="###">
                                         <i class="bi bi-check-lg fa-fw pe-2">
                                         </i>刪除评论</a>
                                     </li>
+                                    </div>
                                   </ul>
                                 </span>
                               </small>
                             </div>
-                            <p class="small mb-0">{{ com.commentContext }}</p>
+                            <p class="small mb-0" style="word-break: break-all;word-wrap: break-word;height: auto">
+                              {{ com.commentContext }}</p>
                           </div>
                           <!-- Comment react -->
                           <ul class="nav nav-divider py-2 small">
@@ -218,7 +223,8 @@
                     <div style="padding: 5px; display: flex;
                     flex-direction: row;
                     align-items: center; ">
-                      <el-button style="display: inline-block" @click="loadMoreComment(index)" size="small"
+                      <el-button style="display: inline-block" @click="loadMoreComment(index)"
+                                 :disabled="!item. commentLoading" size="small"
                                  type="primary" round>点击加载更多评论
                       </el-button>
                     </div>
@@ -1063,7 +1069,8 @@
               <div class="el-upload__tip">Upload up to four photos</div>
             </template>
           </el-upload>
-          <ul id="images" class="el-upload-list el-upload-list--picture-card" v-for="imgItem in tempPost.images" :key="imgItem.index">
+          <ul id="images" class="el-upload-list el-upload-list--picture-card" v-for="imgItem in tempPost.images"
+              :key="imgItem.index">
             <li class="el-upload-list__item is-success" tabindex="0">
               <img class="el-upload-list__item-thumbnail" :src="imgItem.imgSrc" alt="">
               <!--v-if-->
@@ -1140,17 +1147,10 @@ export default {
       userIco: require("@/static/imgs/default_ico.jpg"),
       postLoading: false,
       postPageIndex: 0,
-      commentIsFold: true,
-      commentText: "",//评论内容双向绑定
       dialogVisible: false,
       disabled: false,
-      newComment:'',
-      commentsList:{
-        commentContext:'',
-        createTime:'',
-        createBy:'',
-        createRavatar:''
-      },
+      newComment: '',
+      userInfo: '',
       postList: [],
       tempPost: {
         text: '',
@@ -1160,31 +1160,10 @@ export default {
   },
   async beforeMount() {
     if (this.$cookies.isKey("tokens")) {
-      this.userIco = JSON.parse(localStorage.getItem("userCommonInfo")).portrait
+      this.userInfo = JSON.parse(localStorage.getItem("userCommonInfo"))
+      this.userIco = this.userInfo.portrait
     }
-    const url = "/usd/group/group-post/0/" + this.postPageIndex + "/8/" + this.$cookies.get("tokens").accessToken
-    await this.$axios.get(url)
-        .then(res => {
-          if (res.data.code === 200) {
-            for (let i of res.data.data) {
-              let conetxt = JSON.parse(i.context)
-              this.postList.push({
-                pid: i.pid,
-                createrAvatar: i.createrAvatar,
-                text: conetxt.text,
-                images: conetxt.images,
-                createTime: i.createTime,
-                createUser: i.createUser,
-                likes: i.likes,
-                favorites: i.favorites,
-                commentsList:[]
-              })
-            }
-            this.postLoading = res.data.data.length !== 8;
-          } else {
-            this.messageBox(res.data.msg, "error")
-          }
-        })
+    await this.getPost(this.postPageIndex)
   },
   methods:
       {
@@ -1195,6 +1174,34 @@ export default {
             type: type,
             grouping: true
           })
+        },
+        async getPost(index){
+          const url = "/usd/group/group-post/0/" + index + "/8/" + this.$cookies.get("tokens").accessToken
+          await this.$axios.get(url)
+              .then(res => {
+                if (res.data.code === 200) {
+                  for (let i of res.data.data) {
+                    let conent = JSON.parse(i.context)
+                    this.postList.push({
+                      pid: i.pid,
+                      createrAvatar: i.createrAvatar,
+                      text: conent.text,
+                      images: conent.images,
+                      createTime: i.createTime,
+                      createUser: i.createUser,
+                      likes: i.likes,
+                      favorites: i.favorites,
+                      commentIndex: 0,
+                      commentsList: [],
+                      commentLoading: false,
+                      commentIsFold: true
+                    })
+                  }
+                  this.postLoading = res.data.data.length !== 8
+                } else {
+                  this.messageBox(res.data.msg, "error")
+                }
+              })
         },
         myUploadChange(uploadFile) {
           let imgUrlSuccess = URL.createObjectURL(uploadFile.raw)
@@ -1261,76 +1268,128 @@ export default {
         async commentCommit(index) {
           //输入为空评论失败
           if (this.newComment.length === 0) {
-            this.messageBox("请至少输入一个文字~","warning")
+            this.messageBox("请至少输入一个文字~", "warning")
             return;
           }
-          const url ="/usd/post/comment/"+this.postList[index].pid+"/"+this.$cookies.get("tokens").accessToken
-          await this.$axios.post(url,{content:JSON.stringify(this.newComment)})
-              .then(res=>{
-                if(res.data.code === 200){
-                  this.postList[index].commentsList.splice(0,0,{
+          const url = "/usd/post/comment/" + this.postList[index].pid + "/" + this.$cookies.get("tokens").accessToken
+          await this.$axios.post(url, {content: JSON.stringify(this.newComment)})
+              .then(res => {
+                if (res.data.code === 200) {
+                  this.postList[index].commentsList.splice(0, 0, {
                     commentContext: this.newComment,
                     createTime: this.getNowDate(),
-                    createBy: JSON.parse(localStorage.getItem("userCommonInfo")).nickName,
-                    createRavatar: JSON.parse(localStorage.getItem("userCommonInfo")).portrait
+                    createBy: this.userInfo.nickName,
+                    createRavatar: this.userInfo.portrait,
+                    createId: this.userInfo.uid,
+                    cid: res.data.data.id
                   })
                   this.newComment = "";
+                } else {
+                  this.messageBox(res.data.msg, "error")
+                }
+              }).catch(err => {
+                this.messageBox(err, "error")
+              })
+        },
+        async commentDelete(index, comIndex) {
+          const url = "/usd/post/delete-comment/" + this.postList[index].pid + "/" + this.postList[index].commentsList[comIndex].cid + "/" + this.$cookies.get("tokens").accessToken
+          await this.$axios.post(url)
+              .then(res => {
+                if (res.data.code === 200) {
+                  this.postList[index].commentsList.splice(comIndex, 1)
+                } else {
+                  this.messageBox(res.data.msg, "error")
+                }
+              })
+              .catch(err => {
+                this.messageBox(err, "error")
+              })
+
+        },
+        async transCommentFold(index) {
+          if (this.postList[index].commentIsFold) {
+            const url = "/usd/post/get-comment/" + this.postList[index].pid + "/" + this.postList[index].commentIndex + "/8/" + this.$cookies.get("tokens").accessToken
+            await this.$axios.get(url)
+                .then(res => {
+                  if (res.data.code === 200) {
+                    if (res.data.data === null) {
+                      this.messageBox("没有更多评论啦~", "success")
+                      this.postList[index].commentLoading = false
+                    } else {
+                      this.postList[index].commentsList = res.data.data
+                      this.postList[index].commentLoading = res.data.data.length >= 8
+                      this.postList[index].commentIndex += 2
+                    }
+
+                  } else {
+                    this.messageBox(res.data.msg, "error")
+                  }
+                }).catch(err => {
+                  this.messageBox(err, "error")
+                })
+            this.postList[index].commentIsFold = !this.postList[index].commentIsFold
+          } else {
+            this.postList[index].commentIsFold = !this.postList[index].commentIsFold
+          }
+        },
+        async loadMoreComment(index) {
+          const url = "/usd/post/get-comment/" + this.postList[index].pid + "/" + this.postList[index].commentIndex + "/8/" + this.$cookies.get("tokens").accessToken
+          await this.$axios.get(url)
+              .then(res => {
+                if (res.data.code === 200) {
+                  if (res.data.data === null) {
+                    this.messageBox("没有更多评论啦~", "success")
+                    this.postList[index].commentLoading = false
+                  } else {
+                    this.postList[index].commentsList = this.postList[index].commentsList.concat(res.data.data)
+                    this.postList[index].commentLoading = res.data.data.length >= 8
+                    this.postList[index].commentIndex += 1
+                  }
+                } else {
+                  this.messageBox(res.data.msg, "error")
+                }
+              }).catch(err => {
+                this.messageBox(err, "error")
+              })
+        },
+        async transLiked(index) {
+          const url = "/usd/post/like-post/"+this.postList[index].pid+"/"+this.$cookies.get("tokens").accessToken
+          await this.$axios.post(url)
+              .then(res=>{
+                if(res.data.code !== 200){
+                  this.messageBox(res.data.msg,"error")
                 }
                 else{
-                  this.messageBox(res.data.msg,"error")
+                  this.postList[index].likes +=1;
                 }
               }).catch(err=>{
                 this.messageBox(err,"error")
               })
         },
-        commentDelete(index, comIndex) {
-          this.postList[index].commentsList.splice(comIndex, 1);
-          this.postList[index].comments = this.postList[index].comments - 1;
-        },
-        async transCommentFold() {
-          this.commentIsFold = !this.commentIsFold;
-        },
-        loadMoreComment(index) {
-          //发出请求，判断请求到的数量
-          ElMessage({
-            message: '没有更多评论啦~',
-            grouping: true,
-            type: 'success',
-          })
-          //将请求到的评论赋值
-          let getCommentList = [{
-            avatarImg: "/031.jpg",
-            name: "阿庆",
-            time: "2022/9/24",
-            text: "Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.",
-          }]
-          //将请求到的评论拼接
-          this.postList[index].commentsList = this.postList[index].commentsList.concat(getCommentList);
-        },
-        transLiked(index) {
-          //前端将点数数增加
-          this.postList[index].likes = this.postList[index].likes + 1;
-          //将点赞信息上传到后台
-        },
-        transFavorites(index){
-          this.postList[index].favorites = this.postList[index].favorites+ 1;
+        async transFavorites(index) {
+          const url = "/usd/post/favorite/add/"+this.postList[index].pid+"/"+this.$cookies.get("tokens").accessToken
+          await this.$axios.post(url)
+              .then(res=>{
+                if(res.data.code === 200){
+                  this.postList[index].favorites+=1
+                  this.messageBox("收藏成功~","success")
+                }
+                else{
+                  if(res.data.code === 409)
+                    this.messageBox("已经收藏了~","warning")
+                  else
+                    this.messageBox(res.data.msg,"error")
+                }
+              }).catch(err=>{
+                this.messageBox(err,"error")
+              })
         },
         loadMorePost() {
           let winHeight = window.innerHeight || document.documentElement.clientHeight;
           let docHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-          this.postPageIndex = this.postPageIndex + 1;
-          this.getPosts(this.postPageIndex)
+          this.postPageIndex = this.postPageIndex + 1
+          this.getPost(this.postPageIndex)
           document.documentElement.scrollTop = docHeight - winHeight - 1
-        },
-        getPosts(postPageIndex) {
-          //向后端发起请求当前数据库中的贴子
-          //如果获取的贴子数量为0则将this.postLoading改为false
-          // if()
-          // {
-          //
-          // }
-          console.log("请求第几页的贴子", postPageIndex)
-          this.postList = this.postList.concat(this.postList)
         },
         getNowDate() {
           let date = new Date();
@@ -1340,11 +1399,9 @@ export default {
           let hh = date.getHours();//时
           let mf = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
           let ss = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-          let str = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
-          return str;
+          return yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
         }
       }
-
 
 }
 

@@ -7,5 +7,6 @@ data class UserInfoView(
     var signature:String?,
     var occupation:String?,
     var portrait:String,
-    var nickName:String
+    var nickName:String,
+    var uid:String,
 )

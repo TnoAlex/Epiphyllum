@@ -104,6 +104,7 @@ class UsdUserServiceImp : ServiceImpl<UsdUserMapper, UsdUser>(), UsdUserService 
         obj.portrait = user.portrait
         obj.occupation = user.occupation
         obj.signature = user.signature
+        obj.uid = user.uid
         return Result.ok(obj)
     }
 

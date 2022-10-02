@@ -17,5 +17,6 @@ enum class ResultStatusCode(var code: Int, var msg: String) {
     UNKONW_ERROR(500,"未知错误"),
     TOKEN_EXPIRED(403,"Token已过期"),
     FILE_CHECK_ERR(500,"文件校验失败"),
-    FILE_NOT_FIND(500,"文件未找到")
+    FILE_NOT_FIND(500,"文件未找到"),
+    INVALID_OPERATION(409,"无效操作")
 }

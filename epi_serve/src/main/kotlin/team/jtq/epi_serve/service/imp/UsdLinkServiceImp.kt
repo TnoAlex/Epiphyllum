@@ -138,6 +138,10 @@ class UsdLinkServiceImp : UsdLinkService {
         items: Pair<KProperty<*>, List<String>>,
         page: Page<V>
     ): Page<V>? {
+        if(items.second.isEmpty())
+        {
+            return Page<V>()
+        }
         val query = KtQueryWrapper(linkBean.java)
         return try{
             val instantLink =BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>

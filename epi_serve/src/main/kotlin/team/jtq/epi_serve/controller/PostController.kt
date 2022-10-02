@@ -87,4 +87,10 @@ class PostController {
         return postService.selectPostComment(token, pid,pageIndex, pageItems)
     }
 
+    @PostMapping("/usd/post/delete-comment/{pid}/{cid}/{token}")
+    @ResponseBody
+    fun deleteComment(@PathVariable cid: String, @PathVariable pid: String, @PathVariable token: String): Result {
+        return postService.deletePostComment(token, pid, cid)
+    }
+
 }
