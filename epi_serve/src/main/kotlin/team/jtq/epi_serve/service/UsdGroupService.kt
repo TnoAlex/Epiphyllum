@@ -13,8 +13,10 @@ interface UsdGroupService : IService<UsdGroup> {
     fun exitGroup(token: String, gid: String): Result
     fun revokedGroup(token: String, gid: String): Result
     fun modifyGroup(entity: ModifyGroupEntity, token: String): Result
+    fun selectUserJoinedGroup(token: String, pageIndex: String, pageItems: String): Result
     fun selectUserJoinedGroup(token: String): Result
     fun selectUserCreatedGroup(token: String): Result
-    fun selectGroupPost(token: String, gid: String, pageIndex: String, pageItems: String):Result
-    fun selectUnJoinedGroup(token: String): Result
+    fun selectGroupPost(token: String, gid: String, pageIndex: String, pageItems: String): Result
+    fun selectUnJoinedGroup(token: String, pageIndex: String, pageItems: String): Result
+    fun getGroupBriefInfo(token: String, gid: String): Result
 }

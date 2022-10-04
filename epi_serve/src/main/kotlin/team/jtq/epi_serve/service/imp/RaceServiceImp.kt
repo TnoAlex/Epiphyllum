@@ -9,7 +9,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.DigestUtils
@@ -27,7 +26,7 @@ import team.jtq.epi_serve.mapper.*
 import team.jtq.epi_serve.service.MongoService
 import team.jtq.epi_serve.service.RaceService
 import team.jtq.epi_serve.service.TokenService
-import team.jtq.epi_serve.service.UsdLinkService
+import team.jtq.epi_serve.service.MapperReflectionService
 import team.jtq.epi_serve.tools.Result
 import java.io.File
 import java.io.FileInputStream
@@ -46,7 +45,7 @@ class RaceServiceImp : ServiceImpl<UsdRaceMapper, UsdRace>(), RaceService {
     private lateinit var tokenService: TokenService
 
     @Autowired
-    private lateinit var linkService: UsdLinkService
+    private lateinit var linkService: MapperReflectionService
 
     @Autowired
     private lateinit var mongoService: MongoService

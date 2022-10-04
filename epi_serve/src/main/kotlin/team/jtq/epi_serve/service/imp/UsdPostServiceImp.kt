@@ -19,7 +19,7 @@ import team.jtq.epi_serve.entity.ao.ResultStatusCode
 import team.jtq.epi_serve.mapper.*
 import team.jtq.epi_serve.service.TokenService
 import team.jtq.epi_serve.service.UsdGroupService
-import team.jtq.epi_serve.service.UsdLinkService
+import team.jtq.epi_serve.service.MapperReflectionService
 import team.jtq.epi_serve.service.UsdPostService
 import team.jtq.epi_serve.tools.Result
 import team.jtq.epi_serve.tools.adapterCommentView
@@ -36,7 +36,7 @@ class UsdPostServiceImp : ServiceImpl<UsdPostMapper, UsdPost>(), UsdPostService 
     private lateinit var tokenService: TokenService
 
     @Autowired
-    private lateinit var linkService: UsdLinkService
+    private lateinit var linkService: MapperReflectionService
 
     private val USER_FAV_IDS = "USER_FAV_IDS"
     private val USER_ALL_IDS = "USER_ALL_IDS"

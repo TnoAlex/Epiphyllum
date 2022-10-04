@@ -66,7 +66,7 @@
 
 <script>
 
-import {ElMessage} from "element-plus";
+import messageBox from "@/utils/tools";
 import sha256 from "js-sha256";
 
 
@@ -96,38 +96,30 @@ export default {
         this.SingUpForm.gender=0
       }
     },
-    messageBox(msg,type){
-      ElMessage({
-        showClose:false,
-        message:msg,
-        type:type,
-        grouping: true
-      })
-    },
     async submitSingUpForm(){
       if(this.SingUpForm.account.length === 0){
-        this.messageBox("请输入邮箱","error")
+        messageBox("请输入邮箱","error")
         return
       }
       if(this.SingUpForm.password.length === 0){
-        this.messageBox("请输入密码","error")
+        messageBox("请输入密码","error")
         return
       }
       if(this.SingUpForm.phone.length === 0){
-        this.messageBox("请输入手机号","error")
+        messageBox("请输入手机号","error")
         return
       }
       if(this.SingUpForm.identification.length === 0){
-        this.messageBox("请输入身份证","error")
+        messageBox("请输入身份证","error")
         return
       }
-      // if(this.score<25){
-      //   this.messageBox("密码强度太低，请重新输入","error")
-      // }
-      // let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-      // if(!reg.test(this.SingUpForm.identification)){
-      //   this.messageBox("身份证格式错误","error")
-      // }
+      if(this.score<25){
+        messageBox("密码强度太低，请重新输入","error")
+      }
+      let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+      if(!reg.test(this.SingUpForm.identification)){
+        messageBox("身份证格式错误","error")
+      }
       this.SingUpForm.password = sha256.sha256(this.SingUpForm.password)
       await this.$axios.post('/register',this.SingUpForm)
           .then(res=>{
@@ -135,12 +127,12 @@ export default {
               this.$router.push({path:'/sing-in'})
             }
             else{
-              this.messageBox(res.data.msg,"error")
+              messageBox(res.data.msg,"error")
 
             }
           })
           .catch(err=>{
-            this.messageBox(err.data.msg,"error")
+            messageBox(err.data.msg,"error")
           })
     },
     passwordcomplex(){

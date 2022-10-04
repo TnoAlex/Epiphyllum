@@ -59,9 +59,8 @@
 </template>
 
 <script>
-import {ElMessage} from "element-plus";
 import sha256 from "js-sha256";
-
+import messageBox from "@/utils/tools";
 let codetime = 0
 export default {
   name: "Sign-in",
@@ -90,25 +89,17 @@ export default {
             this.$refs.v_code.src = res.data.data
           })
     },
-    messageBox(msg,type){
-      ElMessage({
-        showClose:false,
-        message:msg,
-        type:type,
-        grouping: true
-      })
-    },
     async submitLogin() {
       if (this.LoginForm.code.length === 0) {
-        this.messageBox("请输入验证码","error")
+        messageBox("请输入验证码","error")
         return
       }
       if (this.LoginForm.username.length === 0) {
-        this.messageBox("请输入用户名","error")
+        messageBox("请输入用户名","error")
         return
       }
       if (this.LoginForm.password.length === 0) {
-        this.messageBox("请输入密码","error")
+        messageBox("请输入密码","error")
         return
       }
       this.LoginForm.timestamp = codetime
@@ -119,11 +110,11 @@ export default {
               this.$cookies.set("tokens", res.data.data)
             }
             else{
-              this.messageBox(res.data.msg,"error")
+              messageBox(res.data.msg,"error")
             }
           })
           .catch(err => {
-            this.messageBox(err.data.msg,"error")
+            messageBox(err.data.msg,"error")
           }
       )
       const url = "/doLogin/" + this.$cookies.get("tokens").accessToken
@@ -137,20 +128,20 @@ export default {
                       localStorage.setItem("userCommonInfo",JSON.stringify(res.data.data))
                       this.$router.push({path: '/index'})
                     }else{
-                      this.messageBox(res.data.msg,"error")
+                      messageBox(res.data.msg,"error")
                     }
 
                   })
                   .catch(err=>{
-                    this.messageBox(err,"error")
+                    messageBox(err,"error")
                   })
             }
             else{
-              this.messageBox(res.data.msg,"error")
+              messageBox(res.data.msg,"error")
             }
           })
           .catch(err=>{
-            this.messageBox(err,"error")
+            messageBox(err,"error")
           })
 
     },

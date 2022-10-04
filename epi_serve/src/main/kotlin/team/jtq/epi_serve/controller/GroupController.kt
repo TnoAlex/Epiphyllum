@@ -50,10 +50,12 @@ class GroupController {
     }
 
     //查找用户加入的群组
-    @GetMapping("/usd/group/user_joined/{token}")
+    @GetMapping("/usd/group/user-joined/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
-    fun selectUserJoinedGroup(@PathVariable token: String): Result {
-        return groupService.selectUserJoinedGroup(token)
+    fun selectUserJoinedGroup(@PathVariable token: String, @PathVariable pageIndex: String,
+                              @PathVariable pageItems: String
+    ): Result {
+        return groupService.selectUserJoinedGroup(token,pageIndex, pageItems)
     }
 
     //查找用户创建的群组
@@ -64,10 +66,12 @@ class GroupController {
     }
 
     //查看所有群组
-    @GetMapping("/usd/group/all_group/{token}")
+    @GetMapping("/usd/group/unjoined-group/{pageIndex}/{pageItems}/{token}")
     @ResponseBody
-    fun selectAllGroup(@PathVariable token: String): Result {
-        return groupService.selectUnJoinedGroup(token)
+    fun selectunJoinedGroup(@PathVariable token: String, @PathVariable pageIndex: String,
+                            @PathVariable pageItems: String
+    ): Result {
+        return groupService.selectUnJoinedGroup(token,pageIndex, pageItems)
     }
 
     @GetMapping("/usd/group/group-post/{gid}/{pageIndex}/{pageItems}/{token}")
@@ -78,4 +82,9 @@ class GroupController {
         return groupService.selectGroupPost(token, gid,pageIndex, pageItems)
     }
 
+    @GetMapping("/usd/group/brief-info/{gid}/{token}")
+    @ResponseBody
+    fun groupBriefInfo(@PathVariable gid: String, @PathVariable token: String): Result {
+        return groupService.getGroupBriefInfo(token, gid)
+    }
 }

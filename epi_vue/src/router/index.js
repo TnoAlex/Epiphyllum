@@ -74,9 +74,18 @@ const router = createRouter({
                 path:'/group',
                 name:"group",
                 component:()=>import('@/components/group/groups')
+            },
+            {
+                path:'/groupDetail/:group_info',
+                name:'groupDetail',
+                props:true,
+                component:()=>import('@/components/group/groupDetail')
+            },
+            {
+                path:'/race',
+                name:'race',
+                component:()=>import('@/components/competition/competitions')
             }
-
-
 
         ],
     }

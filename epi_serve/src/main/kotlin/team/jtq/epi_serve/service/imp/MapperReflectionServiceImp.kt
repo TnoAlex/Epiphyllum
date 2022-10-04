@@ -5,14 +5,14 @@ import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import org.springframework.stereotype.Service
 import team.jtq.epi_serve.config.BeanContext
-import team.jtq.epi_serve.service.UsdLinkService
+import team.jtq.epi_serve.service.MapperReflectionService
 import kotlin.reflect.KClass
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.declaredMemberProperties
 
 @Service
-class UsdLinkServiceImp : UsdLinkService {
+class MapperReflectionServiceImp : MapperReflectionService {
 
     override fun <T : Any, V : Any> addLinkinBeans(
         linkClazz: KClass<T>,
@@ -132,6 +132,23 @@ class UsdLinkServiceImp : UsdLinkService {
         }
     }
 
+    override fun <T : Any, V : Any> limitSelectLinkBeansInList(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: Pair<KProperty<*>, List<String>>,
+        limit: Pair<Int, Int>
+    ): ArrayList<V>? {
+        val query = KtQueryWrapper(linkBean.java)
+        return try{
+            val instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
+            query.`in`(items.first,items.second)
+            query.last("limit "+limit.first+","+limit.second)
+            instantLink.selectList(query).toCollection(ArrayList<V>())
+        }catch (e:Exception){
+            null
+        }
+    }
+
     override fun <T : Any, V : Any> batchSelectLinkBeansInListOnPage(
         linkClazz: KClass<T>,
         linkBean: KClass<V>,
@@ -183,6 +200,35 @@ class UsdLinkServiceImp : UsdLinkService {
             instantLink.selectCount(query)
         }catch (e:Exception)
         {
+            null
+        }
+    }
+
+    override fun <T : Any, V : Any> limlitOrderSelectBeansInList(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: List<Pair<KProperty<*>, List<String>>>,
+        orderType: String,
+        limit: Pair<Int, Int>,
+        orderProperty: KProperty<*>
+    ): List<V>? {
+        val query = KtQueryWrapper(linkBean.java)
+        return try{
+            val instantLink = BeanContext.getBeanbyClazz(linkClazz.java) as BaseMapper<V>
+            items.forEach {
+                query.`in`(it.first, it.second)
+            }
+            when (orderType){
+                "ASC"->{
+                       query.orderByAsc(orderProperty)
+                }
+                "DSEC"->{
+                    query.orderByDesc(orderProperty)
+                }
+            }
+            query.last("limit "+limit.first+","+limit.second)
+            instantLink.selectList(query)
+        }catch (e:Exception){
             null
         }
     }

@@ -22,7 +22,7 @@ import team.jtq.epi_serve.mapper.UsdUserAwardsMapper
 import team.jtq.epi_serve.mapper.UsdUserMapper
 import team.jtq.epi_serve.mapper.UsdUserNoticeMapper
 import team.jtq.epi_serve.service.TokenService
-import team.jtq.epi_serve.service.UsdLinkService
+import team.jtq.epi_serve.service.MapperReflectionService
 import team.jtq.epi_serve.service.UsdUserService
 import team.jtq.epi_serve.tools.Result
 
@@ -33,7 +33,7 @@ class UsdUserServiceImp : ServiceImpl<UsdUserMapper, UsdUser>(), UsdUserService 
     private lateinit var tokenService: TokenService
 
     @Autowired
-    private lateinit var linkService: UsdLinkService
+    private lateinit var linkService: MapperReflectionService
 
     override fun selectUserNotice(token: String, pageIndex: String, pageItems: String): Result {
         val json = tokenService.getUserInfo(token)!!

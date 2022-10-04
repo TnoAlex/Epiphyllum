@@ -1,6 +1,5 @@
 package team.jtq.epi_serve.service.imp
 
-import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONArray
 import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.kotlin.KtUpdateWrapper
@@ -25,8 +24,9 @@ import team.jtq.epi_serve.mapper.UsdGroupUserMapper
 import team.jtq.epi_serve.mapper.UsdPostMapper
 import team.jtq.epi_serve.service.TokenService
 import team.jtq.epi_serve.service.UsdGroupService
-import team.jtq.epi_serve.service.UsdLinkService
+import team.jtq.epi_serve.service.MapperReflectionService
 import team.jtq.epi_serve.tools.Result
+import team.jtq.epi_serve.tools.adapterGroupView
 import team.jtq.epi_serve.tools.adapterPostView
 import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
@@ -40,7 +40,7 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
     private lateinit var redisTemplate: RedisTemplate<String, Any>
 
     @Autowired
-    private lateinit var linkService: UsdLinkService
+    private lateinit var linkService: MapperReflectionService
 
     @Autowired
     private lateinit var tokenService: TokenService
@@ -62,58 +62,53 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
         instant.groupName = entity.groupName
         instant.groupIco = entity.groupIco
         instant.createUser = json["user_id"] as String
-
-        val linkRes: Boolean = linkService.addLinkinBeans(
-            UsdGroupUserMapper::class,
-            UsdGroupUser::class,
-            Pair(UsdGroupUser::groupId.name, instant.id),
-            Pair(UsdGroupUser::uid.name, instant.createUser)
-        )
-        if (!linkRes){
-            throw RuntimeException("Sql Error!")
-        }
+        this.baseMapper.insert(instant)
+        joinGroup(token,instant.id)
         return Result.ok()
     }
 
     @Transactional
     override fun joinGroup(token: String, gid: String): Result {
-
-        val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
-
-        val linkRes = linkService.addLinkinBeans(
-            UsdGroupUserMapper::class,
-            UsdGroupUser::class,
-            Pair(UsdGroupUser::groupId.name, gid),
-            Pair(UsdGroupUser::uid.name, json["user_id"] as String)
-        )
-        return if (linkRes) {
-            Result.ok()
-        } else {
-            throw RuntimeException("Sql Error!")
+        val redisKey = USER_JOINED_GROUP+":"+DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
+        if(redisTemplate.hasKey(redisKey)){ //强制刷新
+            redisTemplate.delete(redisKey)
         }
+        val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
+        val mapper = BeanContext.getBeanbyClazz(UsdGroupUserMapper::class.java)
+        val obj = UsdGroupUser::class.java.newInstance()
+        obj.groupId = gid
+        obj.uid = json["user_id"] as String
+        obj.joinedTime = LocalDateTime.now()
+        mapper.insert(obj)
+        return Result.ok()
     }
 
     @Transactional
     override fun exitGroup(token: String, gid: String): Result {
-
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
-
+        val userId = json["user_id"] as String
+        val redisKey = USER_JOINED_GROUP+":"+DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
+        if(redisTemplate.hasKey(redisKey)){
+            redisTemplate.delete(redisKey)
+        }
         val query = KtQueryWrapper(UsdGroup::class.java)
-        query.eq(UsdGroup::createUser, gid)
+        query.eq(UsdGroup::createUser, userId).eq(UsdGroup::id,gid)
         val groupCreate = this.baseMapper.selectOne(query)
-        if (groupCreate == null)
-            return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
-        if (groupCreate.createUser == json["user_id"] as String)
-            return Result.error("创建者不可退出群组！")
-        val res = linkService.deleteLinkinBeans(
-            UsdGroupUserMapper::class,
-            UsdGroupUser::class,
-            listOf(Pair(UsdGroupUser::groupId, gid), Pair(UsdGroupUser::uid, json["user_id"] as String))
-        )
-        return if (res)
-            Result.ok()
-        else
-            throw RuntimeException("Sql Error!")
+        if(groupCreate == null){
+            val res = linkService.deleteLinkinBeans(
+                UsdGroupUserMapper::class,
+                UsdGroupUser::class,
+                listOf(Pair(UsdGroupUser::groupId, gid), Pair(UsdGroupUser::uid, json["user_id"] as String))
+            )
+            return if (res)
+                Result.ok()
+            else
+                throw RuntimeException("Sql Error!")
+        }else{
+            if (groupCreate.createUser == json["user_id"] as String)
+                return Result.error("创建者不可退出群组！")
+        }
+        return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
     }
 
     @Transactional
@@ -163,13 +158,11 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
         }
     }
 
-    override fun selectUserJoinedGroup(token: String): Result {
+    override fun selectUserJoinedGroup(token: String, pageIndex: String, pageItems: String): Result {
         val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
         val userId = json["user_id"] as String
         val redisKey = USER_JOINED_GROUP+":"+DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
-        val groups:List<UsdGroup>
         val groupId:List<String>
-
         if(redisTemplate.hasKey(redisKey)){
             val obj = redisTemplate.opsForValue().get(redisKey) as String
             groupId = JSONArray.parseArray(obj,String::class.java)
@@ -181,12 +174,37 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
                 listOf(Pair(UsdGroupUser::uid, userId))
             ) ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
             groupId = res.map { it.groupId }
-            val obj = JSON.toJSONString(groupId)
-            redisTemplate.opsForValue().set(redisKey,obj,1,TimeUnit.HOURS)
+            redisTemplate.opsForValue().set(redisKey,JSONArray.toJSONString(groupId),1,TimeUnit.HOURS)
+        }
+        val page = Page<UsdGroup>(pageIndex.toLong(),pageItems.toLong())
+        val query =KtQueryWrapper(UsdGroup::class.java)
+        query.`in`(UsdGroup::id,groupId)
+        val groups = this.baseMapper.selectPage(page,query)
+        val res = adapterGroupView(groups.records)
+        return Result.ok(res)
+    }
+
+    override fun selectUserJoinedGroup(token: String): Result {
+        val json = tokenService.getUserInfo(token) ?: return Result.error(ResultStatusCode.TOKEN_EXPIRED)
+        val userId = json["user_id"] as String
+        val redisKey = USER_JOINED_GROUP+":"+DigestUtils.md5DigestAsHex(token.toByteArray(Charsets.UTF_8))
+        val groupId:List<String>
+        if(redisTemplate.hasKey(redisKey)){
+            val obj = redisTemplate.opsForValue().get(redisKey) as String
+            groupId = JSONArray.parseArray(obj,String::class.java)
+
+        }else{
+            val res = linkService.selectLinkinBeans(
+                UsdGroupUserMapper::class,
+                UsdGroupUser::class,
+                listOf(Pair(UsdGroupUser::uid, userId))
+            ) ?: return Result.error(ResultStatusCode.SERVICE_INNER_ERR)
+            groupId = res.map { it.groupId }
+            redisTemplate.opsForValue().set(redisKey,JSONArray.toJSONString(groupId),1,TimeUnit.HOURS)
         }
         val query =KtQueryWrapper(UsdGroup::class.java)
         query.`in`(UsdGroup::id,groupId)
-        groups = this.baseMapper.selectList(query)
+        val groups = this.baseMapper.selectList(query)
         return Result.ok(groups)
     }
 
@@ -225,12 +243,19 @@ class UsdGroupServiceImp : ServiceImpl<UsdGroupMapper, UsdGroup>(), UsdGroupServ
         return Result.ok(res)
     }
 
-    override fun selectUnJoinedGroup(token: String): Result {
+    override fun selectUnJoinedGroup(token: String, pageIndex: String, pageItems: String): Result {
         val joinedGroup = this.selectUserJoinedGroup(token).data as List<UsdGroup>
+        val page = Page<UsdGroup>(pageIndex.toLong(),pageItems.toLong())
         val groupId= joinedGroup.map { it.id }
         val query = KtQueryWrapper(UsdGroup::class.java)
         query.notIn(UsdGroup::id,groupId)
-        val groups = this.baseMapper.selectList(query)
-        return Result.ok(groups)
+        val groups = this.baseMapper.selectPage(page,query).records.filter { it.id !="0" }
+        val res = adapterGroupView(groups)
+        return Result.ok(res)
+    }
+
+    override fun getGroupBriefInfo(token: String, gid: String): Result {
+
+        TODO("Not yet implemented")
     }
 }

@@ -114,7 +114,7 @@
 
 </template>
 <script>
-import headerNav from "@/components/UniversalComponents/headerNav";
+import headerNav from "@/components/Parts/headerNav";
 import {ElMessage} from "element-plus";
 
 export default {

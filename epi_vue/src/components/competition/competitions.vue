@@ -30,18 +30,9 @@
                   <span class="btn btn-primary-soft  w-100"  data-bs-toggle="modal"
                         data-bs-target="#modalCreateGroup"> <i class="fa-solid fa-plus pe-1"></i> 发布一个竞赛</span>
                 </div>
-
-
-
-
-
-
               </div>
             </div>
-
-
             <div class="card-body">
-
               <ul class="nav nav-tabs nav-bottom-line justify-content-center justify-content-md-start">
                 <li @click="tabTranslate(1)" class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#tab-1">未报名
                 </a></li>
@@ -99,7 +90,6 @@
                           </el-tooltip>
 
                         </div>
-<!--                        <ul class="nav nav-stack small" style="bottom: 0; position: absolute;margin-bottom: 20px">-->
                         <div>
                           <span style="font-size: 20px" class="iconfont icon-jigouduiwu"></span>
                           <span style="font-size: 18px">
@@ -109,7 +99,6 @@
                             {{ item.teamNum }}
                           </span>
 
-
                           <span style="font-size: 20px;margin-left: 15px" class="iconfont icon-shijian" ></span>
                           <span style=" font-size: 18px">
                             时间:
@@ -117,10 +106,7 @@
                           <span style="font-size: 18px;margin-left: 5px; ">
                              {{ item.duringTime }}
                           </span>
-
                         </div>
-
-<!--                        </ul>-->
                       </div><!-- Button -->
                       <div class="d-flex mt-3 ms-auto" style="margin-top: 0px !important;">
                         <div class="dropdown">
@@ -190,9 +176,7 @@
                               {{item.competitionDescription}}
                             </span>
                           </el-tooltip>
-
                         </div>
-                        <!--                        <ul class="nav nav-stack small" style="bottom: 0; position: absolute;margin-bottom: 20px">-->
                         <div>
                           <span style="font-size: 20px" class="iconfont icon-jigouduiwu"></span>
                           <span style="font-size: 18px">
@@ -201,8 +185,6 @@
                           <span style="font-size: 18px ;margin-left: 5px;font-weight: bold;color: rgb(0,101,255);">
                             {{ item.teamNum }}
                           </span>
-
-
                           <span style="font-size: 20px;margin-left: 15px" class="iconfont icon-shijian" ></span>
                           <span style=" font-size: 18px">
                             时间:
@@ -210,10 +192,7 @@
                           <span style="font-size: 18px;margin-left: 5px; ">
                              {{ item.duringTime }}
                           </span>
-
                         </div>
-
-                        <!--                        </ul>-->
                       </div><!-- Button -->
                       <div class="d-flex mt-3 ms-auto" style="margin-top: 0px !important;">
                         <div class="dropdown">
@@ -239,19 +218,10 @@
                     </div>
                   </div>
                 </div>
-
-
-
-
-
-
-
-
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -290,20 +260,12 @@
                     <img id="avatar-preview" class="avatar-img  border border-white border-3 shadow"
                          :src="imageUrl ? imageUrl : baseImg" alt=""></div>
                 </div><!-- Avatar remove button -->
-                <!--                <div class="avatar-remove"><button type="button" id="avatar-reset-img"-->
-                <!--                                                   class="btn btn-light">删除</button></div>-->
               </div><!-- Avatar upload END -->
             </div><!-- Select audience -->
-
-
-            <!-- Invite friend -->
-
-            <!-- Group description -->
             <div class="mb-3"><label class="form-label">组织机构</label><textarea ref="competitionInstitutionRef" class="form-control"
                                                                                    rows="3" placeholder="添加组织机构"></textarea></div>
             <div class="mb-3"><label class="form-label">竞赛简介</label><textarea ref="competitionDescriptionRef" class="form-control"
                                                                                   rows="3" placeholder="添加竞赛简介"></textarea></div>
-
           </form><!-- Form END -->
         </div><!-- Modal footer -->
         <div class="modal-footer">
@@ -315,12 +277,12 @@
   </div>
 </template>
 <script>
-import headerNav from "@/components/UniversalComponents/headerNav"
-import indexLeft from '@/components/UniversalComponents/indexLeft'
+import headerNav from "@/components/Parts/headerNav"
+import indexLeft from '@/components/Parts/indexLeft'
 import {ElMessage} from 'element-plus'
 
 export default {
-  name: "groups",
+  name: "competitions",
   components:{
     'IndexLeft':indexLeft,
     'HeaderNav':headerNav

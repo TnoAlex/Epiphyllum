@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 
-interface UsdLinkService {
+interface MapperReflectionService {
     fun <T : Any, V : Any> addLinkinBeans(
         linkClazz: KClass<T>,
         linkBean: KClass<V>,
@@ -44,6 +44,13 @@ interface UsdLinkService {
         items:Pair<KProperty<*>,List<String>>
     ):ArrayList<V>?
 
+    fun <T:Any,V:Any> limitSelectLinkBeansInList(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: Pair<KProperty<*>, List<String>>,
+        limit: Pair<Int, Int>
+    ):ArrayList<V>?
+
     fun <T:Any,V:Any> batchSelectLinkBeansInListOnPage(
         linkClazz:KClass<T>,
         linkBean:KClass<V>,
@@ -62,5 +69,15 @@ interface UsdLinkService {
         linkBean:KClass<V>,
         items: List<Pair<KProperty<*>, String>>
     ): Long?
+
+    fun <T:Any,V:Any> limlitOrderSelectBeansInList(
+        linkClazz: KClass<T>,
+        linkBean: KClass<V>,
+        items: List<Pair<KProperty<*>, List<String>>>,
+        orderType: String,
+        limit: Pair<Int, Int>,
+        orderProperty: KProperty<*>
+    ): List<V>?
+
 
 }
